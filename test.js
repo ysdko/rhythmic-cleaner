@@ -1,5 +1,5 @@
-function ohayou() {
-    alert("Hello!");
+function test() {
+    alert('Hello!');
 }
 
 // window.addEventListener("deviceorientation", handleOrientation, true);
