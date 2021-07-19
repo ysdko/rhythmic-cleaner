@@ -1,7 +1,7 @@
 // nodeのコアモジュール(オブジェクト)のhttpを使う
 var http = require('http');
 //外部から読み込むファイル
-var html = require('fs').readFileSync('./test2.html');
+var html = require('fs').readFileSync('./test.html');
 //httpサーバオブジェクト生成
 //必要な設定をした後に実行する
 var server = http.createServer();
@@ -14,8 +14,8 @@ var server = http.createServer();
 server.on('request', function(req, res) {
     res.writeHead(200, {'Content-Type' : 'text/html'});
     //res.write('hello world');
-    res.write(html);
-    res.end();
+    //res.write();
+    res.end(html);
 });
 
 // サーバを待ち受け状態にする
