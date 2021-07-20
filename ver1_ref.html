@@ -21,21 +21,26 @@
         now_speed_z = 0;
 
       function deviceMotionRequest() {
-        if (DeviceMotionEvent.requestPermission) {
-          DeviceMotionEvent.requestPermission().then((permissionState) => {
-            if (permissionState === "granted") {
-              window.addEventListener("devicemotion", function (event) {
-                // ジャイロセンサの値が変化したら実行される deviceorientation イベント
-                window.addEventListener("devicemotion", (dat) => {
-                  all_info = dat.accelerationIncludingGravity;
-                  alpha = all_info.x;
-                  beta = all_info.y;
-                  gamma = all_info.z;
-                });
-              });
-            }
-          });
+        if (navigator.userAgent.match(/iPhone/)) {
+          if (DeviceMotionEvent.requestPermission) {
+            DeviceMotionEvent.requestPermission().then((permissionState) => {
+              if (permissionState === "granted") {
+                window.addEventListener("devicemotion", motion);
+              }
+            });
+          }
+        } else {
+          if (navigator.userAgent.match(/Android.+Mobile/)) {
+            window.addEventListener("devicemotion", motion);
+          }
         }
+      }
+
+      function motion() {
+        all_info = event.accelerationIncludingGravity;
+        alpha = all_info.x;
+        beta = all_info.y;
+        gamma = all_info.z;
       }
       // 指定時間ごとに繰り返し実行される setInterval(実行する内容, 間隔[ms]) タイマーを設定
       var timer = window.setInterval(() => {
