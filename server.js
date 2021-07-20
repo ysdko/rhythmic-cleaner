@@ -11,7 +11,7 @@ function getJs(req, res) {
   //左辺にはurl以下のディレクトリを書く
   //if ('/' == url) {
     //dataはhtmlの内容が入っているreadFile()の2引数目
-    fs.readFile('ver1_ref.html', 'UTF-8', function (err, data) {
+    fs.readFile('device_motion.html', 'UTF-8', function (err, data) {
       res.writeHead(200, {'Content-Type': 'text/html'});
       res.write(data);
       res.end();
