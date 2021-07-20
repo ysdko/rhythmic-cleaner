@@ -7,10 +7,14 @@
   </head>
 
   <body>
-    <div id="txt">ここにデータを表示</div><br>
 
     <!-- データを表示するdiv要素 -->
     <button onClick="deviceMotionRequest()">Click</button>
+    <button onclick="play_init()" id="play">最初に再生</button><br>
+    <!-- <a href="javascript:void(0);" onclick="play_init();">再生</a><br/> -->
+    <!-- 加速度データをリアルタイム表示 -->
+    <div id="txt">ここにデータを表示</div><br>
+
 
     <!-- 加速度の閾値判定 -->
     <div id="acc_status">ここにデータを表示</div><br>
@@ -30,6 +34,9 @@
       //var threashold_x = 0, threashold_y = 0, threashold_z = 0;
       var acc_status;
 
+      //音楽の読み込み
+      var music = new Audio();
+
       function deviceMotionRequest() {
         if (navigator.userAgent.match(/iPhone/)) {
           if (DeviceMotionEvent.requestPermission) {
@@ -47,12 +54,19 @@
       }
 
       function motion() {
+
         all_info = event.accelerationIncludingGravity;
         x = all_info.x;
         y = all_info.y;
         z = all_info.z;
-        // threashold_xy = x;
-        // threashold_z = z;
+
+      }
+
+      function play_init() {
+
+        music.src = "tamborine.mp3";
+        music.play();
+      
       }
 
       // 指定時間ごとに繰り返し実行される setInterval(実行する内容, 間隔[ms]) タイマーを設定
@@ -82,6 +96,10 @@
           //メータで表示
           if(y >= 0){
 
+            if(y > 4) {
+              music.currentTime = 0;
+              music.play();  // 再生
+            }
             meter_plus = document.getElementById("plus"); // データを表示するdiv要素の取得
             meter_plus.value = orgRound(y, 10);
             meter_minus = document.getElementById("minus"); // データを表示するdiv要素の取得
@@ -89,7 +107,10 @@
 
           }
           else{
-
+            if(y < -4) {
+              music.currentTime = 0;
+              music.play();  // 再生
+            }
             meter_plus = document.getElementById("plus"); // データを表示するdiv要素の取得
             meter_plus.value = 0;
             meter_minus = document.getElementById("minus"); // データを表示するdiv要素の取得
@@ -128,11 +149,10 @@
           }
 
           var temp_status = document.getElementById("acc_status"); // データを表示するdiv要素の取得
-
           temp_status.innerHTML = acc_status;
         
         }
-      
+
     </script>
   </body>
 </html>
