@@ -1,16 +1,16 @@
-// window.addEventListener("deviceorientation", handleOrientation, false);
+window.addEventListener("deviceorientation", (dat) => {
 
-// function handleOrientation(event) {
+    alpha    = dat.alpha;
+    beta     = dat.beta;
+    gamma    = dat.gamma;
 
-//     var absolute = event.absolute;
-//     var alpha    = event.alpha;
-//     var beta     = event.beta;
-//     var gamma    = event.gamma;
+    displayData();
 
-// };
+}, false);
 
-function test(){
-
-    console.log('test');
-
-};
+function displayData() {
+    var txt = document.getElementById("txt");   // データを表示するdiv要素の取得
+    txt.innerHTML = "alpha: " + alpha + "<br>"  // x軸の値
+                  + "beta:  " + beta  + "<br>"  // y軸の値
+                  + "gamma: " + gamma;          // z軸の値
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ジャイロの値を得る</title>
+</head>
+ 
+<body>
+<div id="txt">ここにデータを表示</div>             <!-- データを表示するdiv要素 -->
+ 
+<script>
+var all_info = 0;
+var alpha = 0, beta = 0, gamma = 0;    
+var now_speed_x = 0, now_speed_y = 0, now_speed_z = 0;
+ 
+// ジャイロセンサの値が変化したら実行される deviceorientation イベント
+window.addEventListener("devicemotion", (dat) => {
+    all_info = dat.accelerationIncludingGravity;
+    alpha = all_info.x; 
+    beta  = all_info.y;
+    gamma = all_info.z;
+});
+ 
+// 指定時間ごとに繰り返し実行される setInterval(実行する内容, 間隔[ms]) タイマーを設定
+var timer = window.setInterval(() => {
+    displayData();      // displayData 関数を実行
+}, 33); // 33msごとに（1秒間に約30回）
+ 
+// データを表示する displayData 関数
+function displayData() {
+    var txt = document.getElementById("txt");   // データを表示するdiv要素の取得
+    
+    now_speed_x = now_speed_x + alpha * 0.033;
+    now_speed_y = now_speed_y + beta  * 0.033;
+    now_speed_z = (now_speed_z - 9.8) + gamma * 0.033;
+    
+    txt.innerHTML = "x方向: " + now_speed_x + "<br>"  // x軸の値
+                  + "y方向: " + now_speed_y + "<br>"  // y軸の値
+                  + "z方向: " + now_speed_z;          // z軸の値
+}
+</script>
+</body>
+</html>

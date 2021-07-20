@@ -6,22 +6,21 @@ server.on('request', getJs);
 server.listen(3000);
 console.log('Server running …');
 function getJs(req, res) {
-  let url = req.url;
-  console.log(url);
+  //let url = req.url;
+  //console.log(url);
   //左辺にはurl以下のディレクトリを書く
-  if ('/' == url) {
+  //if ('/' == url) {
     //dataはhtmlの内容が入っているreadFile()の2引数目
-    fs.readFile('ver1.html', 'UTF-8', function (err, data) {
+    fs.readFile('ver1_ref.html', 'UTF-8', function (err, data) {
       res.writeHead(200, {'Content-Type': 'text/html'});
-      console.log(data);
       res.write(data);
       res.end();
     });
-  } 
-  else if ('./ver1js.js' == url) {
-    fs.readFile('ver1js.js', 'UTF-8', function (err, data) {
-      res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.write(data); 
-      res.end();
-    });} 
+  //} 
+  // else if ('/ver1js.js' == url) {
+  //   fs.readFile('ver1js.js', 'UTF-8', function (err, data) {
+  //     res.writeHead(200, {'Content-Type': 'text/plain'});
+  //     res.write(data); 
+  //     res.end();
+  //   });} 
 }
