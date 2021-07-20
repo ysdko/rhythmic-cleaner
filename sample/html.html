@@ -1,0 +1,34 @@
+<html>
+ 
+<head>
+  <meta http-equiv="content-type" content="text/html charset=UTF-8">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+ 
+<body>
+  
+  <button onclick="request_permission()">センサーを有効にします</button>
+  <script type="text/javascript">
+  function request_permission() {　
+    if (
+        DeviceMotionEvent &&
+        DeviceMotionEvent.requestPermission &&
+        typeof DeviceMotionEvent.requestPermission === 'function'
+    ) {
+        DeviceMotionEvent.requestPermission();
+    };
+    if (
+        DeviceOrientationEvent &&
+        DeviceOrientationEvent.requestPermission &&
+        typeof DeviceOrientationEvent.requestPermission === 'function'
+    ) {
+        DeviceOrientationEvent.requestPermission();
+    };
+};
+
+</script>
+  <button>button</button>
+</body>
+ 
+</html>
