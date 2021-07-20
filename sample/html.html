@@ -5,30 +5,37 @@
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 </head>
- 
-<body>
-  
-  <button onclick="request_permission()">センサーを有効にします</button>
-  <script type="text/javascript">
-  function request_permission() {　
-    if (
-        DeviceMotionEvent &&
-        DeviceMotionEvent.requestPermission &&
-        typeof DeviceMotionEvent.requestPermission === 'function'
-    ) {
-        DeviceMotionEvent.requestPermission();
-    };
-    if (
-        DeviceOrientationEvent &&
-        DeviceOrientationEvent.requestPermission &&
-        typeof DeviceOrientationEvent.requestPermission === 'function'
-    ) {
-        DeviceOrientationEvent.requestPermission();
-    };
-};
 
-</script>
-  <button>button</button>
+<body>
+  <div>
+    <button onClick="deviceMotionRequest()">Click</button>
+    <span id="x">0</span>
+    <span id="y">0</span>
+    <span id="z">0</span>
+  </div>
+  <script>
+    function deviceMotionRequest () {
+      //ios
+      if (DeviceMotionEvent.requestPermission) {
+        DeviceMotionEvent.requestPermission()
+          .then(permissionState => {
+            if (permissionState === 'granted') {
+              window.addEventListener("devicemotion", function (event) {
+                if (!event.accelerationIncludingGravity) {
+                  alert('event.accelerationIncludingGravity is null');
+                  return;
+                }
+                document.getElementById('x').innerHTML = event.accelerationIncludingGravity.x;
+                document.getElementById('y').innerHTML = event.accelerationIncludingGravity.y;
+                document.getElementById('z').innerHTML = event.accelerationIncludingGravity.z;
+              })
+            }
+          })
+          .catch(console.error);
+      } else {
+        alert('DeviceMotionEvent.requestPermission is not found')
+      }
+    }
+  </script>
 </body>
- 
 </html>
