@@ -53,8 +53,9 @@ phina.define('TargetMarker', {
     this.targetTime = targetTime;
     this.trackId = trackId;
     this.vector = phina.geom.Vector2(
-      Math.cos((trackId * ICON_INTERVAL_DEGREE).toRadian()),
-      Math.sin((trackId * ICON_INTERVAL_DEGREE).toRadian())
+      0, 1
+      // Math.cos((trackId * ICON_INTERVAL_DEGREE).toRadian()),
+      // Math.sin((trackId * ICON_INTERVAL_DEGREE).toRadian())
     );
 
     // カウント表示

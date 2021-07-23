@@ -4,7 +4,7 @@ var SCREEN_HEIGHT = 768;
 var MARKER_RADIUS = 70;
 var MARKER_STROKE_WIDTH = 8;
 
-var TRACK_NUM = 3;
+var TRACK_NUM = 1;
 var ICON_INTERVAL_DEGREE = 180 / (TRACK_NUM - 1); // 22.5
 
 var MARKER_APPEARANCE_DELTA = 1000; // ノーツ出現時間(ms): 大きくするほど低速
