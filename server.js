@@ -45,6 +45,13 @@ function getJs(req, res) {
     res.end();
     });
   }
+  else if ('/titlescene.js' == url) {
+    fs.readFile('titlescene.js', 'UTF-8', function (err, data) {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.write(data);
+    res.end();
+    });
+  }
   else if ('/clock.json' == url) {
     fs.readFile('clock.json', 'UTF-8', function (err, data) {
     res.writeHead(200, {'Content-Type': 'application/json'});

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="x-ua-compatible" content="IE=Edge">
   <meta name="viewport" content="width=device-width, user-scalable=no">
-  <title>スクフィナ</title>
+  <title>リズム De! 掃除機</title>
 </head>
 
 <body>
@@ -23,6 +23,9 @@
   <meter max="10" low="1" high="4" optimum="0" id="minus">javascriptから参照</meter>
 
 
+  <!-- fina.jsの読み込み -->
+  <!-- <script src="../phina.js/build/phina.js"></script> -->
+  <script src='https://cdn.rawgit.com/phi-jp/phina.js/v0.2.1/build/phina.js'></script>
 
   <!-- ブラウザに対応しているかの確認 -->
   <script type="text/javascript">
@@ -31,34 +34,28 @@
     }
   </script>
 
-  <!-- fina.jsの読み込み -->
-  <!-- <script src="../phina.js/build/phina.js"></script> -->
-  <script src='https://cdn.rawgit.com/phi-jp/phina.js/v0.2.1/build/phina.js'></script>
-
   <!-- phina.jsを用いた処理 -->
   <!-- main.jsの読み込み -->
+  <script src="./component.js"></script>
+  <script src="./device_motion.js"></script>
   <script src="./main.js"></script>
   <script src="./config.js"></script>
-  <script src="./component.js"></script>
-
-
-  <script src="./device_motion.js"></script>
+  <script src="./titlescene.js"></script>
 
 <script type="text/javascript">
     phina.main(function() {
       var app = GameApp({
 
         assets: ASSETS,
-        width: SCREEN_WIDTH,
-        height: SCREEN_HEIGHT,
+        //width: SCREEN_WIDTH,
+        //height: SCREEN_HEIGHT,
         startLabel: 'title',
-        backgroundColor: '#8BF5FF',
-        title: 'リズムで掃除機',
+        backgroundColor: '#191970',
+        //title: 'リズム De! 掃除機',
         fps: 60,
       });
 
       // app.enableStats();
-      app.enableStats();
       app.run();
     });
 
