@@ -70,6 +70,7 @@ function displayData() {
     if(y >= 0){
         if(y > threathold_high) {
             music.currentTime = 0;
+            ß
             bgm1.play();
         }
         meter_plus = document.getElementById("plus"); // データを表示するdiv要素の取得
