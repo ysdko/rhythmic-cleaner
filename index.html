@@ -6,30 +6,45 @@
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <title>スクフィナ</title>
 </head>
+
 <body>
-  <!-- <script src="../phina.js/build/phina.js"></script> -->
-  <script src='https://cdn.rawgit.com/phi-jp/phina.js/v0.2.1/build/phina.js'></script>
 
+
+  <!-- データを表示するdiv要素 -->
+  <button onClick="deviceMotionRequest()">Click</button>
+  <button onclick="play_init()" id="play">最初に再生</button><br>
+  <!-- <a href="javascript:void(0);" onclick="play_init();">再生</a><br/> -->
+  <!-- 加速度データをリアルタイム表示 -->
+  <div id="txt">ここにデータを表示</div><br>
+
+  <!-- 加速度の閾値判定 -->
+  <div id="acc_status">ここにデータを表示</div><br>
+  <h4>正の加速度</h4>
+  <meter max="10" low="1" high="4" optimum="0" id="plus">javascriptから参照</meter>
+  <h4>負の加速度</h4>
+  <meter max="10" low="1" high="4" optimum="0" id="minus">javascriptから参照</meter>
+
+
+
+  <!-- ブラウザに対応しているかの確認 -->
   <script type="text/javascript">
-    'use strict';
-
     if (!phina.util.Support.webAudio) {
       alert('webAudioに対応していません！最新のブラウザを使って下さい！');
     }
-
-    // IE対策
-    // var ua = phina.global.navigator.userAgent;
-    // if (ua.indexOf('Trident') > 0) {
-    //   alert('インターネットエクスプローラーには対応してません！');
-    // }
-
-    phina.globalize();
   </script>
+
+  <!-- fina.jsの読み込み -->
+  <!-- <script src="../phina.js/build/phina.js"></script> -->
+  <script src='https://cdn.rawgit.com/phi-jp/phina.js/v0.2.1/build/phina.js'></script>
+
+  <!-- phina.jsを用いた処理 -->
+  <!-- main.jsの読み込み -->
   <script src="./main.js"></script>
   <!-- <script src="./config.js"></script> -->
-  <!-- <script src="./components.js"></script>
-  <script src="./mainscene.js"></script>
-  <script src="./titlescene.js"></script> -->
+
+
+  <!-- 要確認 -->
+  <!-- タンバリン音楽ファイル -->
   <script type="text/javascript">
   var ASSETS = {
     sound: {
@@ -131,7 +146,9 @@
   };
 </script>
 
-  <script type="text/javascript">
+<script src="./device_motion.js"></script>
+
+<script type="text/javascript">
     phina.main(function() {
       var app = GameApp({
 

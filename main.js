@@ -1,5 +1,5 @@
-// // phina.js をグローバル領域に展開
-// phina.globalize();
+// phina.js をグローバル領域に展開
+phina.globalize();
 
 
 

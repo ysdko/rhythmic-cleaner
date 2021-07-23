@@ -11,23 +11,32 @@ function getJs(req, res) {
   //左辺にはurl以下のディレクトリを書く
   if ('/' == url) {
     //dataはhtmlの内容が入っているreadFile()の2引数目
-    fs.readFile('device_motion.html', 'UTF-8', function (err, data) {
+    fs.readFile('index.html', 'UTF-8', function (err, data) {
       res.writeHead(200, {'Content-Type': 'text/html'});
       res.write(data);
       res.end();
     });
-  }else if ('/main.js' == url) {
+  }
+  else if ('/main.js' == url) {
     fs.readFile('main.js', 'UTF-8', function (err, data) {
       res.writeHead(200, {'Content-Type': 'text/plain'});
       res.write(data); 
       res.end();
     });
-  }else if ('/phina' == url) {
-        fs.readFile('index.html', 'UTF-8', function (err, data) {
-          res.writeHead(200, {'Content-Type': 'text/html'});
-          res.write(data);
-          res.end();
-      });
+  }
+  else if ('/device_motion.js' == url) {
+    fs.readFile('device_motion.js', 'UTF-8', function (err, data) {
+      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.write(data); 
+      res.end();
+    });
+  }
+  else if ('/config.js' == url) {
+    fs.readFile('config.js', 'UTF-8', function (err, data) {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(data);
+    res.end();
+    });
   }  
     
 
