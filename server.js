@@ -33,11 +33,24 @@ function getJs(req, res) {
   }
   else if ('/config.js' == url) {
     fs.readFile('config.js', 'UTF-8', function (err, data) {
-    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.writeHead(200, {'Content-Type': 'text/plain'});
     res.write(data);
     res.end();
     });
   }  
-    
+  else if ('/component.js' == url) {
+    fs.readFile('component.js', 'UTF-8', function (err, data) {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.write(data);
+    res.end();
+    });
+  }
+  else if ('/clock.json' == url) {
+    fs.readFile('clock.json', 'UTF-8', function (err, data) {
+    res.writeHead(200, {'Content-Type': 'application/json'});
+    res.write(data);
+    res.end();
+    });
+  }
 
 }
