@@ -45,7 +45,9 @@ phina.define('MainScene', {
 
       // タップ・クリック判定
       icon.onpointstart = function() {
+        
         self.judge(this); // 自分を渡す
+        // console.log()
       };
     }
     // キーボード判定
