@@ -48,11 +48,12 @@
       .to({alpha: 0}, 900)
       .to({alpha: 1}, 900)
       ;
-  
+
       // モバイルでの再生制限アンロックのため、画面タッチ時にSoundを無音再生
       this.on('enter', function() {
         var event = "touchstart";
         var dom = this.app.domElement;
+        deviceMotionRequest();
         dom.addEventListener(event, (function() {
           return function f() {
             var context = phina.asset.Sound.getAudioContext();
