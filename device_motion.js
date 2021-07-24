@@ -1,3 +1,4 @@
+phina.globalize();
 const bgm1 = document.querySelector("#bgm1");
 var all_info = 0;
 var x = 0,
@@ -70,8 +71,8 @@ function displayData() {
     if(y >= 0){
         if(y > threathold_high) {
             music.currentTime = 0;
-            this.judge(this);
-            bgm1.play();
+            acceer();
+            // bgm1.play();
         }
         meter_plus = document.getElementById("plus"); // データを表示するdiv要素の取得
         meter_plus.value = orgRound(y, 10);
@@ -82,7 +83,8 @@ function displayData() {
         if(y < -threathold_high) {
             music.currentTime = 0;
             //music.play();  // 再生
-            this.judge(this);
+            // alert("test");
+            // window.acceer();
             bgm1.play()
 
         }

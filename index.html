@@ -10,7 +10,7 @@
 <body>
   <!-- データを表示するdiv要素 -->
   <button onClick="deviceMotionRequest()">Click</button>
-  <button onclick="play_init()" id="play">最初に再生</button><br>
+  <button onClick="play_init()" id="play">最初に再生</button><br>
   <!-- <a href="javascript:void(0);" onclick="play_init();">再生</a><br/> -->
   <!-- 加速度データをリアルタイム表示 -->
   <div id="txt">ここにデータを表示</div><br>
@@ -45,13 +45,14 @@
 <script type="text/javascript">
     phina.main(function() {
       var app = GameApp({
+        
 
         assets: ASSETS,
         width: SCREEN_WIDTH,
         height: SCREEN_HEIGHT,
         startLabel: 'title',
         backgroundColor: '#191970',
-        //title: 'リズム De! 掃除機',
+        // title: 'リズム De! 掃除機',
         fps: 60,
       });
 

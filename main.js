@@ -12,6 +12,18 @@ phina.define('MainScene', {
     var gy = this.gridY;
     var AM = phina.asset.AssetManager;
 
+const bgm1 = document.querySelector("#bgm1");
+var all_info = 0;
+var x = 0,
+    y = 0,
+    z = 0;
+var now_acc_x = 0,
+    now_acc_y = 0,
+    now_acc_z = 0;
+var acc_status;
+var threashold_low = 1,
+    threathold_high = 4;
+
     // var beatmap = DEBUG_BEATMAP;
     var beatmap = AM.get('json', 'beatmap').data;
 
@@ -43,21 +55,118 @@ phina.define('MainScene', {
       )
       .addChildTo(iconGroup);
 
-      // タップ・クリック判定
-      icon.onpointstart = function() {
-        
-        self.judge(this); // 自分を渡す
-        // console.log()
-      };
+      if (navigator.userAgent.match(/iPhone/)) {
+        if (DeviceMotionEvent.requestPermission) {
+            DeviceMotionEvent.requestPermission().then((permissionState) => {
+                if (permissionState === "granted") {
+                  // this.on('devicemotion', function() {
+                    // {
+                      // alert("test");
+                      // var icon = iconGroup.getChildAt(0);
+                      // this.judge(icon);
+                    // }
+                    window.addEventListener("devicemotion", motion);
+                  // });
+                    // window.addEventListener("devicemotion", motion);
+                }
+            });
+        }
+    } else {
+        if (navigator.userAgent.match(/Android.+Mobile/)) {
+            window.addEventListener("devicemotion", motion);
+        }
     }
-    // キーボード判定
-    this.on('keydown', function(e) {
-      var keyData = KEYCODE_TO_KEYDATA_MAP[e.keyCode];
-      if (keyData !== undefined) {
-        var icon = iconGroup.getChildAt(keyData.id);
-        this.judge(icon);
+// }
+
+function motion() {
+    all_info = event.accelerationIncludingGravity;
+    x = all_info.x;
+    y = all_info.y;
+    z = all_info.z;
+    // accer();
+
+    if(y >= 0){
+      if(y > threathold_high) {
+          music.currentTime = 0;
+          acceer();
+          //alert(x);
+          // bgm1.play();
       }
-    });
+      meter_plus = document.getElementById("plus"); // データを表示するdiv要素の取得
+      meter_plus.value = orgRound(y, 10);
+      meter_minus = document.getElementById("minus"); // データを表示するdiv要素の取得
+      meter_minus.value = 0;
+  }
+  else{
+      if(y < -threathold_high) {
+          music.currentTime = 0;
+          //music.play();  // 再生
+          // alert("test");
+          // alert(iconGroup.getChildAt(7));
+          // var icon = iconGroup.getChildAt(0);
+          // alert(icon);
+          console.log(self);
+          console.log("test");
+          // alert("test");
+          self.judge(icon);
+          
+          // this.on('devicemotion', function() {
+          //   // {
+          //     alert("test");
+          //     var icon = iconGroup.getChildAt(0);
+          //     this.judge(icon);
+            // }
+          // });
+          // accer();
+          //alert(x);
+          // bgm1.play()
+
+      }
+      meter_plus = document.getElementById("plus"); // データを表示するdiv要素の取得
+      meter_plus.value = 0;
+      meter_minus = document.getElementById("minus"); // データを表示するdiv要素の取得
+      meter_minus.value = -orgRound(y, 10);
+  }
+}
+
+function play_init() {
+    bgm1.play();
+}
+
+      
+
+      // タップ・クリック判定
+      // icon.onpointstart = function() {
+      //   // console.log(this);
+      //   // alert(icon);
+      //   // alert(this);
+
+      //   self.judge(this); // 自分を渡す
+      //   // console.log()
+      // };
+
+      // function accer(){
+      //   self.judge(this);
+      //   // this.judge(icon);
+      //   // alert(self.judge(this));
+      //   // alert(this);
+      //   // var icon = iconGroup.getChildAt(0);
+      //   // alert(icon);
+      //   // this.judge(icon).bind(this);
+      // }
+    }
+    
+    // キーボード判定
+    // this.on('keydown', function(e) {
+    //   var keyData = KEYCODE_TO_KEYDATA_MAP[e.keyCode];
+    //   if (keyData !== undefined) {
+    //     console.log(keyData.id);
+    //     console.log(this)
+    //     var icon = iconGroup.getChildAt(keyData.id);
+    //     console.log(icon)
+    //     this.judge(icon);
+    //   }
+    // });
 
     // 譜面の展開
     this.markerGroup = DisplayElement()
@@ -161,6 +270,7 @@ phina.define('MainScene', {
 
   // 判定処理
   judge: function(unitIcon) {
+    // alert("test");
     var time = this.gameTime;
 
     // 判定可能マーカーを探索
