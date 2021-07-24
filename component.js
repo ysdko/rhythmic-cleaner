@@ -9,8 +9,8 @@ phina.define('UnitIcon', {
     this.superInit({
       radius: MARKER_RADIUS,
       strokeWidth: MARKER_STROKE_WIDTH,
-      stroke: "magenta",
-      fill: "pink",
+      stroke: "red",
+      fill: "white",
     });
     this.setInteractive(true);
     this.id = id;
@@ -19,7 +19,8 @@ phina.define('UnitIcon', {
     label = (label != null) ? label : id+"";
     Label({
       text: label,
-      fontSize: 60,
+      fill: "red",
+      fontSize: 30,
     })
     .addChildTo(this)
     ;

@@ -5,7 +5,7 @@ phina.define('MainScene', {
 
   init: function(options) {
     this.superInit(options);
-    this.backgroundColor = "#6BEFD5";
+    this.backgroundColor = "white";
 
     var self = this;
     var gx = this.gridX;
@@ -34,6 +34,30 @@ var threashold_low = 1,
     this.totalScore = 0;
     // this.comboNum = 0;
 
+    var main_background = Sprite('main_background').addChildTo(this)
+      .setPosition(this.gridX.center(), this.gridY.center());
+      //title_image.height = 781 / 1.7;
+      //title_image.width = 968 / 1.7;
+
+    var vacuumcleaner = Sprite('vacuumcleaner').addChildTo(this)
+      .setPosition(this.gridX.span(7.7), this.gridY.span(13));
+      vacuumcleaner.height = 800;
+      vacuumcleaner.width = 600;
+    // // 移動する速度
+    // vacuumcleaner.speed = 10;
+    // // 動かす処理
+    // vacuumcleaner.update = function() {
+    //     this.y += this.speed;
+    //     // 指定範囲からはみ出さないように
+    //     if(this.top <= 400) {
+    //         this.top = 400;
+    //         this.speed *= -1;
+    //     } else if(this.bottom >= 420) {
+    //         this.bottom = 420;
+    //         this.speed *= -1;
+    //     }
+    // }
+
     // 時間が来たら音楽流す
     this.one('musicstart', function() {
       SoundManager.playMusic('music', null, false);
@@ -41,14 +65,14 @@ var threashold_low = 1,
 
     // ユニットアイコンの配置
     var iconGroup = DisplayElement()
-    .setPosition(gx.center(), gy.span(5))
+    .setPosition(gx.center(), gy.span(2))
     .addChildTo(this);
     for (var i = 0; i < TRACK_NUM; i++) {
       var label = INDEX_TO_KEY_MAP[i].toUpperCase();
       var rad = (i * ICON_INTERVAL_DEGREE).toRadian();
       var icon = UnitIcon(i, label)
       .setPosition(
-        0, this.gridY.span(10)
+        0, this.gridY.span(9.3)
         
         // Math.cos(rad) * UNIT_ARRANGE_RADIUS,
         // Math.sin(rad) * UNIT_ARRANGE_RADIUS
@@ -181,10 +205,10 @@ function play_init() {
     this.scoreLabel = Label({
       text: 0,
       textAlign: "center",
-      stroke: "magenta",
+      stroke: "black",
       fill: "white",
-      strokeWidth: 2,
-      fontSize: 50,
+      strokeWidth: 10,
+      fontSize: 70,
     })
     .setPosition(gx.center(), gy.span(3))
     .addChildTo(this)
@@ -195,7 +219,9 @@ function play_init() {
     // リセットボタン
     Button({
       text: 'RESET',
-      fill: "#F539B9",
+      stroke:"white",
+      strokeWidth:10,
+      fill: "black",
     })
     .setOrigin(1, 0)
     .setPosition(this.width, 0)
@@ -250,7 +276,7 @@ function play_init() {
         // マーカーの位置比率や縮小率（倍率）を計算する
         // ratioはアイコンに近いほど1.0に近づく
         var ratio = (time - (m.targetTime - MARKER_APPEARANCE_DELTA)) / MARKER_APPEARANCE_DELTA;
-        var distance = UNIT_ARRANGE_RADIUS * ratio;
+        var distance = BIAS + UNIT_ARRANGE_RADIUS * ratio;
 
         m.setVisible(true)
         .setPosition(

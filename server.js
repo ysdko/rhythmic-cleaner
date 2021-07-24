@@ -37,7 +37,14 @@ function getJs(req, res) {
     res.write(data);
     res.end();
     });
-  }  
+  } 
+  // else if ('/title.png' == url) {
+  //   res.writeHead(200, {
+  //     'Content-Type': `image/png; charset=utf-8`  //　← ここがキモ！
+  //     });
+  //   var image = fs.readFileSync("title.png", "binary"); // ← ファイルpathはその環境に合わせてください
+  //     res.end(image, "binary");
+  // }  
   else if ('/component.js' == url) {
     fs.readFile('component.js', 'UTF-8', function (err, data) {
     res.writeHead(200, {'Content-Type': 'text/plain'});

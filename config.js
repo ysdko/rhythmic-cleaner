@@ -10,6 +10,7 @@ var ICON_INTERVAL_DEGREE = 180 / (TRACK_NUM - 1); // 22.5
 var MARKER_APPEARANCE_DELTA = 1000; // ノーツ出現時間(ms): 大きくするほど低速
 var UNIT_ARRANGE_RADIUS = SCREEN_WIDTH * 0.41 | 0;
 var MUSIC_START_DELAY = 2000;
+var BIAS = 130;
 
 var RATING_TABLE = {
   perfect: {
@@ -32,7 +33,7 @@ var RATING_TABLE = {
 
 // キーボード操作用
 var KEYCODE_TO_KEYDATA_MAP = {
-  80: {key:"p", id:0},
+  80: {key:"move!", id:0},
   // 187: {key:";", id:0},
   76: {key:"l", id:1},
   75: {key:"k", id:2},
@@ -51,6 +52,10 @@ KEYCODE_TO_KEYDATA_MAP.forIn(function(key, val) {
 });
 
 var ASSETS = {
+  image: {'title_image': 'https://drive.google.com/uc?id=1KJtjAOX07K30WmKZigsZySCANdBXmnBd',
+          'main_background': 'https://drive.google.com/uc?id=1C3lHzLThYiYPEMcOFi6UFRyK7U2y_MS6',
+          'vacuumcleaner': 'https://drive.google.com/uc?id=18VikX3OpbqIx1umq9ZwPT04t5ZqvbvRv'
+  },
   sound: {
     music: `data:audio/wav;base64,SUQzBAAAAAAAGFRTU0UAAAAOAAADTGF2ZjU0LjYuMTAwAP/7kAAAAAAAAAAAAAAAAAAAAAAAAAAA
     AAAAAAAAAAAAAAAAAEluZm8AAAAHAAAHfAAMOcoAAwUICgwQEhUXGRwfIiQmKSsvMTM2ODo+QENF
