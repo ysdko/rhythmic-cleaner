@@ -73,6 +73,7 @@
   
         // シーン遷移
         this.on('pointend', function() {
+          SoundManager.play('title_music');
           this.exit();
         });
       });
