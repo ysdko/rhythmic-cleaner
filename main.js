@@ -192,11 +192,27 @@ function play_init() {
     .addChildTo(this)
     .onpointstart=function() {
       SoundManager.stopMusic();
+      self.exit('main')
+    };
+
+    Button({
+      text: 'RESULT',
+      stroke:"white",
+      strokeWidth:10,
+      fill: "black",
+    })
+    .setOrigin(1, 0)
+    .setPosition(230, 0)
+    .addChildTo(this)
+    .onpointstart=function() {
+      SoundManager.stopMusic();
       self.exit({
         reselt_score:self.totalScore
       }); // 自分を渡す
     };
   },
+
+  
 
   update: function(app) {
     var self = this;
@@ -308,12 +324,18 @@ phina.define("Result", {
     // 親クラス初期化
     this.superInit(param);
     // 背景色
-    this.backgroundColor = 'blue';
+    this.backgroundColor = 'white';
     // ラベル
+    Label({
+      text: "スコア発表",
+      fontSize: 48,
+      fill: 'red',
+    }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(3));
+
     Label({
       text: param.reselt_score,
       fontSize: 48,
-      fill: 'white',
+      fill: 'red',
     }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
   },
   // タッチで次のシーンへ
