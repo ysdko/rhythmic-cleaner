@@ -40,11 +40,9 @@ var threashold_low = 1,
 
     var main_background = Sprite('main_background').addChildTo(this)
       .setPosition(this.gridX.center(), this.gridY.center());
-      //title_image.height = 781 / 1.7;
-      //title_image.width = 968 / 1.7;
 
     var vacuumcleaner = Sprite('vacuumcleaner').addChildTo(this)
-      .setPosition(this.gridX.span(7.7), this.gridY.span(13));
+      .setPosition(this.gridX.span(7.9), this.gridY.span(13));
       vacuumcleaner.height = 800;
       vacuumcleaner.width = 600;
     // // 移動する速度
@@ -202,7 +200,7 @@ function play_init() {
       fill: "black",
     })
     .setOrigin(1, 0)
-    .setPosition(230, 0)
+    .setPosition(216, 0)
     .addChildTo(this)
     .onpointstart=function() {
       SoundManager.stopMusic();
@@ -273,19 +271,19 @@ function play_init() {
       var delta = Math.abs(m.targetTime - time);
       if (delta <= RATING_TABLE["perfect"].range) {
         unitIcon.fireEffect();
-        SoundManager.play('ring');
+        SoundManager.play('ta');
         this.reaction(m, "perfect");
         return true;
       }
       if (delta <= RATING_TABLE["great"].range) {
         unitIcon.fireEffect();
-        SoundManager.play('ring');
+        SoundManager.play('ta');
         this.reaction(m, "great");
         return true;
       }
       if (delta <= RATING_TABLE["good"].range) {
         unitIcon.fireEffect();
-        SoundManager.play('ring');
+        SoundManager.play('ta');
         this.reaction(m, "good");
         return true;
       }
@@ -325,21 +323,43 @@ phina.define("Result", {
     this.superInit(param);
     // 背景色
     this.backgroundColor = 'white';
+
+    var bgGroup = DisplayElement().addChildTo(this);
+    var SCALE = 65;
+
+    var last_image = Sprite('last_image').addChildTo(bgGroup)
+    .setPosition(this.gridX.center(), this.gridY.center());
+    // .physical.force(-1, 0);
+    last_image.height = 16 * SCALE;
+    last_image.width = 9 * SCALE;
+
+    this.bgGroup = bgGroup;
+
     // ラベル
     Label({
-      text: "スコア発表",
-      fontSize: 48,
-      fill: 'red',
-    }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(3));
+      text: "スコア",
+      fontSize: 60,
+      fill: 'black',
+    }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(5));
 
     Label({
       text: param.reselt_score,
-      fontSize: 48,
+      fontSize: 60,
       fill: 'red',
-    }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
+    }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(7));
   },
   // タッチで次のシーンへ
   onpointstart: function() {
     this.exit();  
   },
+
+  // update: function() {
+  //   // 背景のループ処理
+  //   var first = this.bgGroup.children.first;
+  //   if (first.right < 0) {
+  //     first.addChildTo(this.bgGroup);
+  //     this.bgGroup.children.last.left = this.bgGroup.children.first.right;
+  //   }
+  // },
+
 });
