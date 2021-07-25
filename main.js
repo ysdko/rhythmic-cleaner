@@ -27,6 +27,8 @@ var threashold_low = 1,
     // var beatmap = DEBUG_BEATMAP;
     var beatmap = AM.get('json', 'beatmap').data;
 
+    
+
     // タイマーのセット
     this.elapsedTime = 0; // 経過時間
     this.gameTime = 0 - MUSIC_START_DELAY + beatmap.offset; // 判定用時間
@@ -63,6 +65,8 @@ var threashold_low = 1,
       SoundManager.playMusic('music', null, false);
     });
 
+    
+
     // ユニットアイコンの配置
     var iconGroup = DisplayElement()
     .setPosition(gx.center(), gy.span(2))
@@ -76,6 +80,9 @@ var threashold_low = 1,
       )
       .addChildTo(iconGroup);
 
+      window.addEventListener( "deviceorientation", deviceOrientation );
+
+      function deviceOrientation (){
       if (navigator.userAgent.match(/iPhone/)) {
         if (DeviceMotionEvent.requestPermission) {
             DeviceMotionEvent.requestPermission().then((permissionState) => {
@@ -90,7 +97,7 @@ var threashold_low = 1,
             window.addEventListener("devicemotion", motion);
         }
     }
-// }
+ }
 
 function motion() {
     all_info = event.accelerationIncludingGravity;
