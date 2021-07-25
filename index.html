@@ -54,7 +54,24 @@
         backgroundColor: 'white',
         // title: 'リズム De! 掃除機',
         fps: 60,
-        
+        scenes: [
+      {
+        className: 'TitleScene',
+        label: 'title',
+        nextLabel: 'main',
+      },
+
+      {
+        className: 'MainScene',
+        label: 'main',
+        nextLabel: 'result',
+      },
+      {
+        className: 'Result',
+        label: 'result',
+        nextLabel: 'title',
+      },
+    ]
       });
 
       // app.enableStats();

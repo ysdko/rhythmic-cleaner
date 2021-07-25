@@ -4,6 +4,7 @@ phina.define('MainScene', {
   superClass: 'DisplayScene',
 
   init: function(options) {
+    
     this.superInit(options);
     this.backgroundColor = "white";
 
@@ -22,10 +23,11 @@ var now_acc_x = 0,
     now_acc_z = 0;
 var acc_status;
 var threashold_low = 1,
-    threathold_high = 4;
+    threathold_high = 2;
 
     // var beatmap = DEBUG_BEATMAP;
     var beatmap = AM.get('json', 'beatmap').data;
+    
 
     
 
@@ -188,10 +190,12 @@ function play_init() {
     .setOrigin(1, 0)
     .setPosition(this.width, 0)
     .addChildTo(this)
-    .on('push', function() {
+    .onpointstart=function() {
       SoundManager.stopMusic();
-      self.exit('main')
-    });
+      self.exit({
+        reselt_score:self.totalScore
+      }); // 自分を渡す
+    };
   },
 
   update: function(app) {
@@ -257,12 +261,12 @@ function play_init() {
         this.reaction(m, "perfect");
         return true;
       }
-      // if (delta <= RATING_TABLE["great"].range) {
-      //   unitIcon.fireEffect();
-      //   SoundManager.play('ring');
-      //   this.reaction(m, "great");
-      //   return true;
-      // }
+      if (delta <= RATING_TABLE["great"].range) {
+        unitIcon.fireEffect();
+        SoundManager.play('ring');
+        this.reaction(m, "great");
+        return true;
+      }
       if (delta <= RATING_TABLE["good"].range) {
         unitIcon.fireEffect();
         SoundManager.play('ring');
@@ -289,4 +293,31 @@ function play_init() {
     this.totalScore += RATING_TABLE[rating].score;
   },
 
+  // onpointstart: function() {
+  //   this.exit();  
+  // },
+
+
+});
+
+phina.define("Result", {
+  // 継承
+  superClass: 'DisplayScene',
+  // 初期化
+  init: function(param) {
+    // 親クラス初期化
+    this.superInit(param);
+    // 背景色
+    this.backgroundColor = 'blue';
+    // ラベル
+    Label({
+      text: param.reselt_score,
+      fontSize: 48,
+      fill: 'white',
+    }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
+  },
+  // タッチで次のシーンへ
+  onpointstart: function() {
+    this.exit();  
+  },
 });
