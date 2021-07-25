@@ -73,9 +73,6 @@ var threashold_low = 1,
       var icon = UnitIcon(i, label)
       .setPosition(
         0, this.gridY.span(9.3)
-        
-        // Math.cos(rad) * UNIT_ARRANGE_RADIUS,
-        // Math.sin(rad) * UNIT_ARRANGE_RADIUS
       )
       .addChildTo(iconGroup);
 
@@ -83,15 +80,8 @@ var threashold_low = 1,
         if (DeviceMotionEvent.requestPermission) {
             DeviceMotionEvent.requestPermission().then((permissionState) => {
                 if (permissionState === "granted") {
-                  // this.on('devicemotion', function() {
-                    // {
-                      // alert("test");
-                      // var icon = iconGroup.getChildAt(0);
-                      // this.judge(icon);
-                    // }
+
                     window.addEventListener("devicemotion", motion);
-                  // });
-                    // window.addEventListener("devicemotion", motion);
                 }
             });
         }
@@ -124,27 +114,7 @@ function motion() {
   else{
       if(y < -threathold_high) {
           music.currentTime = 0;
-          //music.play();  // 再生
-          // alert("test");
-          // alert(iconGroup.getChildAt(7));
-          // var icon = iconGroup.getChildAt(0);
-          // alert(icon);
-          console.log(self);
-          console.log("test");
-          // alert("test");
           self.judge(icon);
-          
-          // this.on('devicemotion', function() {
-          //   // {
-          //     alert("test");
-          //     var icon = iconGroup.getChildAt(0);
-          //     this.judge(icon);
-            // }
-          // });
-          // accer();
-          //alert(x);
-          // bgm1.play()
-
       }
       meter_plus = document.getElementById("plus"); // データを表示するdiv要素の取得
       meter_plus.value = 0;
@@ -159,38 +129,23 @@ function play_init() {
 
       
 
-      // タップ・クリック判定
-      // icon.onpointstart = function() {
-      //   // console.log(this);
-      //   // alert(icon);
-      //   // alert(this);
-
-      //   self.judge(this); // 自分を渡す
-      //   // console.log()
-      // };
-
-      // function accer(){
-      //   self.judge(this);
-      //   // this.judge(icon);
-      //   // alert(self.judge(this));
-      //   // alert(this);
-      //   // var icon = iconGroup.getChildAt(0);
-      //   // alert(icon);
-      //   // this.judge(icon).bind(this);
-      // }
+      //タップ・クリック判定
+      icon.onpointstart = function() {
+        self.judge(this); // 自分を渡す
+      };
     }
     
     // キーボード判定
-    // this.on('keydown', function(e) {
-    //   var keyData = KEYCODE_TO_KEYDATA_MAP[e.keyCode];
-    //   if (keyData !== undefined) {
-    //     console.log(keyData.id);
-    //     console.log(this)
-    //     var icon = iconGroup.getChildAt(keyData.id);
-    //     console.log(icon)
-    //     this.judge(icon);
-    //   }
-    // });
+    this.on('keydown', function(e) {
+      var keyData = KEYCODE_TO_KEYDATA_MAP[e.keyCode];
+      if (keyData !== undefined) {
+        console.log(keyData.id);
+        console.log(this)
+        var icon = iconGroup.getChildAt(keyData.id);
+        console.log(icon)
+        this.judge(icon);
+      }
+    });
 
     // 譜面の展開
     this.markerGroup = DisplayElement()
@@ -230,24 +185,6 @@ function play_init() {
       SoundManager.stopMusic();
       self.exit('main')
     });
-
-    // Debug用タイマー表示
-    // Label({
-    //   fill: "white",
-    //   fontSize: 50,
-    // })
-    // .setOrigin(0, 1)
-    // .setPosition(gx.span(1), gy.span(15))
-    // .addChildTo(this)
-    // .on('enterframe', function() {
-    //   this.text = self.elapsedTime+" ms";
-    // });
-
-    // this.on('enter', function() {
-    //   this.app.keyboard.on('keydown', function(e) {
-    //     console.log(e.keyCode);
-    //   })
-    // })
   },
 
   update: function(app) {
@@ -313,12 +250,12 @@ function play_init() {
         this.reaction(m, "perfect");
         return true;
       }
-      if (delta <= RATING_TABLE["great"].range) {
-        unitIcon.fireEffect();
-        SoundManager.play('ring');
-        this.reaction(m, "great");
-        return true;
-      }
+      // if (delta <= RATING_TABLE["great"].range) {
+      //   unitIcon.fireEffect();
+      //   SoundManager.play('ring');
+      //   this.reaction(m, "great");
+      //   return true;
+      // }
       if (delta <= RATING_TABLE["good"].range) {
         unitIcon.fireEffect();
         SoundManager.play('ring');

@@ -15,15 +15,15 @@ var BIAS = 130;
 var RATING_TABLE = {
   perfect: {
     score: 1000,
-    range: 34, //ms
-  },
-  great: {
-    score: 500,
     range: 64, //ms
   },
+  // great: {
+  //   score: 500,
+  //   range: 64, //ms
+  // },
   good: {
     score: 100,
-    range: 90, //ms
+    range: 100, //ms
   },
   miss: {
     score: 0,
