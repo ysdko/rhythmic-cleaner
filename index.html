@@ -23,22 +23,6 @@
       if (!phina.util.Support.webAudio) {
         alert('webAudioに対応していません！最新のブラウザを使って下さい！');
       }
-      //加速度センサ使用認証
-      //html上で実行してみるといける？
-      if (navigator.userAgent.match(/iPhone/)) {
-          if (DeviceMotionEvent.requestPermission) {
-              DeviceMotionEvent.requestPermission().then((permissionState) => {
-                  if (permissionState === "granted") {
-                      window.addEventListener("devicemotion", function(event){ motionCatch(event) });
-                  }
-              });
-          }
-      } else {
-          if (navigator.userAgent.match(/Android.+Mobile/)) {
-              // 直接motionCatch(event)とはできない
-              window.addEventListener("devicemotion", function(event){ motionCatch(event) });
-          }
-      }
     </script>
 
     <script type="text/javascript">

@@ -1,5 +1,23 @@
 phina.globalize();
 
+//加速度センサ使用認証
+function devicemotionRequest() {
+    if (navigator.userAgent.match(/iPhone/)) {
+        if (DeviceMotionEvent.requestPermission) {
+            DeviceMotionEvent.requestPermission().then((permissionState) => {
+                if (permissionState === "granted") {
+                    window.addEventListener("devicemotion", function(event){ motionCatch(event) });
+                }
+            }).catch((e) => {alert(e);});
+        }
+    } else {
+        if (navigator.userAgent.match(/Android.+Mobile/)) {
+            // 直接motionCatch(event)とはできない
+            window.addEventListener("devicemotion", function(event){ motionCatch(event) });
+        }
+    }
+}
+
 // 四捨五入関数
 function orgRound(value, base) {
     return Math.round(value * base) / base;

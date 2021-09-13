@@ -35,6 +35,12 @@ phina.define('TitleScene', {
     title_image.height = 781 / 1.7;
     title_image.width = 968 / 1.7;
 
+    //センサ使用許可要求
+    this.setInteractive(true);
+    this.onclick = function() {
+      devicemotionRequest();
+    };
+
     // モバイルでの再生制限アンロックのため、画面タッチ時にSoundを無音再生
     //enterイベント自体は1つのみしか発火されていない
     this.on('enter', function() {
@@ -51,7 +57,6 @@ phina.define('TitleScene', {
           dom.removeEventListener(event, f, false);
         }
       }()), false);
-
       // シーン遷移
       this.on('pointend', function() {
         SoundManager.play('title_music');
