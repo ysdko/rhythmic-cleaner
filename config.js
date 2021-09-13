@@ -1,18 +1,22 @@
+//画面サイズ(適当)
+const SCREEN_WIDTH = 1024;
+const SCREEN_HEIGHT = 768;
+//　ノーツが落ちてくる角度
+const UNIT_ARRANGE_RADIUS = SCREEN_WIDTH * 0.41;
+const BIAS = 130;
 
-var SCREEN_WIDTH = 1024;
-var SCREEN_HEIGHT = 768;
-var MARKER_RADIUS = 70;
-var MARKER_STROKE_WIDTH = 8;
+//　検出部マーカのパラメータ
+const MARKER_RADIUS = 70;
+const MARKER_STROKE_WIDTH = 8;
+const MARKER_COODINATE_Y = 9.3;
 
-var TRACK_NUM = 1;
-var ICON_INTERVAL_DEGREE = 180 / (TRACK_NUM - 1); // 22.5
+// ノーツ出現時間(ms)
+const MARKER_APPEARANCE_DELTA = 1000;
+//　開始時音楽再生までの時間
+const MUSIC_START_DELAY = 2000;
 
-var MARKER_APPEARANCE_DELTA = 1000; // ノーツ出現時間(ms): 大きくするほど低速
-var UNIT_ARRANGE_RADIUS = SCREEN_WIDTH * 0.41 | 0;
-var MUSIC_START_DELAY = 2000;
-var BIAS = 130;
-
-var RATING_TABLE = {
+// 採点基準
+const RATING_TABLE = {
   perfect: {
     score: 1000,
     range: 34, //ms
@@ -31,31 +35,24 @@ var RATING_TABLE = {
   },
 };
 
-// キーボード操作用
-var KEYCODE_TO_KEYDATA_MAP = {
-  80: {key:"move!", id:0},
-  // 187: {key:";", id:0},
-  76: {key:"l", id:1},
-  75: {key:"k", id:2},
-  78: {key:"n", id:3},
-  66: {key:"b", id:4},
-  // 32: {key:"sp", id:4},
-  86: {key:"v", id:5},
-  68: {key:"d", id:6},
-  83: {key:"s", id:7},
-  81: {key:"q", id:8},
-  // 65: {key:"a", id:8},
-};
-var INDEX_TO_KEY_MAP = {};
-KEYCODE_TO_KEYDATA_MAP.forIn(function(key, val) {
-  INDEX_TO_KEY_MAP[val.id] = val.key;
-});
+// 読み取られた加速度の値
+let aclr = {
+  x : 0,
+  y : 0,
+  z : 0
+}
+const THREATHOLD = 4;
+var self_global;
+var icon_global;
 
+
+//後ほど訂正
 var ASSETS = {
-  image: {'title_image': 'https://drive.google.com/uc?id=1KJtjAOX07K30WmKZigsZySCANdBXmnBd',
-          'main_background': 'https://drive.google.com/uc?id=1C3lHzLThYiYPEMcOFi6UFRyK7U2y_MS6',
-          'vacuumcleaner': 'https://drive.google.com/uc?id=1KMeNPzb7FJRsRhnoSDvaxjFWmiiYabRm',
-          'last_image': 'https://drive.google.com/uc?id=1noY18ShszQvV7N85X_b14-gkd7G-Jf6j'
+  image: {
+    'title_image': 'https://drive.google.com/uc?id=1KJtjAOX07K30WmKZigsZySCANdBXmnBd',
+    'main_background': 'https://drive.google.com/uc?id=1C3lHzLThYiYPEMcOFi6UFRyK7U2y_MS6',
+    'vacuumcleaner': 'https://drive.google.com/uc?id=1KMeNPzb7FJRsRhnoSDvaxjFWmiiYabRm',
+    'last_image': 'https://drive.google.com/uc?id=1noY18ShszQvV7N85X_b14-gkd7G-Jf6j'
   },
   sound: {
     'title_music': `data:audio/wav;base64,//uQZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAAaAAAoigACAgIF
@@ -9007,7 +9004,7 @@ var ASSETS = {
     qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
     qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqo=`,
     ring: "https://raw.githubusercontent.com/Yousuke777/sound/main/kansei.mp3",
-    ta: `data:audio/wav;base64,SUQzAwAAAAAAFVRQRTEAAAALAAAAcGVudGFtYW5pYf/7kAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    hit: `data:audio/wav;base64,SUQzAwAAAAAAFVRQRTEAAAALAAAAcGVudGFtYW5pYf/7kAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     AAAAAAAAAAAAAEluZm8AAAAPAAAACwAAE5YAFxcXFxcXFxcXLi4uLi4uLi4uRUVFRUVFRUVFXV1d
     XV1dXV1ddHR0dHR0dHR0i4uLi4uLi4uLoqKioqKioqKiurq6urq6urq60dHR0dHR0dHR6Ojo6Ojo
     6Ojo////////////AAAAOUxBTUUzLjk5cgGqAAAAAAAAAAAUgCQFa0YAAIAAABOWJN7OBwAAAAAA
