@@ -1,83 +1,31 @@
-/*
- * ユニット表示アイコン
- */
 phina.globalize();
+
+//判定部マーカ
 phina.define('UnitIcon', {
   superClass: 'phina.display.CircleShape',
 
-  init: function(id, label) {
-    this.superInit({
-      radius: MARKER_RADIUS,
-      strokeWidth: MARKER_STROKE_WIDTH,
-      stroke: "red",
-      fill: "white",
-    });
-    this.setInteractive(true);
-    this.id = id;
-
-    // ナンバー表記
-    label = (label != null) ? label : id+"";
-    Label({
-      text: label,
-      fill: "red",
-      fontSize: 30,
-    })
-    .addChildTo(this)
-    ;
-  },
-
-  fireEffect: function() {
-    EffectWave().addChildTo(this);
-  },
-
-});
-
-
-/**
- * ターゲットマーカー（ノーツ）
- */
-phina.define('TargetMarker', {
-  superClass: 'phina.display.CircleShape',
-
-  init: function(targetTime, trackId, type) {
+  init: function() {
     this.superInit({
       radius: MARKER_RADIUS,
       strokeWidth: MARKER_STROKE_WIDTH,
       stroke: "red",
       fill: false,
     });
-
-    this.visible = false;
-    this.scaleX = this.scaleY = 0;
-    this.isAwake = true;
-
-    this.targetTime = targetTime;
-    this.trackId = trackId;
-    this.vector = phina.geom.Vector2(
-      0, 1
-      // Math.cos((trackId * ICON_INTERVAL_DEGREE).toRadian()),
-      // Math.sin((trackId * ICON_INTERVAL_DEGREE).toRadian())
-    );
-
-    // カウント表示
-    // debug
-    // Label({
-    //   text: targetTime + "",
-    //   fontSize: 60,
-    // })
-    // .addChildTo(this)
+    this.setInteractive(true);
   },
 
+  //エフェクト発火関数
+  fireEffect: function() {
+    EffectWave().addChildTo(this);
+  },
 });
 
 
-/**
- * エフェクト：白フェードアウト円
- */
+//判定エフェクト
 phina.define('EffectWave', {
   superClass: 'phina.display.CircleShape',
 
-  init: function(options) {
+  init: function() {
     this.superInit({
       radius: MARKER_RADIUS,
       stroke: false,
@@ -90,19 +38,58 @@ phina.define('EffectWave', {
       this.remove();
     }, this);
   },
-
-  // fire: function() {
-  // },
-
-  // reset: function() {
-  // }
-
 });
 
 
-/**
- * エフェクト："PERFECT!"など
- */
+//ノーツ
+phina.define('TargetMarker', {
+
+  init: function(targetTime, scene, direction) {
+    this.group = DisplayElement().addChildTo(scene);
+    this.marker = CircleShape({
+      radius: MARKER_RADIUS,
+      strokeWidth: MARKER_STROKE_WIDTH,
+      stroke: "red",
+      fill: "white",
+    }).addChildTo(this.group);
+    this.arrow = Arrow(direction).group.addChildTo(this.group);
+
+    this.group.visible = false;
+    this.group.scaleX = this.scaleY = 0;
+    this.group.isAwake = true;
+    this.group.targetTime = targetTime;
+    this.group.vector = phina.geom.Vector2(0, 1);
+  },
+});
+
+
+//矢印オブジェクト
+phina.define("Arrow", {
+  //direction 0:上向き, 1:下向き
+  init: function(direction) {
+    if(direction !== 1 && direction !== 0) direction = 1;
+    this.group = DisplayElement();
+    this.triangle = TriangleShape({
+        fill: 'red',
+        strokeWidth: 0,
+        radius: 45
+    }).addChildTo(this.group).setPosition(0, 0);
+    this.rectangle = RectangleShape({
+      width: 25,
+      height: 70,
+      fill: 'red',
+      strokeWidth: 0,
+    }).addChildTo(this.group).setPosition(0,30);
+    this.group.setRotation(180 * direction);
+    if(direction)
+      this.group.setPosition(0, 12);
+    else
+      this.group.setPosition(0, -12);
+  },
+});
+
+
+//文字エフェクト
 phina.define('RateLabel', {
   superClass: 'phina.display.Label',
 
