@@ -3,107 +3,107 @@
   "offset": 0,
   "notes": [
    {
-    "track": 0,
+    "direction": 1,
     "targetTime": 550
    },
    {
-    "track": 0,
+    "direction": 0,
     "targetTime": 1400
    },
    {
-    "track": 0,
+    "direction": 1,
     "targetTime": 2000
    },
    {
-    "track": 0,
+    "direction": 0,
     "targetTime": 3500
    },
    {
-    "track": 0,
+    "direction": 1,
     "targetTime": 4200
    },
    {
-    "track": 0,
+    "direction": 0,
     "targetTime": 5000
    },
    {
-    "track": 0,
+    "direction": 1,
     "targetTime": 6500
    },
    {
-    "track": 0,
+    "direction": 0,
     "targetTime": 7500
    },
    {
-    "track": 0,
+    "direction": 1,
     "targetTime": 8000
    },
    {
-    "track": 0,
+    "direction": 1,
     "targetTime": 8800
    },
    {
-    "track": 0,
+    "direction": 1,
     "targetTime": 10000
    },
    {
-    "track": 0,
+    "direction": 0,
     "targetTime": 11000
    },
    {
-    "track": 0,
+    "direction": 1,
     "targetTime": 12500
    },
    {
-    "track": 0,
+    "direction": 0,
     "targetTime": 13500
    },
    {
-    "track": 0,
+    "direction": 1,
     "targetTime": 14000
    },
    {
-    "track": 0,
+    "direction": 1,
     "targetTime": 15500
    },
    {
-    "track": 0,
+    "direction": 0,
     "targetTime": 16300
    },
    {
-    "track": 0,
+    "direction": 0,
     "targetTime": 17250
    },
    {
-    "track": 0,
+    "direction": 1,
     "targetTime": 18000
    },
    {
-    "track": 0,
+    "direction": 0,
     "targetTime": 20000
    },
    {
-    "track": 0,
+    "direction": 1,
     "targetTime": 21000
    },
    {
-    "track": 0,
+    "direction": 0,
     "targetTime": 22000
    },
    {
-    "track": 0,
+    "direction": 0,
     "targetTime": 23000
    },
    {
-    "track": 0,
+    "direction": 1,
     "targetTime": 24800
    },
    {
-    "track": 0,
+    "direction": 1,
     "targetTime": 26250
    },
    {
-    "track": 0,
+    "direction": 1,
     "targetTime": 28000
    }
   ]
