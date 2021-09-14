@@ -100,7 +100,7 @@ phina.define('MainScene', {
     .onpointstart=function() {
       SoundManager.stopMusic();
       self.exit({
-        reselt_score: self.totalScore
+        result_score: self.totalScore
       }); // 自分を渡す
     };
   },
