@@ -6,6 +6,8 @@ phina.define('TitleScene', {
   init: function(params) {
     this.superInit(params);
     this.backgroundColor = params.backgroundColor;
+    SoundManager.volume = 0.05;
+    SoundManager.musicVolume = 0.05;
 
     Label({
       text: "リズム De! 掃除機",
