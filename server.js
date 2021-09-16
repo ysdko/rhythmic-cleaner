@@ -25,6 +25,17 @@ function getReq(req, res) {
       res.end();
     });
   }
+  else if ('/css/baseCanvas.css' === url) {
+    fs.readFile('./css/baseCanvas.css', 'UTF-8', function (err, data) {
+      if(err) {
+        console.error(err.message);
+        process.exit(1);
+      }
+      res.writeHead(200, {'Content-Type': 'text/css'});
+      res.write(data); 
+      res.end();
+    });
+  }
   else if ('/mainScene.js' === url) {
     fs.readFile('mainScene.js', 'UTF-8', function (err, data) {
       if(err) {
