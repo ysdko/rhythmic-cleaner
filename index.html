@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <canvas id="canvasId" class="responsive"></canvas>
+    <canvas id="canvasId"></canvas>
 
     <!-- fina.jsの読み込み -->
     <script src="https://cdn.jsdelivr.net/gh/phinajs/phina.js@v0.2.3/build/phina.js"></script>
@@ -19,6 +19,7 @@
     <script src="./device_motion.js"></script>
     <script src="./mainScene.js"></script>
     <script src="./resultScene.js"></script>
+    <script src="./selectMusicScene.js"></script>
     <script src="./titleScene.js"></script>
 
     <script type="text/javascript">
@@ -33,8 +34,10 @@
 
         var app = GameApp({
           query: "#canvasId",
-          fit: false,
+          fit: true,
           assets: ASSETS,
+          width: SCREEN_WIDTH,
+          height: SCREEN_HEIGHT,
           // width: SCREEN_WIDTH,
           // height: SCREEN_HEIGHT,
           startLabel: 'title',
@@ -44,6 +47,11 @@
             {
               className: 'TitleScene',
               label: 'title',
+              nextLabel: 'selectMusic',
+            },
+            {
+              className: 'SelectMusicScene',
+              label: 'selectMusic',
               nextLabel: 'main',
             },
             {
