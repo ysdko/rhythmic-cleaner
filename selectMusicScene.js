@@ -5,66 +5,108 @@ phina.define('SelectMusicScene', {
 
   init: function(params) {
     this.superInit(params);
-    this.backgroundColor = params.backgroundColor;
-    SoundManager.volume = 0.05;
-    SoundManager.musicVolume = 0.05;
+    const self = this;
 
     Label({
-      text: "リズム De! 掃除機",
-      fill: "black",
-      fontSize: 70,
+      text: "曲を選択して下さい",
+      fill: "white",
+      fontSize: 60,
+      stroke: "cyan",
+      strokeWidth: 3,
     })
-    .setPosition(this.gridX.center(), this.gridY.span(2))
+    .setPosition(this.gridX.center(), this.gridY.span(1.8))
     .addChildTo(this);
 
-    const touchLabel = Label({
-      text: "Tap to start",
-      fill: "black",
-      //stroke: "#0000ff",
-      //strokeWidth: 6,
-      fontSize: 50,
-    })
-    .setPosition(this.gridX.center(), this.gridY.span(13))
-    .addChildTo(this);
-    
-    touchLabel.tweener.clear()
-    .setLoop(true)
-    .to({alpha: 0}, 900)
-    .to({alpha: 1}, 900);
+    const songGroup = DisplayElement().setPosition(this.gridX.center(), this.gridY.span(7.3)).addChildTo(this);
+    RectangleShape({
+      width: 500,
+      height: 500,
+      fill: 'black',
+      stroke: 'cyan',
+      strokeWidth: 10,
+    }).addChildTo(songGroup);
+    Label({
+      text: "1. Shining Star",
+      fontSize: 52,
+      fill: "white",
+      stroke: "cyan",
+      strokeWidth: 3,
+    }).addChildTo(songGroup).setPosition(0, -150);
+    PathShape({
+      stroke: "magenta",
+      strokeWidth: 5,
+      paths: [Vector2(-200, -100), 
+        Vector2(200, -100)]
+    }).addChildTo(songGroup);
+    Label({
+      text: "2. Shining Star",
+      fontSize: 52,
+      fill: "white",
+      stroke: "cyan",
+      strokeWidth: 3,
+    }).addChildTo(songGroup);
+    PathShape({
+      stroke: "magenta",
+      strokeWidth: 5,
+      paths: [Vector2(-200, 50), 
+        Vector2(200, 50)]
+    }).addChildTo(songGroup);
+    Label({
+      text: "3. Shining Star",
+      fontSize: 52,
+      fill: "white",
+      stroke: "cyan",
+      strokeWidth: 3,
+    }).addChildTo(songGroup).setPosition(0, 150);
+    PathShape({
+      stroke: "magenta",
+      strokeWidth: 5,
+      paths: [Vector2(-200, 200), 
+        Vector2(200, 200)]
+    }).addChildTo(songGroup);
 
-    const title_image = Sprite('title_image').addChildTo(this)
-    .setPosition(this.gridX.center(), this.gridY.span(7.5));
-    title_image.height = 781 / 1.7;
-    title_image.width = 968 / 1.7;
 
-    //センサ使用許可要求
-    this.setInteractive(true);
-    this.onclick = function() {
-      devicemotionRequest();
+    const nextButtonGroup = DisplayElement().setPosition(this.gridX.span(12) - 20, this.gridY.span(14)- 30).addChildTo(this);
+    const nextButton = RectangleShape({
+      width: 240,
+      height: 100,
+      fill: 'black',
+      stroke: 'cyan',
+      strokeWidth: 10,
+    }).addChildTo(nextButtonGroup);
+    nextButton.setInteractive(true);
+    nextButton.onpointstart = function() {
+      SoundManager.play('title_music');
+      self.exit();
     };
+    Label({
+      text: "OK",
+      fontSize: 60,
+      fill: "white",
+      stroke: "cyan",
+      strokeWidth: 3,
+    }).addChildTo(nextButtonGroup);
 
-    // モバイルでの再生制限アンロックのため、画面タッチ時にSoundを無音再生
-    //enterイベント自体は1つのみしか発火されていない
-    this.on('enter', function() {
-      var event = "touchstart";
-      var dom = this.app.domElement;
-      dom.addEventListener(event, (function() {
-        return function f() {
-          var context = phina.asset.Sound.getAudioContext();
-          var buf = context.createBuffer(1, 1, 22050);
-          var src = context.createBufferSource();
-          src.buffer = buf;
-          src.connect(context.destination);
-          src.start(0);
-          dom.removeEventListener(event, f, false);
-        }
-      }()), false);
-      // シーン遷移
-      this.on('pointend', function() {
-        SoundManager.play('title_music');
-        this.exit();
-      });
-    });
+    const prevButtonGroup = DisplayElement().setPosition(this.gridX.span(4) + 20, this.gridY.span(14)- 30).addChildTo(this);
+    const prevButton = RectangleShape({
+      width: 240,
+      height: 100,
+      fill: 'black',
+      stroke: 'cyan',
+      strokeWidth: 10,
+    }).addChildTo(prevButtonGroup);
+    prevButton.setInteractive(true);
+    prevButton.onpointstart = function() {
+      SoundManager.play('title_music');
+      self.app.pushScene(TitleScene(params));  
+    };
+    Label({
+      text: "戻る",
+      fontSize: 60,
+      fill: "white",
+      stroke: "cyan",
+      strokeWidth: 3,
+    }).addChildTo(prevButtonGroup);
 
   },
 

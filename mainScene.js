@@ -22,13 +22,24 @@ phina.define('MainScene', {
     //スコア
     this.totalScore = 0;
 
-    var main_background = Sprite('main_background').addChildTo(this)
-      .setPosition(gx.center(), gy.center());
-
-    var vacuumcleaner = Sprite('vacuumcleaner').addChildTo(this)
-      .setPosition(gx.span(7.9), gy.span(13));
-      vacuumcleaner.height = 800;
-      vacuumcleaner.width = 600;
+    PathShape({
+      stroke: "magenta",
+      strokeWidth: 1,
+      paths: [Vector2(this.gridX.span(8), this.gridY.span(16)), 
+        Vector2(this.gridX.span(8), this.gridY.span(4.5))]
+    }).addChildTo(this);
+    PathShape({
+      stroke: "magenta",
+      strokeWidth: 5,
+      paths: [Vector2(this.gridX.span(0), this.gridY.span(16)), 
+        Vector2(this.gridX.span(7.5), this.gridY.span(4.5))]
+    }).addChildTo(this);
+    PathShape({
+      stroke: "magenta",
+      strokeWidth: 5,
+      paths: [Vector2(this.gridX.span(16), this.gridY.span(16)), 
+        Vector2(this.gridX.span(8.5), this.gridY.span(4.5))]
+    }).addChildTo(this);
     
     // ラベル表示
     var aclr_label = Label(orgRound(aclr.y, 10).toString()).addChildTo(this);
