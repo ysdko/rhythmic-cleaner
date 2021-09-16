@@ -1,8 +1,8 @@
-//画面サイズ(固定)実際のサイズとは異なる
+//画面サイズ(固定)
 const SCREEN_WIDTH = 640;
-const SCREEN_HEIGHT = 960;
+const SCREEN_HEIGHT = 1060;
 //　ノーツが落ちてくる角度
-const UNIT_ARRANGE_RADIUS = SCREEN_WIDTH * 0.75;
+const UNIT_ARRANGE_RADIUS = SCREEN_WIDTH * 0.77;
 const BIAS = 130;
 
 //　検出部マーカのパラメータ
