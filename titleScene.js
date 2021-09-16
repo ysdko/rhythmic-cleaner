@@ -41,10 +41,10 @@ phina.define('TitleScene', {
     .to({alpha: 0}, 900)
     .to({alpha: 1}, 900);
 
-    // const title_image = Sprite('title_image').addChildTo(this)
-    // .setPosition(this.gridX.center(), this.gridY.span(7.5));
-    // title_image.height = 781 / 1.7;
-    // title_image.width = 968 / 1.7;
+    const title_image = Sprite('title_image').addChildTo(this)
+    .setPosition(this.gridX.center(), this.gridY.span(7.5));
+    title_image.height = 781 / 1.7;
+    title_image.width = 968 / 1.7;
 
     //センサ使用許可要求
     this.setInteractive(true);

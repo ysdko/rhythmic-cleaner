@@ -2,7 +2,7 @@
 const SCREEN_WIDTH = 640;
 const SCREEN_HEIGHT = 960;
 //　ノーツが落ちてくる角度
-const UNIT_ARRANGE_RADIUS = SCREEN_WIDTH * 0.67;
+const UNIT_ARRANGE_RADIUS = SCREEN_WIDTH * 0.75;
 const BIAS = 130;
 
 //　検出部マーカのパラメータ

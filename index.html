@@ -9,7 +9,7 @@
   </head>
 
   <body>
-    <canvas id="canvasId" class="responsive"></canvas>
+    <canvas id="canvasId"></canvas>
 
     <!-- fina.jsの読み込み -->
     <script src="https://cdn.jsdelivr.net/gh/phinajs/phina.js@v0.2.3/build/phina.js"></script>
@@ -35,6 +35,8 @@
           query: "#canvasId",
           fit: false,
           assets: ASSETS,
+          width: 640,
+          height: 1060,
           // width: SCREEN_WIDTH,
           // height: SCREEN_HEIGHT,
           startLabel: 'title',
