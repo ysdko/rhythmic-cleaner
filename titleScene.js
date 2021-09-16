@@ -28,9 +28,9 @@ phina.define('TitleScene', {
 
     const touchLabel = Label({
       text: "Tap to start",
-      fill: "white",
-      //stroke: "#0000ff",
-      //strokeWidth: 6,
+      fill: "black",
+      stroke: "#0000ff",
+      strokeWidth: 6,
       fontSize: 50,
     })
     .setPosition(this.gridX.center(), this.gridY.span(13))

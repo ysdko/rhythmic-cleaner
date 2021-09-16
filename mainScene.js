@@ -21,6 +21,10 @@ phina.define('MainScene', {
     this.gameTime = 0 - MUSIC_START_DELAY + beatmap.offset; // 判定用時間
     //スコア
     this.totalScore = 0;
+    this.perfect_times = 0
+    this.great_times = 0
+    this.good_times = 0
+    this.miss_times = 0
 
     var main_background = Sprite('main_background').addChildTo(this)
       .setPosition(gx.center(), gy.center());
@@ -100,7 +104,11 @@ phina.define('MainScene', {
     .onpointstart=function() {
       SoundManager.stopMusic();
       self.exit({
-        result_score: self.totalScore
+        result_score: self.totalScore,
+        perfect_times: self.perfect_times,
+        great_times: self.great_times,
+        good_times: self.good_times,
+        miss_times: self.miss_times
       }); // 自分を渡す
     };
   },
@@ -156,22 +164,26 @@ phina.define('MainScene', {
         unitIcon.fireEffect();
         SoundManager.play('hit');
         this.reaction(m, "perfect");
+        this.perfect_times += 1;
         return true;
       }
       if (delta <= RATING_TABLE["great"].range) {
         unitIcon.fireEffect();
         SoundManager.play('hit');
         this.reaction(m, "great");
+        this.great_times += 1;
         return true;
       }
       if (delta <= RATING_TABLE["good"].range) {
         unitIcon.fireEffect();
         SoundManager.play('hit');
         this.reaction(m, "good");
+        this.good_times += 1;
         return true;
       }
       if (delta <= RATING_TABLE["miss"].range) {
         this.reaction(m, "miss");
+        this.miss_times += 1;
         return true;
       }
     });
