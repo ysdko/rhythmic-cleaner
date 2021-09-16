@@ -112,3 +112,29 @@ phina.define('RateLabel', {
     }, this);
   },
 });
+
+//スコア詳細
+phina.define('ScoreView', {
+
+  init: function(title, score) {
+    this.group = DisplayElement();
+    this.label1 = Label({
+      text: title,
+      // text: params.perfect_times,
+      fontSize: 40,
+      fill: 'cyan',
+    }).addChildTo(this.group).setPosition(0, 0);
+    this.label2 = Label({
+      text: score,
+      // text: params.perfect_times,
+      fontSize: 40,
+      fill: 'white',
+    }).addChildTo(this.group).setPosition(150, 0);
+    // Label({
+    //   text: score,
+    //   // text: params.perfect_times,
+    //   fontSize: 60,
+    //   fill: 'red',
+    // }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
+  },
+});

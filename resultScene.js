@@ -7,43 +7,68 @@ phina.define('ResultScene2', {
     // 親クラス初期化
     this.superInit(params);
     // 背景色
-    this.backgroundColor = 'white';
+    this.backgroundColor = 'black';
     var bgGroup = DisplayElement().addChildTo(this);
     var SCALE = 65;
 
     self = this;
 
-    var last_image = Sprite('last_image').addChildTo(bgGroup)
-    .setPosition(this.gridX.center(), this.gridY.center());
-    // .physical.force(-1, 0);
-    last_image.height = 16 * SCALE;
-    last_image.width = 9 * SCALE;
+    // var last_image = Sprite('last_image').addChildTo(bgGroup)
+    // .setPosition(this.gridX.center(), this.gridY.center());
+    // // .physical.force(-1, 0);
+    // last_image.height = 16 * SCALE;
+    // last_image.width = 9 * SCALE;
 
     this.bgGroup = bgGroup;
 
     // ラベル
     Label({
-      text: "スコア",
+      text: `シャイニングスター`,
       fontSize: 60,
-      fill: 'black',
-    }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(5));
+      fill: 'white',
+    }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(2));
 
     Label({
-      text: params.result_score,
+      text: `score: ${params.result_score}`,
       fontSize: 60,
-      fill: 'red',
-    }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(7));
+      fill: 'white',
+    }).addChildTo(this).setPosition(this.gridX.span(10), this.gridY.span(4.2));
+
+    Label({
+      text: "A",
+      fontSize: 100,
+      fill: 'cyan',
+    }).addChildTo(this).setPosition(this.gridX.span(4), this.gridY.span(4));
+
+    PathShape({
+      paths:[
+          Vector2(-300, 0),
+          Vector2(300, 0)
+      ]
+  }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(5));
+
+  //スコア詳細
+    ScoreView("perfect: ", params.perfect_times).group.addChildTo(this).setPosition(this.gridX.span(7), this.gridY.span(6));
+    ScoreView("great: ", params.great_times).group.addChildTo(this).setPosition(this.gridX.span(7), this.gridY.span(7.5));
+    ScoreView("good: ", params.good_times).group.addChildTo(this).setPosition(this.gridX.span(7), this.gridY.span(9));
+    ScoreView("miss: ", params.miss_times).group.addChildTo(this).setPosition(this.gridX.span(7), this.gridY.span(10.5));
+
+
+
+
 
     //タイトル遷移ボタン
     Button({
-      text: 'タイトルへ戻る',
-      stroke:"white",
+      text: 'もう一度遊ぶ',
+      fontColor: 'white',
       strokeWidth:10,
+      stroke:"cyan",
       fill: "black",
-      width: 300
+      width: 300,
+      cornerRadius:40
     })
     .setOrigin(0.5, 0.5)
-    .setPosition(this.width/2, this.height/2+30)
+    .setPosition(this.gridX.center(), this.gridY.span(12.5))
     .addChildTo(this)
     .onpointstart=function() {
       self.exit(); // 自分を渡す
@@ -52,16 +77,16 @@ phina.define('ResultScene2', {
 
     // twitterシェアボタン
     var shareButton = phina.ui.Button({
-      text: "twitterでシェア",
+      text: "twitter",
       fontSize: 30,
-      width: 256,
+      width: 230,
       height: 54,
+      cornerRadius:25
     })
-    .setPosition(this.width/2, 50)
+    .setPosition(this.gridX.center(), this.gridY.span(14.5))
     .addChildTo(this)
 
     shareButton.onclick = function(){
-      // alert(params.reselt_score)
       var text = '{0}\nScore: {1}\n'.format("リズムDe!掃除機",params.result_score);
       var url = phina.social.Twitter.createURL({
         text: text,
