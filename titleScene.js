@@ -6,20 +6,29 @@ phina.define('TitleScene', {
   init: function(params) {
     this.superInit(params);
     this.backgroundColor = params.backgroundColor;
-    SoundManager.volume = 0.05;
-    SoundManager.musicVolume = 0.05;
+    SoundManager.volume = 0.15;
+    SoundManager.musicVolume = 0.15;
 
     Label({
       text: "リズム De! 掃除機",
-      fill: "black",
-      fontSize: 70,
+      fill: "white",
+      fontSize: 55,
     })
-    .setPosition(this.gridX.center(), this.gridY.span(2))
+    .setPosition(this.gridX.center(), this.gridY.span(4))
     .addChildTo(this);
+
+    playMethod = RectangleShape({
+      width: 220,
+      height: 80,
+      fill: 'black',
+      stroke: 'cyan',
+      strokeWidth: 10,
+      cornerRadius: 16
+    }).addChildTo(this).setPosition(this.gridX.span(13), this.gridY.span(1));
 
     const touchLabel = Label({
       text: "Tap to start",
-      fill: "black",
+      fill: "white",
       //stroke: "#0000ff",
       //strokeWidth: 6,
       fontSize: 50,
@@ -32,10 +41,10 @@ phina.define('TitleScene', {
     .to({alpha: 0}, 900)
     .to({alpha: 1}, 900);
 
-    const title_image = Sprite('title_image').addChildTo(this)
-    .setPosition(this.gridX.center(), this.gridY.span(7.5));
-    title_image.height = 781 / 1.7;
-    title_image.width = 968 / 1.7;
+    // const title_image = Sprite('title_image').addChildTo(this)
+    // .setPosition(this.gridX.center(), this.gridY.span(7.5));
+    // title_image.height = 781 / 1.7;
+    // title_image.width = 968 / 1.7;
 
     //センサ使用許可要求
     this.setInteractive(true);
@@ -65,7 +74,6 @@ phina.define('TitleScene', {
         this.exit();
       });
     });
-
   },
 
 });
