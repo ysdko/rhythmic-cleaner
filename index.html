@@ -5,9 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>リズム De! 掃除機</title>
+    <link rel="stylesheet" href="./css/baseCanvas.css">
   </head>
 
   <body>
+    <canvas id="canvasId" class="responsive"></canvas>
+
     <!-- fina.jsの読み込み -->
     <script src="https://cdn.jsdelivr.net/gh/phinajs/phina.js@v0.2.3/build/phina.js"></script>
     <!-- 各種モジュール -->
@@ -29,11 +32,13 @@
       phina.main(function() {
 
         var app = GameApp({
+          query: "#canvasId",
+          fit: false,
           assets: ASSETS,
           // width: SCREEN_WIDTH,
           // height: SCREEN_HEIGHT,
           startLabel: 'title',
-          backgroundColor: 'white',
+          backgroundColor: 'black',
           fps: 60,
           scenes: [
             {
