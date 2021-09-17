@@ -6,6 +6,23 @@ server.on('request', getReq);
 server.listen(3000);
 console.log('Server running …');
 
+function getType(_url) {
+  var types = {
+    '.html': 'text/html',
+    '.css': 'text/css',
+    '.js': 'text/javascript',
+    '.png': 'image/png',
+    '.gif': 'image/gif',
+    '.svg': 'image/svg+xml'
+  }
+  for (var key in types) {
+    if (_url.endsWith(key)) {
+      return types[key];
+    }
+  }
+  return 'text/plain';
+}
+
 function getReq(req, res) {
   let url = req.url;
   
@@ -86,7 +103,7 @@ function getReq(req, res) {
         console.error(err.message);
         process.exit(1);
       }
-      res.writeHead(200, {'Content-Type': 'text/javascript'});
+      res.writeHead(200, {'Content-Type': getType(url)});
       res.write(data); 
       res.end();
     });
@@ -119,7 +136,7 @@ function getReq(req, res) {
         console.error(err.message);
         process.exit(1);
       }
-      res.writeHead(200, {'Content-Type': 'text/javascript'});
+      res.writeHead(200, {'Content-Type': getType(url)});
       res.write(data); 
       res.end();
     });
@@ -134,5 +151,10 @@ function getReq(req, res) {
       res.write(data); 
       res.end();
     });
+  }
+  else if('/imgs/twitter_logo.png' == url){
+    res.writeHead(200,{"Content-Type":"image/png"});
+    var output2=fs.readFileSync("./imgs/twitter_logo.png", "binary");
+    res.end(output2, "binary");
   }
 }

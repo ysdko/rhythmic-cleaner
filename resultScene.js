@@ -12,6 +12,7 @@ phina.define('ResultScene2', {
     var SCALE = 65;
 
     self = this;
+    var group = DisplayElement().addChildTo(this);
 
     // var last_image = Sprite('last_image').addChildTo(bgGroup)
     // .setPosition(this.gridX.center(), this.gridY.center());
@@ -97,6 +98,14 @@ phina.define('ResultScene2', {
       var childWindow = window.open('about:blank');
       childWindow.location.href = url;
     };
+
+    Sprite('twitter_logo').addChildTo(bgGroup)
+    .setPosition(this.gridX.center(), this.gridY.center()).addChildTo(this)
+    // // .physical.force(-1, 0);
+    // last_image.height = 16 * SCALE;
+    // last_image.width = 9 * SCALE;
+
+
   },
 
   // update: function() {

@@ -53,7 +53,8 @@ var ASSETS = {
     'title_image': 'https://drive.google.com/uc?id=1KJtjAOX07K30WmKZigsZySCANdBXmnBd',
     'main_background': 'https://drive.google.com/uc?id=1C3lHzLThYiYPEMcOFi6UFRyK7U2y_MS6',
     'vacuumcleaner': 'https://drive.google.com/uc?id=1KMeNPzb7FJRsRhnoSDvaxjFWmiiYabRm',
-    'last_image': 'https://drive.google.com/uc?id=1noY18ShszQvV7N85X_b14-gkd7G-Jf6j'
+    'last_image': 'https://drive.google.com/uc?id=1noY18ShszQvV7N85X_b14-gkd7G-Jf6j',
+    'twitter_logo': './imgs/twitter_logo.png'
   },
   sound: {
     'title_music': `data:audio/wav;base64,//uQZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAAaAAAoigACAgIF
