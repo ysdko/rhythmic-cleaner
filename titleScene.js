@@ -94,6 +94,7 @@ phina.define('TitleScene', {
     .to({alpha: 0}, 900)
     .to({alpha: 1}, 900);
 
+    Sprite('title').addChildTo(this).setPosition(320, 480);
 
     //センサ使用許可要求
     this.setInteractive(true);
@@ -119,7 +120,7 @@ phina.define('TitleScene', {
       }()), false);
       // シーン遷移
       SoundManager.play('title_music');
-      self.exit();
+      self.exit(params);
     });
   },
 

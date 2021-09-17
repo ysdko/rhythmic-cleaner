@@ -49,6 +49,7 @@ var icon_global;
 //後ほど訂正
 var ASSETS = {
   image: {
+    'title' : './imgs/title.png',
     'title_image': 'https://drive.google.com/uc?id=1KJtjAOX07K30WmKZigsZySCANdBXmnBd',
     'main_background': 'https://drive.google.com/uc?id=1C3lHzLThYiYPEMcOFi6UFRyK7U2y_MS6',
     'vacuumcleaner': 'https://drive.google.com/uc?id=1KMeNPzb7FJRsRhnoSDvaxjFWmiiYabRm',
@@ -238,7 +239,7 @@ var ASSETS = {
     VVVVVVVVVVVVVVVVVVX/+xBkMo/wAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARVVVVVVVVV
     VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
     VVVVVQ==`,
-    music: `data:audio/wav;base64,SUQzBAAAAAABAFRYWFgAAAASAAADbWFqb3JfYnJhbmQAZGFzaABUWFhYAAAAEQAAA21pbm9yX3Zl
+    shiningStar: `data:audio/wav;base64,SUQzBAAAAAABAFRYWFgAAAASAAADbWFqb3JfYnJhbmQAZGFzaABUWFhYAAAAEQAAA21pbm9yX3Zl
     cnNpb24AMABUWFhYAAAAHAAAA2NvbXBhdGlibGVfYnJhbmRzAGlzbzZtcDQxAFRTU0UAAAAPAAAD
     TGF2ZjU4LjE5LjEwMgAAAAAAAAAAAAAA//uQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
     AAAASW5mbwAAAA8AAASqAAefBAACBQcKDQ8SFBcZHB8hJCYpKy4xMzY4Oz1AQ0VISk1PUlVXWlxf
@@ -9096,6 +9097,6 @@ var ASSETS = {
     // ring: "tamborine.mp3",
   },
   json: {
-    beatmap: "./clock.json"
+    shiningStar: "./clock.json"
   }
 };

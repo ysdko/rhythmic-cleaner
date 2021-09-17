@@ -6,6 +6,9 @@ phina.define('SelectMusicScene', {
   init: function(params) {
     this.superInit(params);
     const self = this;
+    let music, musicClock;
+    var labels = [0,0,0];
+    const selectFlag = 0;
 
     Label({
       text: "曲を選択して下さい",
@@ -25,46 +28,45 @@ phina.define('SelectMusicScene', {
       stroke: 'cyan',
       strokeWidth: 10,
     }).addChildTo(songGroup);
-    Label({
+    labels[0] = Label({
       text: "1. Shining Star",
       fontSize: 52,
-      fill: "white",
-      stroke: "cyan",
+      fill: "gray",
       strokeWidth: 3,
     }).addChildTo(songGroup).setPosition(0, -150);
-    PathShape({
-      stroke: "magenta",
+    labels[0].setInteractive(true);
+    const path1 = PathShape({
+      stroke: "purple",
       strokeWidth: 5,
-      paths: [Vector2(-200, -100), 
-        Vector2(200, -100)]
+      paths: [Vector2(-230, -100), 
+        Vector2(230, -100)]
     }).addChildTo(songGroup);
     Label({
       text: "2. Shining Star",
       fontSize: 52,
-      fill: "white",
-      stroke: "cyan",
+      fill: "gray",
       strokeWidth: 3,
     }).addChildTo(songGroup);
-    PathShape({
-      stroke: "magenta",
+    labels[1].setInteractive(true);
+    const path2 = PathShape({
+      stroke: "purple",
       strokeWidth: 5,
-      paths: [Vector2(-200, 50), 
-        Vector2(200, 50)]
+      paths: [Vector2(-230, 50), 
+        Vector2(230, 50)]
     }).addChildTo(songGroup);
-    Label({
+    labels[2] = Label({
       text: "3. Shining Star",
       fontSize: 52,
-      fill: "white",
-      stroke: "cyan",
+      fill: "gray",
       strokeWidth: 3,
     }).addChildTo(songGroup).setPosition(0, 150);
-    PathShape({
-      stroke: "magenta",
+    labels[3].setInteractive(true);
+    const path3 = PathShape({
+      stroke: "purple",
       strokeWidth: 5,
-      paths: [Vector2(-200, 200), 
-        Vector2(200, 200)]
+      paths: [Vector2(-230, 200), 
+        Vector2(230, 200)]
     }).addChildTo(songGroup);
-
 
     const nextButtonGroup = DisplayElement().setPosition(this.gridX.span(12) - 20, this.gridY.span(14)- 30).addChildTo(this);
     const nextButton = RectangleShape({
@@ -77,7 +79,10 @@ phina.define('SelectMusicScene', {
     nextButton.setInteractive(true);
     nextButton.onpointstart = function() {
       SoundManager.play('title_music');
-      self.exit();
+      self.exit({
+        music: music,
+        musicClock: musicClock,
+      });
     };
     Label({
       text: "OK",
@@ -109,5 +114,26 @@ phina.define('SelectMusicScene', {
     }).addChildTo(prevButtonGroup);
 
   },
+
+  // update: function(){
+  //   if(nowLabel === 1){
+  //     label1.fill = "magenta";
+  //     label2.fill = "purple";
+  //     label3.fill = "purple";
+  //     path1.stroke = 1;
+  //     path1.strokeWidth= 10;
+  //   }
+  //   else if(nowLabel === 2){
+  //     label1.fill = "purple";
+  //     label2.fill = "magenta";
+  //     label3.fill = "purple";
+  //   }
+  //   else if(nowLabel === 3){
+  //     label1.fill = "purple";
+  //     label2.fill = "purple";
+  //     label3.fill = "magenta";
+  //   }
+
+  // }
 
 });

@@ -47,6 +47,17 @@ function getReq(req, res) {
       res.end();
     });
   }
+  else if ('/imgs/title.png' === url) {
+    fs.readFile('./imgs/title.png', 'binary', function (err, data) {
+      if(err) {
+        console.error(err.message);
+        process.exit(1);
+      }
+      res.writeHead(200, {'Content-Type': 'image/png'});
+      res.write(data, 'binary'); 
+      res.end();
+    });
+  }
   else if ('/mainScene.js' === url) {
     fs.readFile('mainScene.js', 'UTF-8', function (err, data) {
       if(err) {

@@ -6,6 +6,8 @@ phina.define('MainScene', {
 
   init: function(options) {
     this.superInit(options);
+    const music = options.music;
+    const musicClock = options.musicClock;
 
     const self = this;
     self_global = self;
@@ -14,7 +16,7 @@ phina.define('MainScene', {
     const AM = phina.asset.AssetManager;
 
     // var beatmap = DEBUG_BEATMAP;
-    var beatmap = AM.get('json', 'beatmap').data;
+    var beatmap = AM.get('json', musicClock).data;
     
     // タイマーのセット
     this.elapsedTime = 0; // 経過時間
@@ -54,7 +56,7 @@ phina.define('MainScene', {
 
     // 時間が来たら音楽流す
     this.one('musicstart', function() {
-      SoundManager.playMusic('music', null, false);
+      SoundManager.playMusic(music, null, false);
     });
 
     // 判定部マーカの表示
