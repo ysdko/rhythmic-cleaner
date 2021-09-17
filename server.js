@@ -143,7 +143,7 @@ function getReq(req, res) {
   }
   else if('/imgs/twitter_logo.png' == url){
     res.writeHead(200,{"Content-Type":"image/png"});
-    var output2=fs.readFileSync("./imgs/twitter_logo.png", "binary");
-    res.end(output2, "binary");
+    var output=fs.readFileSync("./imgs/twitter_logo.png", "binary");
+    res.end(output, "binary");
   }
 }

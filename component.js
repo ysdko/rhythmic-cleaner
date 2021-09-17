@@ -122,7 +122,9 @@ phina.define('ScoreView', {
       text: title,
       // text: params.perfect_times,
       fontSize: 40,
-      fill: 'cyan',
+      fill: 'white',
+      stroke: 'cyan',
+      strokeWidth: 5
     }).addChildTo(this.group).setPosition(0, 0);
     this.label2 = Label({
       text: score,
