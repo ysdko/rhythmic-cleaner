@@ -20,6 +20,7 @@
     <script src="./mainScene.js"></script>
     <script src="./resultScene.js"></script>
     <script src="./selectMusicScene.js"></script>
+    <script src="./playMethodScene.js"></script>
     <script src="./titleScene.js"></script>
 
     <script type="text/javascript">
@@ -47,7 +48,12 @@
             {
               className: 'TitleScene',
               label: 'title',
-              nextLabel: 'selectMusic',
+              nextLabel: '',
+            },
+            {
+              className: 'PlayMethodScene',
+              label: 'playMethod',
+              nextLabel: 'title',
             },
             {
               className: 'SelectMusicScene',

@@ -98,7 +98,8 @@ phina.define('SelectMusicScene', {
     prevButton.setInteractive(true);
     prevButton.onpointstart = function() {
       SoundManager.play('title_music');
-      self.app.pushScene(TitleScene(params));  
+      self.exit('title')
+      // self.app.pushScene(TitleScene(params));  
     };
     Label({
       text: "戻る",

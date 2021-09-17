@@ -53,6 +53,17 @@ function getReq(req, res) {
       res.end();
     });
   }
+  else if ('/playMethodScene.js' === url) {
+    fs.readFile('./playMethodScene.js', 'UTF-8', function (err, data) {
+      if(err) {
+        console.error(err.message);
+        process.exit(1);
+      }
+      res.writeHead(200, {'Content-Type': 'text/javascript'});
+      res.write(data); 
+      res.end();
+    });
+  }
   else if ('/selectMusicScene.js' === url) {
     fs.readFile('./selectMusicScene.js', 'UTF-8', function (err, data) {
       if(err) {
