@@ -12,7 +12,7 @@ phina.define('ResultScene2', {
     var SCALE = 65;
 
     self = this;
-    var twitter_group = DisplayElement().addChildTo(this);
+    var group = DisplayElement().addChildTo(this);
 
     // var last_image = Sprite('last_image').addChildTo(bgGroup)
     // .setPosition(this.gridX.center(), this.gridY.center());
@@ -85,7 +85,7 @@ phina.define('ResultScene2', {
       cornerRadius:25
     })
     .setPosition(this.gridX.center(), this.gridY.span(14.5))
-    .addChildTo(twtter_group)
+    .addChildTo(this)
 
     shareButton.onclick = function(){
       var text = '{0}\nScore: {1}\n'.format("リズムDe!掃除機",params.result_score);
@@ -99,8 +99,8 @@ phina.define('ResultScene2', {
       childWindow.location.href = url;
     };
 
-    var last_image = Sprite('twitter_logo').addChildTo(bgGroup)
-    .setPosition(this.gridX.center(), this.gridY.center()).addChildTo(twtter_group)
+    Sprite('twitter_logo').addChildTo(bgGroup)
+    .setPosition(this.gridX.center(), this.gridY.center()).addChildTo(this)
     // // .physical.force(-1, 0);
     // last_image.height = 16 * SCALE;
     // last_image.width = 9 * SCALE;
