@@ -12,7 +12,7 @@ phina.define('ResultScene2', {
     var SCALE = 65;
 
     self = this;
-    var group = DisplayElement().addChildTo(this);
+    var twitter_group = DisplayElement().addChildTo(this).setPosition(this.gridX.span(2.5), this.gridY.span(12.5));
 
     // var last_image = Sprite('last_image').addChildTo(bgGroup)
     // .setPosition(this.gridX.center(), this.gridY.center());
@@ -27,19 +27,25 @@ phina.define('ResultScene2', {
       text: `シャイニングスター`,
       fontSize: 60,
       fill: 'white',
+      stroke: 'cyan',
+      strokeWidth: 5
     }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(2));
 
     Label({
       text: `score: ${params.result_score}`,
       fontSize: 60,
-      fill: 'white',
+      fill: 'cyan',
+      stroke: 'white',
+      strokeWidth: 10
     }).addChildTo(this).setPosition(this.gridX.span(10), this.gridY.span(4.2));
 
     Label({
       text: "A",
       fontSize: 100,
-      fill: 'cyan',
-    }).addChildTo(this).setPosition(this.gridX.span(4), this.gridY.span(4));
+      fill: 'magenta',
+      stroke: 'white',
+      strokeWidth: 10
+    }).addChildTo(this).setPosition(this.gridX.span(3.5), this.gridY.span(4));
 
     PathShape({
       paths:[
@@ -53,9 +59,6 @@ phina.define('ResultScene2', {
     ScoreView("great: ", params.great_times).group.addChildTo(this).setPosition(this.gridX.span(7), this.gridY.span(7.5));
     ScoreView("good: ", params.good_times).group.addChildTo(this).setPosition(this.gridX.span(7), this.gridY.span(9));
     ScoreView("miss: ", params.miss_times).group.addChildTo(this).setPosition(this.gridX.span(7), this.gridY.span(10.5));
-
-
-
 
 
     //タイトル遷移ボタン
@@ -85,27 +88,32 @@ phina.define('ResultScene2', {
       cornerRadius:25
     })
     .setPosition(this.gridX.center(), this.gridY.span(14.5))
-    .addChildTo(this)
+    .addChildTo(twitter_group)
 
-    shareButton.onclick = function(){
+    twitter_button = CircleShape({
+      fill: "#00acee"
+    })
+    .addChildTo(twitter_group)
+    // .setPosition(this.gridX.center(),this.gridY.center());
+    twitter_button.setInteractive(true);
+    twitter_button.onpointstart = function() {
       var text = '{0}\nScore: {1}\n'.format("リズムDe!掃除機",params.result_score);
       var url = phina.social.Twitter.createURL({
         text: text,
         hashtags: ["リズムDe掃除機", "技育展"],
         url: params.url// 指定がない場合はlocation.hrefが代入される
       });
-      // 新規タブで開く
-      var childWindow = window.open('about:blank');
-      childWindow.location.href = url;
+
+    // 新規タブで開く場合
+    var childWindow = window.open('about:blank');
+    childWindow.location.href = url;
+  
     };
 
-    Sprite('twitter_logo').addChildTo(bgGroup)
-    .setPosition(this.gridX.center(), this.gridY.center()).addChildTo(this)
-    // // .physical.force(-1, 0);
-    // last_image.height = 16 * SCALE;
-    // last_image.width = 9 * SCALE;
-
-
+    twitter_image = Sprite('twitter_logo')
+    .addChildTo(twitter_group)
+    twitter_image.height = 30;
+    twitter_image.width = 30;
   },
 
   // update: function() {

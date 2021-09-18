@@ -69,7 +69,8 @@ phina.define('TitleScene', {
       strokeWidth: 3,
     }).addChildTo(playMethodGroup);
     playMethodButton.onpointstart = function() {
-      self.app.pushScene(PlayMethodScene(params));    
+      // self.app.pushScene(PlayMethodScene(params));    
+      self.exit('playMethod')
     };
 
     const touchLabelGroup = DisplayElement().setPosition(this.gridX.center(), this.gridY.span(14)- 30).addChildTo(this);
@@ -122,23 +123,4 @@ phina.define('TitleScene', {
     });
   },
 
-});
-
-//遊び方画面
-phina.define("PlayMethodScene", {
-  superClass: 'DisplayScene',
-
-  init: function(params) {
-    this.superInit(params);
-    this.backgroundColor = "black";
-    const self = this;
- 
-    Button({
-      text: '戻る',
-    }).addChildTo(this)
-      .setPosition(this.gridX.center(), this.gridY.span(15))
-      .onpush = function() {
-        self.exit();    
-      };
-  },
 });
