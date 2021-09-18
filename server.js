@@ -64,17 +64,6 @@ function getReq(req, res) {
       res.end();
     });
   }
-  else if ('/imgs/title.png' === url) {
-    fs.readFile('./imgs/title.png', 'binary', function (err, data) {
-      if(err) {
-        console.error(err.message);
-        process.exit(1);
-      }
-      res.writeHead(200, {'Content-Type': 'image/png'});
-      res.write(data, 'binary'); 
-      res.end();
-    });
-  }
   else if ('/mainScene.js' === url) {
     fs.readFile('mainScene.js', 'UTF-8', function (err, data) {
       if(err) {
@@ -154,7 +143,12 @@ function getReq(req, res) {
   }
   else if('/imgs/twitter_logo.png' == url){
     res.writeHead(200,{"Content-Type":"image/png"});
-    var output2=fs.readFileSync("./imgs/twitter_logo.png", "binary");
-    res.end(output2, "binary");
+    const data = fs.readFileSync("./imgs/twitter_logo.png", "binary");
+    res.end(data, "binary");
+  }
+  else if("/tools/tamborine.mp3" == url){
+    res.writeHead(200,{"Content-Type":"audio/mpeg"});
+    const data = fs.readFileSync("./tools/tamborine.mp3", "binary");
+    res.end(data, "binary");
   }
 }
