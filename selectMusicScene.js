@@ -7,29 +7,47 @@ phina.define('SelectMusicScene', {
     this.superInit(params);
     const self = this;
     var music = "";
+    const num = [];
     const labels = [];
     const lines = [];
     let selectFlag = false;
+    let circleY = 0;
+    self.count = 0;
 
-    function set(num) {
+    function set(nowNum) {
       selectFlag = true;
+      self.circleLeft.stroke = "magenta";
+      self.circleRight.stroke = "magenta";
       nextLabel.fill = "white";
+      SoundManager.stopMusic();
       for(var i=0; i<3; i++){
-        if(i === num) {
+        if(i === nowNum) {
+          num[i].fill = "white";
           labels[i].fill = "white";
           lines[i].stroke = "magenta";
         }
         else{
+          num[i].fill = "gray";
           labels[i].fill = "gray";
           lines[i].stroke = "purple";
         }
       }
-      if(num === 0)
+
+      if(nowNum === 0)
+        circleY = 335;
+      else if(nowNum === 1)
+        circleY = 485;
+      else 
+        circleY = 635;
+      circleGroup.setPosition(0, circleY);
+
+      if(nowNum === 0)
         music = "shiningStar";
-      else if(num === 1)
+      else if(nowNum === 1)
         music = "catlife";
       else
         music = "hyakkaryouran";
+      SoundManager.playMusic(music, null, false);
     }
 
     Label({
@@ -42,38 +60,84 @@ phina.define('SelectMusicScene', {
     .setPosition(this.gridX.center(), this.gridY.span(1.8))
     .addChildTo(this);
 
+    const circleGroup = DisplayElement().addChildTo(this);
+    self.circleLeft = CircleShape({
+      fill: null,
+      stroke: null,
+      strokeWidth: 5,
+      radius: 30,
+    }).addChildTo(circleGroup).setPosition(50, 0);
+    self.circleRight = CircleShape({
+      fill: null,
+      stroke: null,
+      strokeWidth: 5,
+      radius: 30,
+    }).addChildTo(circleGroup).setPosition(590, 0);
+    circleGroup.tweener.clear()
+    .setLoop(true)
+    .to({alpha: 0}, 900)
+    .to({alpha: 1}, 900);
+
     const songGroup = DisplayElement().setPosition(this.gridX.center(), this.gridY.span(7.3)).addChildTo(this);
-    RectangleShape({
-      width: 500,
-      height: 500,
-      fill: 'black',
-      stroke: 'cyan',
-      strokeWidth: 10,
+    PathShape({
+      stroke: "cyan",
+      strokeWidth: 5,
+      paths: [Vector2(this.gridX.span(-8), this.gridY.span(-3.7)), 
+        Vector2(this.gridX.span(8), this.gridY.span(-3.7))]
+    }).addChildTo(songGroup);
+    PathShape({
+      stroke: "cyan",
+      strokeWidth: 5,
+      paths: [Vector2(this.gridX.span(-8), this.gridY.span(4.0)), 
+        Vector2(this.gridX.span(8), this.gridY.span(4.0))]
     }).addChildTo(songGroup);
 
-    labels.push(Label({
-      text: "1. Shining Star",
+    const point1 = RectangleShape({
+      width: 400,
+      height: 100,
+      fill: 'black',
+      strokeWidth: 0,
+    }).addChildTo(songGroup).setPosition(0, -150).setInteractive(true);
+    num.push(Label({
+      text: "1.",
       fontSize: 52,
       fill: "gray",
       strokeWidth: 3,
-    }).addChildTo(songGroup).setPosition(0, -150));
-    labels[0].setInteractive(true);
+    }).addChildTo(songGroup).setPosition(-175, -150));
+    labels.push(Label({
+      text: "Shining Star",
+      fontSize: 52,
+      fill: "gray",
+      strokeWidth: 3,
+    }).addChildTo(songGroup).setPosition(35, -150));
     lines.push(PathShape({
       stroke: "purple",
       strokeWidth: 5,
       paths: [Vector2(-230, -100), 
         Vector2(230, -100)]
     }).addChildTo(songGroup));
-    labels[0].on("pointstart", function() {   
+    point1.on("pointstart", function() {   
       set(0);
     });
 
-    labels.push(Label({
-      text: "2. Cat life",
+    const point2 = RectangleShape({
+      width: 400,
+      height: 100,
+      fill: 'black',
+      strokeWidth: 0,
+    }).addChildTo(songGroup).setPosition(0, 0).setInteractive(true);
+    num.push(Label({
+      text: "2.",
       fontSize: 52,
       fill: "gray",
       strokeWidth: 3,
-    }).addChildTo(songGroup));
+    }).addChildTo(songGroup).setPosition(-175, 0));
+    labels.push(Label({
+      text: "Cat life",
+      fontSize: 52,
+      fill: "gray",
+      strokeWidth: 3,
+    }).addChildTo(songGroup).setPosition(35, 0));
     labels[1].setInteractive(true);
     lines.push(PathShape({
       stroke: "purple",
@@ -84,13 +148,28 @@ phina.define('SelectMusicScene', {
     labels[1].on("pointstart", function() {   
       set(1);
     });
+    point2.on("pointstart", function() {   
+      set(1);
+    });
     
-    labels.push(Label({
-      text: "3. 百花繚乱",
+    const point3 = RectangleShape({
+      width: 400,
+      height: 100,
+      fill: 'black',
+      strokeWidth: 0,
+    }).addChildTo(songGroup).setPosition(0, 150).setInteractive(true);
+    num.push(Label({
+      text: "3.",
       fontSize: 52,
       fill: "gray",
       strokeWidth: 3,
-    }).addChildTo(songGroup).setPosition(0, 150));
+    }).addChildTo(songGroup).setPosition(-175, 150));
+    labels.push(Label({
+      text: "百花繚乱",
+      fontSize: 52,
+      fill: "gray",
+      strokeWidth: 3,
+    }).addChildTo(songGroup).setPosition(40, 150));
     labels[2].setInteractive(true);
     lines.push(PathShape({
       stroke: "purple",
@@ -98,7 +177,7 @@ phina.define('SelectMusicScene', {
       paths: [Vector2(-230, 200), 
         Vector2(230, 200)]
     }).addChildTo(songGroup));
-    labels[2].on("pointstart", function() {   
+    point3.on("pointstart", function() {   
       set(2);
     });
 
@@ -113,6 +192,7 @@ phina.define('SelectMusicScene', {
     nextButton.setInteractive(true);
     nextButton.onpointstart = function() {
       if(selectFlag){
+        SoundManager.stopMusic();
         SoundManager.play('point');
         self.exit({
           music: music,
@@ -140,6 +220,7 @@ phina.define('SelectMusicScene', {
     }).addChildTo(prevButtonGroup);
     prevButton.setInteractive(true);
     prevButton.onpointstart = function() {
+      SoundManager.stopMusic();
       SoundManager.play('point');
       self.exit({nextLabel: 'title'});
     };

@@ -40,7 +40,6 @@ phina.define('TitleScene', {
     .setPosition(this.gridX.center(), this.gridY.span(3) + 10)
     .addChildTo(this);
 
-
     const playMethodGroup = DisplayElement().setPosition(this.gridX.span(13), this.gridY.span(1)).addChildTo(this);
     const playMethodButton = RectangleShape({
       width: 220,
