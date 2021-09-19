@@ -44,6 +44,7 @@ let aclr = {
 const THREATHOLD = 4;
 var self_global;
 var icon_global;
+var params_global;
 
 const ASSETS = {
   image: {

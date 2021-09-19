@@ -116,13 +116,4 @@ phina.define('ResultScene2', {
     twitter_image.width = 30;
   },
 
-  // update: function() {
-  //   // 背景のループ処理
-  //   var first = this.bgGroup.children.first;
-  //   if (first.right < 0) {
-  //     first.addChildTo(this.bgGroup);
-  //     this.bgGroup.children.last.left = this.bgGroup.children.first.right;
-  //   }
-  // },
-
 });

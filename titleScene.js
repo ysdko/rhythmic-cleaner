@@ -6,6 +6,7 @@ phina.define('TitleScene', {
   init: function(params) {
     this.superInit(params);
     this.backgroundColor = params.backgroundColor;
+    params_global = params;
     SoundManager.volume = 0.15;
     SoundManager.musicVolume = 0.15;
     const self = this;

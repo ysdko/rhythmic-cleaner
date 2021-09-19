@@ -152,29 +152,6 @@ phina.define("MainScene", {
       self.app.pushScene(MyPauseScene());
     };
 
-    phina.define("MyPauseScene", {
-      superClass: "DisplayScene",
-      init: function () {
-        this.superInit();
-        this.backgroundColor = "rgba(0, 0, 0, 0.7)";
-
-        var self = this;
-        // ポーズ解除ボタン
-        Button({
-          text: "再開する",
-          stroke: "cyan",
-          strokeWidth: 10,
-          fill: "black",
-        })
-          .addChildTo(this)
-          .setPosition(this.gridX.center(), this.gridY.center(-3)).onpush =
-          function () {
-            SoundManager.resumeMusic();
-            self.exit();
-          };
-      },
-    });
-
     // 結果画面への遷移ボタン
     Button({
       text: "RESULT",
@@ -301,5 +278,26 @@ phina.define("MainScene", {
       .addChildTo(this);
 
     this.totalScore += RATING_TABLE[rating].score;
+  },
+});
+
+phina.define("MyPauseScene", {
+  superClass: "DisplayScene",
+  init: function () {
+    this.superInit(params_global);
+    this.backgroundColor = "rgba(0, 0, 0, 0.7)";
+    const self = this;
+
+    Button({
+      text: "再開する",
+      stroke: "cyan",
+      strokeWidth: 10,
+      fill: "black",
+    }).addChildTo(this)
+    .setPosition(this.gridX.center(), this.gridY.center())
+    .onpush = function () {
+        SoundManager.resumeMusic();
+        self.exit();
+    };
   },
 });
