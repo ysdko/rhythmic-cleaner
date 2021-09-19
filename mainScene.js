@@ -210,9 +210,9 @@ phina.define("MainScene", {
       if (RATING_TABLE["miss"].range < -rTime) {
         this.reaction(m, "miss");
         this.combo = 0;
-        //max値の算出
-        this.totalScore *= 1.1;
-        this.totalScore += RATING_TABLE["perfect"].score;
+        //スコアの最大値の算出
+        // this.totalScore *= 1.1;
+        // this.totalScore += RATING_TABLE["perfect"].score;
     
       }
     });
