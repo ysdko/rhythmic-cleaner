@@ -6,9 +6,31 @@ phina.define('SelectMusicScene', {
   init: function(params) {
     this.superInit(params);
     const self = this;
-    let music, musicClock;
-    var labels = [0,0,0];
-    const selectFlag = 0;
+    var music = "";
+    const labels = [];
+    const lines = [];
+    let selectFlag = false;
+
+    function set(num) {
+      selectFlag = true;
+      nextLabel.fill = "white";
+      for(var i=0; i<3; i++){
+        if(i === num) {
+          labels[i].fill = "white";
+          lines[i].stroke = "magenta";
+        }
+        else{
+          labels[i].fill = "gray";
+          lines[i].stroke = "purple";
+        }
+      }
+      if(num === 0)
+        music = "shiningStar";
+      else if(num === 1)
+        music = "shiningStar";
+      else
+        music = "shiningStar";
+    }
 
     Label({
       text: "曲を選択して下さい",
@@ -28,45 +50,57 @@ phina.define('SelectMusicScene', {
       stroke: 'cyan',
       strokeWidth: 10,
     }).addChildTo(songGroup);
-    labels[0] = Label({
+
+    labels.push(Label({
       text: "1. Shining Star",
       fontSize: 52,
       fill: "gray",
       strokeWidth: 3,
-    }).addChildTo(songGroup).setPosition(0, -150);
+    }).addChildTo(songGroup).setPosition(0, -150));
     labels[0].setInteractive(true);
-    const path1 = PathShape({
+    lines.push(PathShape({
       stroke: "purple",
       strokeWidth: 5,
       paths: [Vector2(-230, -100), 
         Vector2(230, -100)]
-    }).addChildTo(songGroup);
-    Label({
-      text: "2. Shining Star",
+    }).addChildTo(songGroup));
+    labels[0].on("pointstart", function() {   
+      set(0);
+    });
+
+    labels.push(Label({
+      text: "2. 2番目の曲",
       fontSize: 52,
       fill: "gray",
       strokeWidth: 3,
-    }).addChildTo(songGroup);
+    }).addChildTo(songGroup));
     labels[1].setInteractive(true);
-    const path2 = PathShape({
+    lines.push(PathShape({
       stroke: "purple",
       strokeWidth: 5,
       paths: [Vector2(-230, 50), 
         Vector2(230, 50)]
-    }).addChildTo(songGroup);
-    labels[2] = Label({
-      text: "3. Shining Star",
+    }).addChildTo(songGroup));
+    labels[1].on("pointstart", function() {   
+      set(1);
+    });
+    
+    labels.push(Label({
+      text: "3. 3番目の曲",
       fontSize: 52,
       fill: "gray",
       strokeWidth: 3,
-    }).addChildTo(songGroup).setPosition(0, 150);
-    labels[3].setInteractive(true);
-    const path3 = PathShape({
+    }).addChildTo(songGroup).setPosition(0, 150));
+    labels[2].setInteractive(true);
+    lines.push(PathShape({
       stroke: "purple",
       strokeWidth: 5,
       paths: [Vector2(-230, 200), 
         Vector2(230, 200)]
-    }).addChildTo(songGroup);
+    }).addChildTo(songGroup));
+    labels[2].on("pointstart", function() {   
+      set(2);
+    });
 
     const nextButtonGroup = DisplayElement().setPosition(this.gridX.span(12) - 20, this.gridY.span(14)- 30).addChildTo(this);
     const nextButton = RectangleShape({
@@ -78,16 +112,20 @@ phina.define('SelectMusicScene', {
     }).addChildTo(nextButtonGroup);
     nextButton.setInteractive(true);
     nextButton.onpointstart = function() {
-      SoundManager.play('title_music');
-      self.exit({
-        music: music,
-        musicClock: musicClock,
-      });
+      if(selectFlag){
+        SoundManager.play('point');
+        self.exit({
+          music: music,
+        });
+      }
+      else{
+        self.app.pushScene(pauseScene());
+      }
     };
-    Label({
+    const nextLabel = Label({
       text: "OK",
       fontSize: 60,
-      fill: "white",
+      fill: "gray",
       stroke: "cyan",
       strokeWidth: 3,
     }).addChildTo(nextButtonGroup);
@@ -102,8 +140,8 @@ phina.define('SelectMusicScene', {
     }).addChildTo(prevButtonGroup);
     prevButton.setInteractive(true);
     prevButton.onpointstart = function() {
-      SoundManager.play('title_music');
-      self.app.pushScene(TitleScene(params));  
+      SoundManager.play('point');
+      self.exit({nextLabel: 'title'});
     };
     Label({
       text: "戻る",
@@ -114,26 +152,31 @@ phina.define('SelectMusicScene', {
     }).addChildTo(prevButtonGroup);
 
   },
+});
 
-  // update: function(){
-  //   if(nowLabel === 1){
-  //     label1.fill = "magenta";
-  //     label2.fill = "purple";
-  //     label3.fill = "purple";
-  //     path1.stroke = 1;
-  //     path1.strokeWidth= 10;
-  //   }
-  //   else if(nowLabel === 2){
-  //     label1.fill = "purple";
-  //     label2.fill = "magenta";
-  //     label3.fill = "purple";
-  //   }
-  //   else if(nowLabel === 3){
-  //     label1.fill = "purple";
-  //     label2.fill = "purple";
-  //     label3.fill = "magenta";
-  //   }
+phina.define("pauseScene", {
+  superClass: 'DisplayScene',
+  init: function() {
+    this.superInit();
+    this.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    const self = this;
+    
+    Label({
+      text: "開始するには曲を選択して下さい",
+      fill: "white",
+      fontSize: 35,
+      stroke: "cyan",
+      strokeWidth: 3,
+    })
+    .setPosition(this.gridX.center(), this.gridY.center(-1))
+    .addChildTo(this);
 
-  // }
-
+    Button({
+      text: '曲選択に戻る',
+    }).addChildTo(this)
+      .setPosition(this.gridX.center(), this.gridY.center(1))
+      .onpush = function() {
+        self.exit();    
+      };
+  },
 });
