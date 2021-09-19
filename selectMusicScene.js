@@ -253,11 +253,15 @@ phina.define("pauseScene", {
     .addChildTo(this);
 
     Button({
-      text: '曲選択に戻る',
+      width: 270,
+      text: "曲選択に戻る",
+      stroke: "cyan",
+      strokeWidth: 10,
+      fill: "black",
     }).addChildTo(this)
-      .setPosition(this.gridX.center(), this.gridY.center(1))
-      .onpush = function() {
-        self.exit();    
-      };
+    .setPosition(this.gridX.center(), this.gridY.center(1))
+    .onpush = function () {
+        self.exit();
+    };
   },
 });
