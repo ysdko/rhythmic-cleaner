@@ -7,7 +7,6 @@ phina.define('MainScene', {
   init: function(options) {
     this.superInit(options);
     const music = options.music;
-    const musicClock = options.musicClock;
 
     const self = this;
     self_global = self;
@@ -16,7 +15,7 @@ phina.define('MainScene', {
     const AM = phina.asset.AssetManager;
 
     // var beatmap = DEBUG_BEATMAP;
-    var beatmap = AM.get('json', musicClock).data;
+    var beatmap = AM.get('json', music).data;
     
     // タイマーのセット
     this.elapsedTime = 0; // 経過時間
