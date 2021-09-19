@@ -52,9 +52,13 @@ const ASSETS = {
   sound: {
     point: "./tools/point.mp3",
     shiningStar: "./tools/shiningStar.mp3",
+    catlife: "./tools/catlife.mp3",
+    hyakkaryouran: "./tools/hyakkaryouran.mp3",
     hit: "./tools/tamborine.mp3",
   },
   json: {
-    shiningStar: "./tools/shiningStar.json"
+    shiningStar: "./tools/shiningStar.json",
+    catlife: "./tools/catlife.json",
+    hyakkaryouran: "./tools/hyakkaryouran.json",
   }
 };
