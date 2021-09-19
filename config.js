@@ -35,6 +35,12 @@ const RATING_TABLE = {
   },
 };
 
+const MAX_SCORE = {
+  shiningStar: 109192,
+  catlife: 299153,
+  hyakkaryouran: 330068
+}
+
 // 読み取られた加速度の値
 let aclr = {
   x : 0,

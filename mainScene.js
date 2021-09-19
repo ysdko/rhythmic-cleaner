@@ -233,6 +233,10 @@ phina.define("MainScene", {
       if (RATING_TABLE["miss"].range < -rTime) {
         this.reaction(m, "miss");
         this.combo = 0;
+        //max値の算出
+        this.totalScore *= 1.1;
+        this.totalScore += RATING_TABLE["perfect"].score;
+    
       }
     });
   },
@@ -302,6 +306,6 @@ phina.define("MainScene", {
       .setPosition(this.gridX.center(), this.gridY.center())
       .addChildTo(this);
 
-    this.totalScore += RATING_TABLE[rating].score;
+      this.totalScore += RATING_TABLE[rating].score;
   },
 });

@@ -15,6 +15,9 @@ phina.define('ResultScene2', {
     self = this;
     var twitter_group = DisplayElement().addChildTo(this).setPosition(this.gridX.span(2.5), this.gridY.span(12.5));
 
+    // switch(params.music_title){
+    //   case 
+    // }
 
     if (params.total_score > 30000){
       this.rank = "S";
@@ -25,6 +28,8 @@ phina.define('ResultScene2', {
     }else{
       this.rank = "C";
     }
+
+
 
 
     // var last_image = Sprite('last_image').addChildTo(bgGroup)
