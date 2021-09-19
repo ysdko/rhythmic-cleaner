@@ -10,17 +10,6 @@ phina.define('TitleScene', {
     SoundManager.musicVolume = 0.15;
     const self = this;
 
-    // var canvas = document.getElementById('canvasId');
-    // var rectangle = canvas.getContext('2d');
-    // var rectangle_color = canvas.getContext('2d');
-    // rectangle.beginPath();
-    // rectangle.fillStyle = 'green';
-    // rectangle.fillRect(0, 0, 1000, 200);
-    // var rectangle_color = path.createLinearGradient(100, 100, 100, 300);
-    // // rectangle_color.addColorStop(0.0, 'rgb(0, 255, 255)');
-    // // rectangle_color.addColorStop(1.0, 'rgb(253, 182, 7)');
-    // // rectangle.fillStyle = rectangle_color;
-
     PathShape({
       stroke: "magenta",
       strokeWidth: 1,
@@ -68,9 +57,8 @@ phina.define('TitleScene', {
       stroke: "cyan",
       strokeWidth: 3,
     }).addChildTo(playMethodGroup);
-    playMethodButton.onpointstart = function() {
-      // self.app.pushScene(PlayMethodScene(params));    
-      self.exit('playMethod')
+    playMethodButton.onpointstart = function() {   
+      self.exit({nexLabel: 'playMethod'})
     };
 
     const touchLabelGroup = DisplayElement().setPosition(this.gridX.center(), this.gridY.span(14)- 30).addChildTo(this);
@@ -82,7 +70,6 @@ phina.define('TitleScene', {
       strokeWidth: 15,
       cornerRadius: 70,
     }).addChildTo(touchLabelGroup).setInteractive(true);
-
     const touchLabel = Label({
       text: "Tap to start",
       fontSize: 60,
@@ -102,7 +89,7 @@ phina.define('TitleScene', {
     };
 
     // モバイルでの再生制限アンロックのため、画面タッチ時にSoundを無音再生
-    //enterイベント自体は1つのみしか発火されていない
+    // enterイベント自体は1つのみしか発火されていない
     nextButton.on('pointstart', function() {
       var event = "touchstart";
       var dom = self.app.domElement;
@@ -118,9 +105,8 @@ phina.define('TitleScene', {
         }
       }()), false);
       // シーン遷移
-      SoundManager.play('shiningStar');
-      self.exit(params);
+      SoundManager.play('point');
+      self.exit({nextLabel: 'selectMusic'});
     });
   },
-
 });
