@@ -13,7 +13,7 @@ phina.define('ResultScene2', {
     var SCALE = 65;
 
     self = this;
-    var twitter_group = DisplayElement().addChildTo(this).setPosition(this.gridX.span(2.5), this.gridY.span(12.5));
+    
 
     const rank_score = params.result_score/MAX_SCORE[params.music_title]
 
@@ -79,10 +79,10 @@ phina.define('ResultScene2', {
   }).addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(5));
 
   //スコア詳細
-    ScoreView("perfect: ", params.perfect_times).group.addChildTo(this).setPosition(this.gridX.span(7), this.gridY.span(6));
-    ScoreView("great: ", params.great_times).group.addChildTo(this).setPosition(this.gridX.span(7), this.gridY.span(7.5));
-    ScoreView("good: ", params.good_times).group.addChildTo(this).setPosition(this.gridX.span(7), this.gridY.span(9));
-    ScoreView("miss: ", params.miss_times).group.addChildTo(this).setPosition(this.gridX.span(7), this.gridY.span(10.5));
+    ScoreView("perfect : ", params.perfect_times).group.addChildTo(this).setPosition(this.gridX.span(7), this.gridY.span(6));
+    ScoreView("great : ", params.great_times).group.addChildTo(this).setPosition(this.gridX.span(7), this.gridY.span(7.5));
+    ScoreView("good : ", params.good_times).group.addChildTo(this).setPosition(this.gridX.span(7), this.gridY.span(9));
+    ScoreView("miss : ", params.miss_times).group.addChildTo(this).setPosition(this.gridX.span(7), this.gridY.span(10.5));
 
 
     //タイトル遷移ボタン
@@ -96,13 +96,13 @@ phina.define('ResultScene2', {
       cornerRadius:40
     })
     .setOrigin(0.5, 0.5)
-    .setPosition(this.gridX.center(), this.gridY.span(12.5))
+    .setPosition(this.gridX.span(5), this.gridY.span(12.5))
     .addChildTo(this)
     .onpointstart=function() {
       self.exit(); // 自分を渡す
     };
 
-
+    var twitter_group = DisplayElement().addChildTo(this).setPosition(this.gridX.span(12), this.gridY.span(12.5));
     // twitterシェアボタン
     var shareButton = phina.ui.Button({
       text: "twitter",
