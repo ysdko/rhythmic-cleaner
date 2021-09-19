@@ -15,17 +15,17 @@ phina.define('ResultScene2', {
     self = this;
     var twitter_group = DisplayElement().addChildTo(this).setPosition(this.gridX.span(2.5), this.gridY.span(12.5));
 
+    const rank_score = params.result_score/MAX_SCORE[params.music_title]
 
-    if (params.total_score > 30000){
+    if (rank_score > 0.8){
       this.rank = "S";
-    }else if(params.result_score > 2000){
+    }else if(rank_score > 0.6){
       this.rank = "A";
-    }else if(params.result_score > 10000){
+    }else if(rank_score> 0.4){
       this.rank = "B";
     }else{
       this.rank = "C";
     }
-
 
     // var last_image = Sprite('last_image').addChildTo(bgGroup)
     // .setPosition(this.gridX.center(), this.gridY.center());
