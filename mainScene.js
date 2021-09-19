@@ -109,7 +109,8 @@ phina.define("MainScene", {
       .setPosition(gx.center(), gy.span(3))
       .addChildTo(this)
       .on("enterframe", function () {
-        this.text = Math.round(self.totalScore);
+        self.totalScore = Math.round(self.totalScore);
+        this.text = self.totalScore;
       });
 
     // combo表示
@@ -169,6 +170,7 @@ phina.define("MainScene", {
         great_times: self.great_times,
         good_times: self.good_times,
         miss_times: self.miss_times,
+        music_title: music
       }); // 自分を渡す
     };
   },
@@ -256,7 +258,7 @@ phina.define("MainScene", {
     });
   },
 
-  //
+// bonusエフェクトの表示
   combo_func: function () {
     this.combo += 1;
     if (this.combo > 1) {

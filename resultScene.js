@@ -8,11 +8,24 @@ phina.define('ResultScene2', {
     this.superInit(params);
     // 背景色
     this.backgroundColor = 'black';
+    this.rank = '';
     var bgGroup = DisplayElement().addChildTo(this);
     var SCALE = 65;
 
     self = this;
     var twitter_group = DisplayElement().addChildTo(this).setPosition(this.gridX.span(2.5), this.gridY.span(12.5));
+
+
+    if (params.total_score > 30000){
+      this.rank = "S";
+    }else if(params.result_score > 2000){
+      this.rank = "A";
+    }else if(params.result_score > 10000){
+      this.rank = "B";
+    }else{
+      this.rank = "C";
+    }
+
 
     // var last_image = Sprite('last_image').addChildTo(bgGroup)
     // .setPosition(this.gridX.center(), this.gridY.center());
@@ -24,7 +37,7 @@ phina.define('ResultScene2', {
 
     // ラベル
     Label({
-      text: `シャイニングスター`,
+      text: params.music_title,
       fontSize: 60,
       fill: 'white',
       stroke: 'cyan',
@@ -40,7 +53,7 @@ phina.define('ResultScene2', {
     }).addChildTo(this).setPosition(this.gridX.span(10), this.gridY.span(4.2));
 
     Label({
-      text: "A",
+      text: this.rank,
       fontSize: 100,
       fill: 'magenta',
       stroke: 'white',
