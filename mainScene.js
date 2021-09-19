@@ -22,10 +22,12 @@ phina.define('MainScene', {
     this.gameTime = 0 - MUSIC_START_DELAY + beatmap.offset; // 判定用時間
     //スコア
     this.totalScore = 0;
-    this.perfect_times = 0
-    this.great_times = 0
-    this.good_times = 0
-    this.miss_times = 0
+    this.perfect_times = 0;
+    this.great_times = 0;
+    this.good_times = 0;
+    this.miss_times = 0;
+    //コンボ
+    this.combo = 0;
 
     PathShape({
       stroke: "magenta",
@@ -44,6 +46,12 @@ phina.define('MainScene', {
       strokeWidth: 5,
       paths: [Vector2(this.gridX.span(16), this.gridY.span(16)), 
         Vector2(this.gridX.span(8.5), this.gridY.span(4.5))]
+    }).addChildTo(this);
+    PathShape({
+      stroke: "magenta",
+      strokeWidth: 5,
+      paths: [Vector2(0, this.gridY.span(10)), 
+        Vector2(this.gridX.width, this.gridY.span(10))]
     }).addChildTo(this);
     
     // ラベル表示
@@ -77,7 +85,7 @@ phina.define('MainScene', {
     this.scoreLabel = Label({
       text: 0,
       textAlign: "center",
-      stroke: "black",
+      stroke: "cyan",
       fill: "white",
       strokeWidth: 10,
       fontSize: 70,
@@ -88,25 +96,77 @@ phina.define('MainScene', {
       this.text = self.totalScore;
     });
 
-    // リセットボタン
+    // combo表示
+    this.comboLabel = Label({
+      text: 0,
+      textAlign: "center",
+      stroke: "cyan",
+      fill: "white",
+      strokeWidth: 10,
+      fontSize: 70,
+    })
+    .setPosition(gx.span(13), gy.span(6))
+    .addChildTo(this)
+    .on('enterframe', function() {
+      this.text = self.combo;
+    });
+    this.comboview = Label({
+      text: "COMBO",
+      textAlign: "center",
+      stroke: "black",
+      fill: "white",
+      strokeWidth: 10,
+      fontSize: 40,
+    })
+    .setPosition(gx.span(13), gy.span(7))
+    .addChildTo(this)
+
+     // ポーズボタン
     Button({
-      text: 'RESET',
-      stroke:"white",
+      text: 'PAUSE',
+      stroke:"cyan",
       strokeWidth:10,
       fill: "black",
-    })
-    .setOrigin(1, 0)
-    .setPosition(this.width, 0)
-    .addChildTo(this)
-    .onpointstart=function() {
-      SoundManager.stopMusic();
-      self.exit('main')
-    };
+    }).addChildTo(this)
+      .setOrigin(1, 0)
+      .setPosition(this.width, 0)
+      .onpush = function() {
+        SoundManager.pauseMusic()
+        // ポーズシーンをpushする
+        self.app.pushScene(MyPauseScene());    
+      };
+
+      phina.define("MyPauseScene", {
+        // 継承
+        superClass: 'DisplayScene',
+        // コンストラクタ
+        init: function() {
+          // 親クラス初期化
+          this.superInit();
+          // 背景を半透明化
+          this.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+      
+          var self = this;
+          // ポーズ解除ボタン    
+          Button({
+            text: '再開する',
+            stroke:"cyan",
+            strokeWidth:10,
+            fill: "black",
+          }).addChildTo(this)
+            .setPosition(this.gridX.center(), this.gridY.center(-3))
+            .onpush = function() {
+              SoundManager.resumeMusic()
+              // 自身を取り除く
+              self.exit();    
+            };
+        },
+      });
 
     // 結果画面への遷移ボタン
     Button({
       text: 'RESULT',
-      stroke:"white",
+      stroke:"cyan",
       strokeWidth:10,
       fill: "black",
     })
@@ -157,6 +217,7 @@ phina.define('MainScene', {
       // 通りすぎたノーツをmiss判定とする処理
       if (RATING_TABLE["miss"].range < -rTime) {
         this.reaction(m, "miss");
+        this.combo = 0;
       }
     });
   },
@@ -177,6 +238,7 @@ phina.define('MainScene', {
         SoundManager.play('hit');
         this.reaction(m, "perfect");
         this.perfect_times += 1;
+        this.combo +=1;
         return true;
       }
       if (delta <= RATING_TABLE["great"].range) {
@@ -184,6 +246,7 @@ phina.define('MainScene', {
         SoundManager.play('hit');
         this.reaction(m, "great");
         this.great_times += 1;
+        this.combo +=1;
         return true;
       }
       if (delta <= RATING_TABLE["good"].range) {
@@ -191,11 +254,13 @@ phina.define('MainScene', {
         SoundManager.play('hit');
         this.reaction(m, "good");
         this.good_times += 1;
+        this.combo += 1;
         return true;
       }
       if (delta <= RATING_TABLE["miss"].range) {
         this.reaction(m, "miss");
         this.miss_times += 1;
+        this.combo = 0;
         return true;
       }
     });
