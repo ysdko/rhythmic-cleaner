@@ -22,10 +22,12 @@ phina.define('MainScene', {
     this.gameTime = 0 - MUSIC_START_DELAY + beatmap.offset; // 判定用時間
     //スコア
     this.totalScore = 0;
-    this.perfect_times = 0
-    this.great_times = 0
-    this.good_times = 0
-    this.miss_times = 0
+    this.perfect_times = 0;
+    this.great_times = 0;
+    this.good_times = 0;
+    this.miss_times = 0;
+    //コンボ
+    this.combo = 0;
 
     PathShape({
       stroke: "magenta",
@@ -44,6 +46,12 @@ phina.define('MainScene', {
       strokeWidth: 5,
       paths: [Vector2(this.gridX.span(16), this.gridY.span(16)), 
         Vector2(this.gridX.span(8.5), this.gridY.span(4.5))]
+    }).addChildTo(this);
+    PathShape({
+      stroke: "magenta",
+      strokeWidth: 5,
+      paths: [Vector2(0, this.gridY.span(10)), 
+        Vector2(this.gridX.width, this.gridY.span(10))]
     }).addChildTo(this);
     
     // ラベル表示
@@ -87,6 +95,31 @@ phina.define('MainScene', {
     .on('enterframe', function() {
       this.text = self.totalScore;
     });
+
+    // combo表示
+    this.comboLabel = Label({
+      text: 0,
+      textAlign: "center",
+      stroke: "cyan",
+      fill: "white",
+      strokeWidth: 10,
+      fontSize: 70,
+    })
+    .setPosition(gx.span(13), gy.span(6))
+    .addChildTo(this)
+    .on('enterframe', function() {
+      this.text = self.combo;
+    });
+    this.comboview = Label({
+      text: "COMBO",
+      textAlign: "center",
+      stroke: "black",
+      fill: "white",
+      strokeWidth: 10,
+      fontSize: 40,
+    })
+    .setPosition(gx.span(13), gy.span(7))
+    .addChildTo(this)
 
     // リセットボタン
     Button({
@@ -157,6 +190,7 @@ phina.define('MainScene', {
       // 通りすぎたノーツをmiss判定とする処理
       if (RATING_TABLE["miss"].range < -rTime) {
         this.reaction(m, "miss");
+        this.combo = 0;
       }
     });
   },
@@ -177,6 +211,7 @@ phina.define('MainScene', {
         SoundManager.play('hit');
         this.reaction(m, "perfect");
         this.perfect_times += 1;
+        this.combo +=1;
         return true;
       }
       if (delta <= RATING_TABLE["great"].range) {
@@ -184,6 +219,7 @@ phina.define('MainScene', {
         SoundManager.play('hit');
         this.reaction(m, "great");
         this.great_times += 1;
+        this.combo +=1;
         return true;
       }
       if (delta <= RATING_TABLE["good"].range) {
@@ -191,11 +227,13 @@ phina.define('MainScene', {
         SoundManager.play('hit');
         this.reaction(m, "good");
         this.good_times += 1;
+        this.combo += 1;
         return true;
       }
       if (delta <= RATING_TABLE["miss"].range) {
         this.reaction(m, "miss");
         this.miss_times += 1;
+        this.combo = 0;
         return true;
       }
     });
