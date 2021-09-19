@@ -27,9 +27,9 @@ phina.define('SelectMusicScene', {
       if(num === 0)
         music = "shiningStar";
       else if(num === 1)
-        music = "shiningStar";
+        music = "catlife";
       else
-        music = "shiningStar";
+        music = "hyakkaryouran";
     }
 
     Label({
@@ -69,7 +69,7 @@ phina.define('SelectMusicScene', {
     });
 
     labels.push(Label({
-      text: "2. 2番目の曲",
+      text: "2. Cat life",
       fontSize: 52,
       fill: "gray",
       strokeWidth: 3,
@@ -86,7 +86,7 @@ phina.define('SelectMusicScene', {
     });
     
     labels.push(Label({
-      text: "3. 3番目の曲",
+      text: "3. 百花繚乱",
       fontSize: 52,
       fill: "gray",
       strokeWidth: 3,
