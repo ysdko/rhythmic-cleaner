@@ -46,12 +46,8 @@ phina.define('TargetMarker', {
 
   init: function(targetTime, scene, direction) {
     this.group = DisplayElement().addChildTo(scene);
-    this.marker = CircleShape({
-      radius: MARKER_RADIUS,
-      strokeWidth: MARKER_STROKE_WIDTH,
-      stroke: "red",
-      fill: "white",
-    }).addChildTo(this.group);
+    this.marker = Sprite('garbage').addChildTo(this.group);
+    this.marker.scaleX = 0.6; this.marker.scaleY = 0.6;
     this.arrow = Arrow(direction).group.addChildTo(this.group);
 
     this.group.visible = false;
@@ -72,11 +68,11 @@ phina.define("Arrow", {
     this.triangle = TriangleShape({
         fill: 'red',
         strokeWidth: 0,
-        radius: 45
+        radius: 40
     }).addChildTo(this.group).setPosition(0, 0);
     this.rectangle = RectangleShape({
-      width: 25,
-      height: 70,
+      width: 22,
+      height: 65,
       fill: 'red',
       strokeWidth: 0,
     }).addChildTo(this.group).setPosition(0,30);
