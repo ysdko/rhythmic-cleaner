@@ -122,24 +122,24 @@ phina.define('MainScene', {
     .addChildTo(this)
 
     // リセットボタン
-    Button({
-      text: 'RESET',
-      stroke:"white",
-      strokeWidth:10,
-      fill: "black",
-    })
-    .setOrigin(1, 0)
-    .setPosition(this.width, 0)
-    .addChildTo(this)
-    .onpointstart=function() {
-      SoundManager.stopMusic();
-      self.exit('main')
-    };
+    // Button({
+    //   text: 'RESET',
+    //   stroke:"white",
+    //   strokeWidth:10,
+    //   fill: "black",
+    // })
+    // .setOrigin(1, 0)
+    // .setPosition(this.width, 0)
+    // .addChildTo(this)
+    // .onpointstart=function() {
+    //   SoundManager.stopMusic();
+    //   self.exit('main')
+    // };
 
     // 結果画面への遷移ボタン
     Button({
       text: 'RESULT',
-      stroke:"white",
+      stroke:"cyan",
       strokeWidth:10,
       fill: "black",
     })
