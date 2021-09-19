@@ -85,7 +85,7 @@ phina.define('MainScene', {
     this.scoreLabel = Label({
       text: 0,
       textAlign: "center",
-      stroke: "black",
+      stroke: "cyan",
       fill: "white",
       strokeWidth: 10,
       fontSize: 70,
@@ -121,20 +121,47 @@ phina.define('MainScene', {
     .setPosition(gx.span(13), gy.span(7))
     .addChildTo(this)
 
-    // リセットボタン
-    // Button({
-    //   text: 'RESET',
-    //   stroke:"white",
-    //   strokeWidth:10,
-    //   fill: "black",
-    // })
-    // .setOrigin(1, 0)
-    // .setPosition(this.width, 0)
-    // .addChildTo(this)
-    // .onpointstart=function() {
-    //   SoundManager.stopMusic();
-    //   self.exit('main')
-    // };
+     // ポーズボタン
+    Button({
+      text: 'PAUSE',
+      stroke:"cyan",
+      strokeWidth:10,
+      fill: "black",
+    }).addChildTo(this)
+      .setOrigin(1, 0)
+      .setPosition(this.width, 0)
+      .onpush = function() {
+        SoundManager.pauseMusic()
+        // ポーズシーンをpushする
+        self.app.pushScene(MyPauseScene());    
+      };
+
+      phina.define("MyPauseScene", {
+        // 継承
+        superClass: 'DisplayScene',
+        // コンストラクタ
+        init: function() {
+          // 親クラス初期化
+          this.superInit();
+          // 背景を半透明化
+          this.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+      
+          var self = this;
+          // ポーズ解除ボタン    
+          Button({
+            text: '再開する',
+            stroke:"cyan",
+            strokeWidth:10,
+            fill: "black",
+          }).addChildTo(this)
+            .setPosition(this.gridX.center(), this.gridY.center(-3))
+            .onpush = function() {
+              SoundManager.resumeMusic()
+              // 自身を取り除く
+              self.exit();    
+            };
+        },
+      });
 
     // 結果画面への遷移ボタン
     Button({
