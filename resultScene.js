@@ -40,9 +40,20 @@ phina.define('ResultScene2', {
 
     this.bgGroup = bgGroup;
 
+    //結果表示の曲名変換
+    var text1;
+    if(params.music_title=="shiningStar"){
+      text1="Shining Star";
+    }else if(params.music_title=="catlife"){
+      text1="Cat life";
+    }else{
+      text1="百花繚乱"
+    }
+
     // ラベル
     Label({
-      text: params.music_title,
+      
+      text: text1,
       fontSize: 60,
       fill: 'white',
       stroke: 'cyan',
