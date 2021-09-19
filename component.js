@@ -96,7 +96,7 @@ phina.define('RateLabel', {
   init: function(textParam) {
     this.superInit({
       text: textParam.text,
-      fontSize: 60,
+      fontSize: textParam.fontSize,
       strokeWidth: 8,
       fill: "pink",
       stroke: "white",
