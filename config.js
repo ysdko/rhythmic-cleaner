@@ -56,7 +56,7 @@ const ASSETS = {
   image: {
     twitter_logo: "./tools/twitter_logo.png",
     garbage: "./tools/grbg.png",
-    vacume: "http://drive.google.com/uc?export=view&id=1XLHvg4DPp25n2pBASy6vspi9IBtjVsks"
+    vacume: "http://drive.google.com/uc?export=view&id=1-1RwxyM1fSWPxDoXuZAJ_gDTm1UrjMIJ"
   },
   sound: {
     point: "./tools/point.mp3",

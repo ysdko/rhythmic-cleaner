@@ -62,6 +62,23 @@ phina.define("MainScene", {
       ],
     }).addChildTo(this);
 
+    
+
+    this.gauge = Gauge({
+      x: this.gridX.center(), y: this.gridY.span(2),
+      width: 400,
+      height: 30,
+      cornerRadius: 10,
+      maxValue: MAX_SCORE[music] * 0.8,
+      value: 0,
+      fill: 'white',
+      gaugeColor: 'cyan',
+      stroke: 'silver',
+      strokeWidth: 5,
+    }).addChildTo(this).on("enterframe", function () {
+      this.value = self.totalScore;
+    });;
+
     // ラベル表示
     var aclr_label = Label(orgRound(aclr.y, 10).toString()).addChildTo(this);
     aclr_label.fontSize = 48;
@@ -71,7 +88,7 @@ phina.define("MainScene", {
       this.text = orgRound(aclr.y, 10).toString();
     };
 
-    vacume = Sprite('vacume').addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(14.5));
+    vacume = Sprite('vacume').addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(14.7));
     vacume.width = 300;
     vacume.height = 300;
 
