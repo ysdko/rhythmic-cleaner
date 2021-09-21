@@ -57,10 +57,27 @@ phina.define("MainScene", {
       stroke: "magenta",
       strokeWidth: 5,
       paths: [
-        Vector2(0, this.gridY.span(10)),
-        Vector2(this.gridX.width, this.gridY.span(10)),
+        Vector2(0, gy.span(2) + this.gridY.span(MARKER_COODINATE_Y)),
+        Vector2(this.gridX.width, gy.span(2) + this.gridY.span(MARKER_COODINATE_Y)),
       ],
     }).addChildTo(this);
+
+    
+
+    this.gauge = Gauge({
+      x: this.gridX.center(), y: this.gridY.span(2),
+      width: 400,
+      height: 30,
+      cornerRadius: 10,
+      maxValue: MAX_SCORE[music] * 0.8,
+      value: 0,
+      fill: 'white',
+      gaugeColor: 'cyan',
+      stroke: 'silver',
+      strokeWidth: 5,
+    }).addChildTo(this).on("enterframe", function () {
+      this.value = self.totalScore;
+    });;
 
     // ラベル表示
     var aclr_label = Label(orgRound(aclr.y, 10).toString()).addChildTo(this);
@@ -70,6 +87,10 @@ phina.define("MainScene", {
     aclr_label.update = function () {
       this.text = orgRound(aclr.y, 10).toString();
     };
+
+    vacume = Sprite('vacume').addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(14.7));
+    vacume.width = 300;
+    vacume.height = 300;
 
     // 時間が来たら音楽流す
     this.one("musicstart", function () {
