@@ -35,6 +35,12 @@ const RATING_TABLE = {
   },
 };
 
+const MAX_SCORE = {
+  shiningStar: 109192,
+  catlife: 299153,
+  hyakkaryouran: 330068
+}
+
 // 読み取られた加速度の値
 let aclr = {
   x : 0,
@@ -50,6 +56,7 @@ const ASSETS = {
   image: {
     twitter_logo: "./tools/twitter_logo.png",
     garbage: "./tools/grbg.png",
+    vacume: "http://drive.google.com/uc?export=view&id=1-1RwxyM1fSWPxDoXuZAJ_gDTm1UrjMIJ"
   },
   sound: {
     point: "./tools/point.mp3",
