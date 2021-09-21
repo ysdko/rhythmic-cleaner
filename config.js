@@ -11,9 +11,9 @@ const MARKER_STROKE_WIDTH = 8;
 const MARKER_COODINATE_Y = 9.3;
 
 // ノーツ出現時間(ms)
-const MARKER_APPEARANCE_DELTA = 500;
+const MARKER_APPEARANCE_DELTA = 1000;
 //　開始時音楽再生までの時間
-const MUSIC_START_DELAY = 1000;
+const MUSIC_START_DELAY = 2000;
 
 // 採点基準
 const RATING_TABLE = {
