@@ -89,7 +89,7 @@ phina.define("MainScene", {
     };
 
     vacume = Sprite('vacume').addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(14.7));
-    vacume.width = 300;
+    vacume.width = 500;
     vacume.height = 300;
 
     // 時間が来たら音楽流す
