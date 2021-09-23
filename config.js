@@ -52,12 +52,16 @@ var self_global;
 var icon_global;
 var params_global;
 
+//背景の透明度
+const ALPHA = 0.3;
+
 const ASSETS = {
   image: {
     twitter_logo: "./tools/twitter_logo.png",
     garbage: "./tools/grbg.png",
     vacume: "./tools/vacume.png",
     logo: "./tools/logoC.png",
+    bg: "./tools/bg.png",
   },
   sound: {
     point: "./tools/point.mp3",

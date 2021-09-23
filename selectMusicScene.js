@@ -50,6 +50,9 @@ phina.define('SelectMusicScene', {
       SoundManager.playMusic(music, null, false);
     }
 
+    bg = Sprite('bg').addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
+    bg.alpha = ALPHA;
+
     Label({
       text: "曲を選択して下さい",
       fill: "white",
@@ -95,7 +98,7 @@ phina.define('SelectMusicScene', {
     const point1 = RectangleShape({
       width: 400,
       height: 100,
-      fill: 'black',
+      fill: null,
       strokeWidth: 0,
     }).addChildTo(songGroup).setPosition(0, -150).setInteractive(true);
     num.push(Label({
@@ -123,7 +126,7 @@ phina.define('SelectMusicScene', {
     const point2 = RectangleShape({
       width: 400,
       height: 100,
-      fill: 'black',
+      fill: null,
       strokeWidth: 0,
     }).addChildTo(songGroup).setPosition(0, 0).setInteractive(true);
     num.push(Label({
@@ -155,7 +158,7 @@ phina.define('SelectMusicScene', {
     const point3 = RectangleShape({
       width: 400,
       height: 100,
-      fill: 'black',
+      fill: null,
       strokeWidth: 0,
     }).addChildTo(songGroup).setPosition(0, 150).setInteractive(true);
     num.push(Label({

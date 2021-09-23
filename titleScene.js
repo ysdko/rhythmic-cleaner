@@ -11,6 +11,9 @@ phina.define('TitleScene', {
     SoundManager.musicVolume = 0.15;
     const self = this;
 
+    bg = Sprite('bg').addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
+    bg.alpha = 0.5;
+
     Sprite('logo').addChildTo(this).setPosition(90, 80).setScale(0.4, 0.4);
 
     PathShape({
