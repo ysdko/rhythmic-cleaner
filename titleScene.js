@@ -11,6 +11,8 @@ phina.define('TitleScene', {
     SoundManager.musicVolume = 0.15;
     const self = this;
 
+    Sprite('logo').addChildTo(this).setPosition(90, 80).setScale(0.4, 0.4);
+
     PathShape({
       stroke: "magenta",
       strokeWidth: 1,
@@ -38,16 +40,16 @@ phina.define('TitleScene', {
       stroke: "cyan",
       strokeWidth: 3,
     })
-    .setPosition(this.gridX.center(), this.gridY.span(3) + 10)
+    .setPosition(this.gridX.center(), this.gridY.span(3) + 25)
     .addChildTo(this);
 
-    const playMethodGroup = DisplayElement().setPosition(this.gridX.span(13), this.gridY.span(1)).addChildTo(this);
+    const playMethodGroup = DisplayElement().setPosition(this.gridX.span(13) - 10, this.gridY.span(1) + 15).addChildTo(this);
     const playMethodButton = RectangleShape({
       width: 220,
       height: 80,
       fill: 'black',
       stroke: 'cyan',
-      strokeWidth: 10,
+      strokeWidth: 7,
       cornerRadius: 16
     }).addChildTo(playMethodGroup).setInteractive(true);
     Label({

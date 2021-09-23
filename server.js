@@ -7,6 +7,7 @@ const contentTypes = {
   '.js': 'text/javascript',
   '.json': 'application/json',
   '.png': 'image/png',
+  '.gif': 'image/gif',
   '.mp3': 'audio/mpeg',
   'else': 'text/plain',
 }
@@ -16,6 +17,7 @@ const codeTypes = {
   '.js': 'UTF-8',
   '.json': 'UTF-8',
   '.png': 'binary',
+  '.gif': 'binary',
   '.mp3': 'binary',
   'else': 'UTF-8',
 }
