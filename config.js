@@ -11,9 +11,9 @@ const MARKER_STROKE_WIDTH = 8;
 const MARKER_COODINATE_Y = 9.3;
 
 // ノーツ出現時間(ms)
-const MARKER_APPEARANCE_DELTA = 500;
+const MARKER_APPEARANCE_DELTA = 1000;
 //　開始時音楽再生までの時間
-const MUSIC_START_DELAY = 1000;
+const MUSIC_START_DELAY = 2000;
 
 // 採点基準
 const RATING_TABLE = {
@@ -52,11 +52,16 @@ var self_global;
 var icon_global;
 var params_global;
 
+//背景の透明度
+const ALPHA = 0.3;
+
 const ASSETS = {
   image: {
     twitter_logo: "./tools/twitter_logo.png",
     garbage: "./tools/grbg.png",
-    vacume: "./tools/vacume.png"
+    vacume: "./tools/vacume.png",
+    logo: "./tools/logoC.png",
+    bg: "./tools/bg.png",
   },
   sound: {
     point: "./tools/point.mp3",

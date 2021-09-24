@@ -29,6 +29,9 @@ phina.define("MainScene", {
     //コンボ
     this.combo = 0;
 
+    bg = Sprite('bg').addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
+    bg.alpha = ALPHA;
+
     PathShape({
       stroke: "magenta",
       strokeWidth: 1,
