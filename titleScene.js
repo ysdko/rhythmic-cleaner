@@ -82,6 +82,15 @@ phina.define('TitleScene', {
     .to({alpha: 0}, 900)
     .to({alpha: 1}, 900);
 
+    
+
+    const intervalId = setInterval(() =>{
+
+      var x = Math.randint(95, this.gridX.width-95);
+      var y = 300;
+      TitleNotes(x,y, this).group.addChildTo(this);
+      }, 200);
+
     //センサ使用許可要求
     this.setInteractive(true);
     this.onclick = function() {
