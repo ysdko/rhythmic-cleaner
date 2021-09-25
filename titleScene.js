@@ -73,6 +73,14 @@ phina.define('TitleScene', {
       self.exit({nexLabel: 'playMethod'})
     };
 
+    // vacume1 = Sprite('vacume').addChildTo(this).setPosition(this.gridX.span(1.8), this.gridY.span(7.5)).setRotation(108);
+    // vacume1.width = 500;
+    // vacume1.height = 300;
+
+    // vacume2 = Sprite('vacume').addChildTo(this).setPosition(this.gridX.span(14.2), this.gridY.span(7.5)).setRotation(-108);
+    // vacume2.width = 500;
+    // vacume2.height = 300;
+
     const touchLabelGroup = DisplayElement().setPosition(this.gridX.center(), this.gridY.span(14)- 30).addChildTo(this);
     const nextButton = RectangleShape({
       width: 450,

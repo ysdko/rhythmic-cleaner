@@ -52,7 +52,7 @@ phina.define('ResultScene2', {
       fontSize: 60,
       fill: 'cyan',
       stroke: 'white',
-      strokeWidth: 10
+      strokeWidth: 8
     }).addChildTo(this).setPosition(this.gridX.span(10), this.gridY.span(4.2));
 
     Label({

@@ -16,7 +16,7 @@ phina.define("UnitIcon", {
 
   //エフェクト発火関数
   fireEffect: function () {
-    EffectWave().addChildTo(this);
+    EffectWave("white").addChildTo(this);
   },
 });
 
@@ -24,11 +24,11 @@ phina.define("UnitIcon", {
 phina.define("EffectWave", {
   superClass: "phina.display.CircleShape",
 
-  init: function () {
+  init: function (color) {
     this.superInit({
       radius: MARKER_RADIUS,
       stroke: false,
-      fill: "white",
+      fill: color,
     });
 
     this.tweener
@@ -128,7 +128,7 @@ phina.define("ScoreView", {
       text: score,
       // text: params.perfect_times,
       fontSize: 40,
-      fill: "white",
+      fill: "gray",
     })
       .addChildTo(this.group)
       .setPosition(150, 0);
@@ -161,7 +161,7 @@ phina.define("TitleNotes", {
       this.vy += 0.5;
       this.y += this.vy;
       if (this.bottom > 750) {
-        EffectWave().addChildTo(scene).setPosition(this.x, 750);
+        EffectWave("magenta").addChildTo(scene).setPosition(this.x, 750);
         this.remove();
       }
     }

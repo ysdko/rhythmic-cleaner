@@ -6,32 +6,31 @@ phina.define('SelectMusicScene', {
   init: function(params) {
     this.superInit(params);
     const self = this;
-    let music = "";
+    var music = "";
+    const rect = [];
     const num = [];
     const labels = [];
     const lines = [];
     let selectFlag = false;
     let circleY = 0;
     self.count = 0;
-    this.mode = 'normal';
 
     function set(nowNum) {
-      self.mode = 'normal';
-      self.circleRightText.text = 'N';
       selectFlag = true;
-      circleGroup.visible = true;
+      self.circleLeft.stroke = "magenta";
+      self.circleRight.stroke = "magenta";
       nextLabel.fill = "white";
       SoundManager.stopMusic();
       for(var i=0; i<3; i++){
         if(i === nowNum) {
+          rect[i].stroke = "magenta";
           num[i].fill = "white";
           labels[i].fill = "white";
-          lines[i].stroke = "magenta";
         }
         else{
+          rect[i].stroke = "purple";
           num[i].fill = "gray";
           labels[i].fill = "gray";
-          lines[i].stroke = "purple";
         }
       }
 
@@ -52,17 +51,6 @@ phina.define('SelectMusicScene', {
       SoundManager.playMusic(music, null, false);
     }
 
-    function setMode() {
-      if (self.mode === 'normal') {
-        self.mode = 'hard';
-        self.circleRightText.text = 'H';
-      }
-      else {
-        self.mode = 'normal';
-        self.circleRightText.text = 'N';
-      }
-    }
-
     bg = Sprite('bg').addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
     bg.alpha = ALPHA;
 
@@ -73,30 +61,23 @@ phina.define('SelectMusicScene', {
       stroke: "cyan",
       strokeWidth: 3,
     })
-    .setPosition(this.gridX.center(), this.gridY.span(1.2))
+    .setPosition(this.gridX.center(), this.gridY.span(1.8))
     .addChildTo(this);
 
-    const circleGroup = DisplayElement().setVisible(false).addChildTo(this);
-    self.circleLeft = Sprite('logo').setPosition(60, 0)
-    .addChildTo(circleGroup).setScale(0.35, 0.35);
-    self.circleRight = RectangleShape({
-      width: 80,
-      height: 80,
+    const circleGroup = DisplayElement().addChildTo(this);
+    self.circleLeft = CircleShape({
       fill: null,
-      stroke: 'cyan',
+      stroke: null,
       strokeWidth: 5,
-    }).addChildTo(circleGroup).setPosition(580, 0).setInteractive(true);
-    self.circleRight.on("pointstart", function() {   
-      setMode();
-    });
-    self.circleRightText = Label({
-      text: "N",
-      fill: "white",
-      fontSize: 50,
-      stroke: "cyan",
-      strokeWidth: 3,
-    }).addChildTo(circleGroup).setPosition(580, 0);
-    self.circleLeft.tweener.clear()
+      radius: 30,
+    }).addChildTo(circleGroup).setPosition(50, 0);
+    self.circleRight = CircleShape({
+      fill: null,
+      stroke: null,
+      strokeWidth: 5,
+      radius: 30,
+    }).addChildTo(circleGroup).setPosition(590, 0);
+    circleGroup.tweener.clear()
     .setLoop(true)
     .to({alpha: 0}, 900)
     .to({alpha: 1}, 900);
@@ -115,7 +96,7 @@ phina.define('SelectMusicScene', {
         Vector2(this.gridX.span(8), this.gridY.span(4.0))]
     }).addChildTo(songGroup);
 
-    const point1 = RectangleShape({
+    point1 = RectangleShape({
       width: 400,
       height: 100,
       fill: null,
@@ -127,18 +108,19 @@ phina.define('SelectMusicScene', {
       fill: "gray",
       strokeWidth: 3,
     }).addChildTo(songGroup).setPosition(-175, -150));
+    rect.push(RectangleShape({
+      width: 460,
+      height: 100,
+      fill: null,
+      stroke: "purple",
+      strokeWidth: 5,
+    }).addChildTo(songGroup).setPosition(0, -150));
     labels.push(Label({
       text: "Shining Star",
       fontSize: 52,
       fill: "gray",
       strokeWidth: 3,
     }).addChildTo(songGroup).setPosition(35, -150));
-    lines.push(PathShape({
-      stroke: "purple",
-      strokeWidth: 5,
-      paths: [Vector2(-200, -100), 
-        Vector2(200, -100)]
-    }).addChildTo(songGroup));
     point1.on("pointstart", function() {   
       set(0);
     });
@@ -149,6 +131,13 @@ phina.define('SelectMusicScene', {
       fill: null,
       strokeWidth: 0,
     }).addChildTo(songGroup).setPosition(0, 0).setInteractive(true);
+    rect.push(RectangleShape({
+      width: 460,
+      height: 100,
+      fill: null,
+      stroke: "purple",
+      strokeWidth: 5,
+    }).addChildTo(songGroup).setPosition(0, 0));
     num.push(Label({
       text: "2.",
       fontSize: 52,
@@ -162,12 +151,6 @@ phina.define('SelectMusicScene', {
       strokeWidth: 3,
     }).addChildTo(songGroup).setPosition(35, 0));
     labels[1].setInteractive(true);
-    lines.push(PathShape({
-      stroke: "purple",
-      strokeWidth: 5,
-      paths: [Vector2(-200, 50), 
-        Vector2(200, 50)]
-    }).addChildTo(songGroup));
     labels[1].on("pointstart", function() {   
       set(1);
     });
@@ -181,6 +164,13 @@ phina.define('SelectMusicScene', {
       fill: null,
       strokeWidth: 0,
     }).addChildTo(songGroup).setPosition(0, 150).setInteractive(true);
+    rect.push(RectangleShape({
+      width: 460,
+      height: 100,
+      fill: null,
+      stroke: "purple",
+      strokeWidth: 5,
+    }).addChildTo(songGroup).setPosition(0, 150));
     num.push(Label({
       text: "3.",
       fontSize: 52,
@@ -194,12 +184,6 @@ phina.define('SelectMusicScene', {
       strokeWidth: 3,
     }).addChildTo(songGroup).setPosition(40, 150));
     labels[2].setInteractive(true);
-    lines.push(PathShape({
-      stroke: "purple",
-      strokeWidth: 5,
-      paths: [Vector2(-200, 200), 
-        Vector2(200, 200)]
-    }).addChildTo(songGroup));
     point3.on("pointstart", function() {   
       set(2);
     });
@@ -219,7 +203,6 @@ phina.define('SelectMusicScene', {
         SoundManager.play('point');
         self.exit({
           music: music,
-          mode: self.mode,
         });
       }
       else{
