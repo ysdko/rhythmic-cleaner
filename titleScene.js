@@ -87,17 +87,18 @@ phina.define('TitleScene', {
     .to({alpha: 0}, 900)
     .to({alpha: 1}, 900);
 
-    //センサ使用許可要求
-    this.setInteractive(true);
-    this.onclick = function() {
-      devicemotionRequest();
-    };
+    // //センサ使用許可要求
+    // this.setInteractive(true);
+    // this.onclick = function() {
+    //   devicemotionRequest();
+    // };
 
     // モバイルでの再生制限アンロックのため、画面タッチ時にSoundを無音再生
     // enterイベント自体は1つのみしか発火されていない
-    nextButton.on('pointstart', function() {
+    nextButton.onclick = function() {
       var event = "touchstart";
       var dom = self.app.domElement;
+      devicemotionRequest();
       dom.addEventListener(event, (function() {
         return function f() {
           var context = phina.asset.Sound.getAudioContext();
