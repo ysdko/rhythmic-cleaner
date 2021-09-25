@@ -16,24 +16,31 @@ phina.define('TitleScene', {
 
     Sprite('logo').addChildTo(this).setPosition(90, 80).setScale(0.4, 0.4);
 
-    PathShape({
-      stroke: "magenta",
-      strokeWidth: 1,
-      paths: [Vector2(this.gridX.span(8), this.gridY.span(16)), 
-        Vector2(this.gridX.span(8), this.gridY.span(4.5))]
-    }).addChildTo(this);
-    PathShape({
-      stroke: "magenta",
-      strokeWidth: 5,
-      paths: [Vector2(this.gridX.span(0), this.gridY.span(16)), 
-        Vector2(this.gridX.span(7.5), this.gridY.span(4.5))]
-    }).addChildTo(this);
-    PathShape({
-      stroke: "magenta",
-      strokeWidth: 5,
-      paths: [Vector2(this.gridX.span(16), this.gridY.span(16)), 
-        Vector2(this.gridX.span(8.5), this.gridY.span(4.5))]
-    }).addChildTo(this);
+    // PathShape({
+    //   stroke: "magenta",
+    //   strokeWidth: 1,
+    //   paths: [Vector2(this.gridX.span(8), this.gridY.span(16)), 
+    //     Vector2(this.gridX.span(8), this.gridY.span(4.5))]
+    // }).addChildTo(this);
+    // PathShape({
+    //   stroke: "magenta",
+    //   strokeWidth: 5,
+    //   paths: [Vector2(this.gridX.span(0), this.gridY.span(16)), 
+    //     Vector2(this.gridX.span(7.5), this.gridY.span(4.5))]
+    // }).addChildTo(this);
+    // PathShape({
+    //   stroke: "magenta",
+    //   strokeWidth: 5,
+    //   paths: [Vector2(this.gridX.span(16), this.gridY.span(16)), 
+    //     Vector2(this.gridX.span(8.5), this.gridY.span(4.5))]
+    // }).addChildTo(this);
+
+
+    const intervalId = setInterval(() =>{
+      var x = Math.randint(95, this.gridX.width-95);
+      var y = 300;
+      TitleNotes(x,y, this).group.addChildTo(this);
+    }, 700);
 
 
     Label({
@@ -87,7 +94,7 @@ phina.define('TitleScene', {
     .to({alpha: 0}, 900)
     .to({alpha: 1}, 900);
 
-    
+
     // モバイルでの再生制限アンロックのため、画面タッチ時にSoundを無音再生
     // enterイベント自体は1つのみしか発火されていない
     nextButton.onclick = function() {
