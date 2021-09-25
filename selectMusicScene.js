@@ -17,6 +17,7 @@ phina.define('SelectMusicScene', {
 
     function set(nowNum) {
       self.mode = 'normal';
+      self.circleRightText.text = 'N';
       selectFlag = true;
       circleGroup.visible = true;
       nextLabel.fill = "white";
