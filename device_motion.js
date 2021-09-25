@@ -6,12 +6,14 @@ function devicemotionRequest() {
         if (DeviceMotionEvent.requestPermission) {
             DeviceMotionEvent.requestPermission().then((permissionState) => {
                 if (permissionState === "granted") {
+                    DEVICE = 'iPhone';
                     window.addEventListener("devicemotion", function(event){ motionCatch(event) });
                 }
             }).catch((e) => {alert(e);});
         }
     } else {
         if (navigator.userAgent.match(/Android.+Mobile/)) {
+            DEVICE = 'Android';
             // 直接motionCatch(event)とはできない
             window.addEventListener("devicemotion", function(event){ motionCatch(event) });
         }
@@ -31,11 +33,26 @@ function motionCatch(event) {
     aclr.z = temp.z;
 }
 
-// 加速度を更新する周期の設定
+// 判定する周期の設定
 timer = window.setInterval(displayData, 33);
 
 // 加速度を表示する関数
 function displayData() {
-    if(aclr.y > THREATHOLD || aclr.y < -THREATHOLD)
+    const nowAclr = aclr;
+    if (nowAclr.y > THREATHOLD) {
+        if (DEVICE === 'iPhone')
+            nowDirection = 0;
+        else  
+            nowDirection = 1;
+        flagTorS = 'Slide';
         self_global.judge(icon_global);
+    }
+    if (nowAclr.y < -THREATHOLD) {
+        if (DEVICE === 'iPhone')
+            nowDirection = 1;
+        else  
+            nowDirection = 0;
+        flagTorS = 'Slide';
+        self_global.judge(icon_global);
+    }
 }

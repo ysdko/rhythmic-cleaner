@@ -7,15 +7,13 @@ phina.define("MainScene", {
   init: function (options) {
     this.superInit(options);
     const music = options.music;
-
     const self = this;
-    self_global = self;
     const gx = this.gridX;
     const gy = this.gridY;
     const AM = phina.asset.AssetManager;
-
     // var beatmap = DEBUG_BEATMAP;
-    var beatmap = AM.get("json", music).data;
+    const beatmap = AM.get("json", music).data;
+    self_global = self;
 
     // タイマーのセット
     this.elapsedTime = 0; // 経過時間
@@ -31,8 +29,10 @@ phina.define("MainScene", {
 
     this.rating_ratio = 1;
 
+
     bg = Sprite('bg').addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
     bg.alpha = ALPHA;
+
 
     PathShape({
       stroke: "magenta",
@@ -67,7 +67,6 @@ phina.define("MainScene", {
       ],
     }).addChildTo(this);
 
-    
 
     this.gauge = Gauge({
       x: this.gridX.center(), y: this.gridY.span(2),
@@ -82,25 +81,19 @@ phina.define("MainScene", {
       strokeWidth: 5,
     }).addChildTo(this).on("enterframe", function () {
       this.value = self.totalScore;
-    });;
+    });
 
-    // ラベル表示
-    var aclr_label = Label(orgRound(aclr.y, 10).toString()).addChildTo(this);
-    aclr_label.fontSize = 48;
-    aclr_label.fill = "black";
-    aclr_label.setPosition(gx.span(2), gy.span(4));
-    aclr_label.update = function () {
-      this.text = orgRound(aclr.y, 10).toString();
-    };
 
     vacume = Sprite('vacume').addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(14.7));
     vacume.width = 500;
     vacume.height = 300;
 
+
     // 時間が来たら音楽流す
     this.one("musicstart", function () {
       SoundManager.playMusic(music, null, false);
     });
+
 
     // 判定部マーカの表示
     const icon = UnitIcon()
@@ -111,17 +104,22 @@ phina.define("MainScene", {
       .addChildTo(this);
     icon_global = icon;
     //タップ判定=最終的に消す
-    icon.onpointstart = () => this.judge(icon);
+    icon.onpointstart = () => {
+      flagTorS = 'Touch';
+      this.judge(icon);
+    }
+
 
     // 譜面の展開
     this.markerGroup = DisplayElement()
       .setPosition(gx.center(), gy.span(2))
       .addChildTo(this);
     beatmap.notes.forEach((note) => {
-      TargetMarker(note.targetTime, this, note.direction).group.addChildTo(
+      TargetMarker(note.targetTime, note.direction).group.addChildTo(
         this.markerGroup
       );
     });
+
 
     // score表示
     this.scoreLabel = Label({
@@ -138,6 +136,7 @@ phina.define("MainScene", {
         self.totalScore = Math.round(self.totalScore);
         this.text = self.totalScore;
       });
+
 
     // combo表示
     this.comboLabel = Label({
@@ -164,6 +163,17 @@ phina.define("MainScene", {
       .setPosition(gx.span(13), gy.span(7))
       .addChildTo(this);
 
+
+    // 加速度表示(デバッグ用)
+    var aclr_label = Label(orgRound(aclr.y, 10).toString()).addChildTo(this);
+    aclr_label.fontSize = 48;
+    aclr_label.fill = "white";
+    aclr_label.setPosition(gx.span(2), gy.span(4));
+    aclr_label.update = function () {
+      this.text = orgRound(aclr.y, 10).toString();
+    };
+
+
     // ポーズボタン
     Button({
       text: "PAUSE",
@@ -178,6 +188,7 @@ phina.define("MainScene", {
       // ポーズシーンをpushする
       self.app.pushScene(MyPauseScene());
     };
+
 
     // 結果画面への遷移ボタン
     Button({
@@ -200,6 +211,7 @@ phina.define("MainScene", {
       }); // 自分を渡す
     };
   },
+
 
   update: function (app) {
     // タイマー加算
@@ -235,7 +247,12 @@ phina.define("MainScene", {
       // 通りすぎたノーツをmiss判定とする処理
       if (RATING_TABLE["miss"].range < -rTime) {
         this.reaction(m, "miss");
-        this.combo = 0; 
+        this.miss_times += 1;
+        this.combo = 0;
+        //スコアの最大値の算出
+        // this.totalScore *= 1.1;
+        // this.totalScore += RATING_TABLE["perfect"].score;
+    
       }
     });
   },
@@ -251,7 +268,10 @@ phina.define("MainScene", {
       // マーカーが有効かつtrackIdが一致、かつ判定範囲内
       // 判定が狭い順に判定し、該当したらループ拔ける
       const delta = Math.abs(m.targetTime - time);
-      if (delta <= RATING_TABLE["perfect"].range) {
+      if (delta <= RATING_TABLE["perfect"].range 
+        && (flagTorS === 'Touch' 
+          || flagTorS === 'Slide' 
+            && (m.direction === nowDirection))) {
         unitIcon.fireEffect();
         SoundManager.play("hit");
         this.reaction(m, "perfect");
@@ -259,7 +279,10 @@ phina.define("MainScene", {
         this.combo_func();
         return true;
       }
-      if (delta <= RATING_TABLE["great"].range) {
+      if (delta <= RATING_TABLE["great"].range
+        && (flagTorS === 'Touch' 
+          || flagTorS === 'Slide' 
+            && (m.direction === nowDirection))) {
         unitIcon.fireEffect();
         SoundManager.play("hit");
         this.reaction(m, "great");
@@ -267,7 +290,10 @@ phina.define("MainScene", {
         this.combo_func();
         return true;
       }
-      if (delta <= RATING_TABLE["good"].range) {
+      if (delta <= RATING_TABLE["good"].range
+        && (flagTorS === 'Touch' 
+          || flagTorS === 'Slide' 
+            && (m.direction === nowDirection))) {
         unitIcon.fireEffect();
         SoundManager.play("hit");
         this.reaction(m, "good");
@@ -275,7 +301,10 @@ phina.define("MainScene", {
         this.combo_func();
         return true;
       }
-      if (delta <= RATING_TABLE["miss"].range) {
+      if (delta <= RATING_TABLE["miss"].range
+        && (flagTorS === 'Touch' 
+          || flagTorS === 'Slide' 
+            && (m.direction === nowDirection))) {
         this.reaction(m, "miss");
         this.miss_times += 1;
         this.combo = 0;

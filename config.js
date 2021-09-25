@@ -47,13 +47,22 @@ let aclr = {
   y : 0,
   z : 0
 }
-const THREATHOLD = 4;
+// 判定時の加速度の値
+let nowDirection = 0;
+// 判定する加速度の閾値
+const THREATHOLD = 0.4;
+// タッチかスライドかのフラグ
+let flagTorS = 'Touch'; // Slide
+// デバイスの種類
+let DEVICE = 'iPhone';
+
+// オブジェクト参照用
 var self_global;
 var icon_global;
 var params_global;
 
 //背景の透明度
-const ALPHA = 0.3;
+const ALPHA = 0.8;
 
 const ASSETS = {
   image: {
@@ -61,7 +70,7 @@ const ASSETS = {
     garbage: "./tools/grbg.png",
     vacume: "./tools/vacume.png",
     logo: "./tools/logoC.png",
-    bg: "./tools/bg.png",
+    bg: "./tools/bg2.png",
   },
   sound: {
     point: "./tools/point.mp3",

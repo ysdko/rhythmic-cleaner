@@ -11,9 +11,7 @@ phina.define('ResultScene2', {
     this.rank = '';
     var bgGroup = DisplayElement().addChildTo(this);
     var SCALE = 65;
-
-    self = this;
-    
+    self = this;  
 
     const rank_score = params.result_score/MAX_SCORE[params.music_title]
 
@@ -27,19 +25,13 @@ phina.define('ResultScene2', {
       this.rank = "C";
     }
 
-    // var last_image = Sprite('last_image').addChildTo(bgGroup)
-    // .setPosition(this.gridX.center(), this.gridY.center());
-    // // .physical.force(-1, 0);
-    // last_image.height = 16 * SCALE;
-    // last_image.width = 9 * SCALE;
-
     this.bgGroup = bgGroup;
 
     //結果表示の曲名変換
     var text1;
-    if(params.music_title=="shiningStar"){
+    if(params.music_title　===　"shiningStar"){
       text1="Shining Star";
-    }else if(params.music_title=="catlife"){
+    }else if(params.music_title === "catlife"){
       text1="Cat life";
     }else{
       text1="百花繚乱"
