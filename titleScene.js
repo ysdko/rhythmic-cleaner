@@ -87,12 +87,7 @@ phina.define('TitleScene', {
     .to({alpha: 0}, 900)
     .to({alpha: 1}, 900);
 
-    // //センサ使用許可要求
-    // this.setInteractive(true);
-    // this.onclick = function() {
-    //   devicemotionRequest();
-    // };
-
+    
     // モバイルでの再生制限アンロックのため、画面タッチ時にSoundを無音再生
     // enterイベント自体は1つのみしか発火されていない
     nextButton.onclick = function() {
@@ -113,6 +108,6 @@ phina.define('TitleScene', {
       // シーン遷移
       SoundManager.play('point');
       self.exit({nextLabel: 'selectMusic'});
-    });
+    };
   },
 });
