@@ -29,6 +29,8 @@ phina.define("MainScene", {
     //コンボ
     this.combo = 0;
 
+    this.rating_ratio = 1;
+
     bg = Sprite('bg').addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
     bg.alpha = ALPHA;
 
@@ -233,11 +235,7 @@ phina.define("MainScene", {
       // 通りすぎたノーツをmiss判定とする処理
       if (RATING_TABLE["miss"].range < -rTime) {
         this.reaction(m, "miss");
-        this.combo = 0;
-        //スコアの最大値の算出
-        // this.totalScore *= 1.1;
-        // this.totalScore += RATING_TABLE["perfect"].score;
-    
+        this.combo = 0; 
       }
     });
   },
@@ -290,8 +288,7 @@ phina.define("MainScene", {
   combo_func: function () {
     this.combo += 1;
     if (this.combo > 1) {
-      this.totalScore *= 1.1;
-      RateLabel({ text: "bonus ×1.1", fontSize: 40 })
+      RateLabel({ text: "BONUS ×1.1", fontSize: 40 })
         .setPosition(this.gridX.center(), this.gridY.span(4))
         .addChildTo(this);
     }
@@ -306,8 +303,13 @@ phina.define("MainScene", {
     RateLabel({ text: rating.toUpperCase(), fontSize: 60 })
       .setPosition(this.gridX.center(), this.gridY.center())
       .addChildTo(this);
+      if (rating == 'miss'){
+        this.rating_ratio = 1.0;
+      }else{
+        this.rating_ratio *= 1.1;
+      }
 
-      this.totalScore += RATING_TABLE[rating].score;
+      this.totalScore += RATING_TABLE[rating].score * this.rating_ratio;
   },
 });
 
