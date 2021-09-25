@@ -41,18 +41,16 @@ function displayData() {
     const nowAclr = aclr;
     if (nowAclr.y > THREATHOLD) {
         if (DEVICE === 'iPhone')
-            nowDirection = 0;
-        else  
-            nowDirection = 1;
-        flagTorS = 'Slide';
+            flagTorS = 'SlideBack';
+        else
+            flagTorS = 'SlideFront';
         self_global.judge(icon_global);
     }
     if (nowAclr.y < -THREATHOLD) {
         if (DEVICE === 'iPhone')
-            nowDirection = 1;
+            flagTorS = 'SlideFront';
         else  
-            nowDirection = 0;
-        flagTorS = 'Slide';
+            flagTorS = 'SlideBack';
         self_global.judge(icon_global);
     }
 }

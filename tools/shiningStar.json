@@ -10,11 +10,11 @@
     "targetTime": 1400
    },
    {
-    "direction": 0,
+    "direction": 1,
     "targetTime": 2000
    },
    {
-    "direction": 1,
+    "direction": -1,
     "targetTime": 3500
    },
    {
@@ -22,7 +22,7 @@
     "targetTime": 4200
    },
    {
-    "direction": 1,
+    "direction": 0,
     "targetTime": 5000
    },
    {
@@ -34,7 +34,7 @@
     "targetTime": 7500
    },
    {
-    "direction": 0,
+    "direction": -1,
     "targetTime": 8000
    },
    {
@@ -70,7 +70,7 @@
     "targetTime": 16300
    },
    {
-    "direction": 1,
+    "direction": -1,
     "targetTime": 17250
    },
    {
@@ -90,7 +90,7 @@
     "targetTime": 22000
    },
    {
-    "direction": 1,
+    "direction": -1,
     "targetTime": 23000
    },
    {
@@ -102,7 +102,7 @@
     "targetTime": 26250
    },
    {
-    "direction": 0,
+    "direction": 1,
     "targetTime": 28000
    }
   ]

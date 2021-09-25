@@ -3,11 +3,11 @@
   "offset": 0,
   "notes": [
    {
-    "direction": 0,
+    "direction": 1,
     "targetTime": 1400
    },
    {
-    "direction": 0,
+    "direction": -1,
     "targetTime": 2200
    },
    {
@@ -15,15 +15,15 @@
     "targetTime": 3200
    },
    {
-    "direction": 1,
+    "direction": 0,
     "targetTime": 3700
    },
    {
-    "direction": 0,
+    "direction": 1,
     "targetTime": 4100
    },
    {
-    "direction": 0,
+    "direction": -1,
     "targetTime": 5100
    },
    {
@@ -55,15 +55,15 @@
     "targetTime": 10600
    },
    {
-    "direction": 1,
+    "direction": 0,
     "targetTime": 11000
    },
    {
-    "direction": 0,
+    "direction": 1,
     "targetTime": 11400
    },
    {
-    "direction": 0,
+    "direction": -1,
     "targetTime": 12300
    },
    {
@@ -107,7 +107,7 @@
     "targetTime": 19600
    },
    {
-    "direction": 1,
+    "direction": -1,
     "targetTime": 20500
    },
    {
@@ -119,7 +119,7 @@
     "targetTime": 21900
    },
    {
-    "direction": 0,
+    "direction": -1,
     "targetTime": 22300
    },
    {
@@ -139,7 +139,7 @@
     "targetTime": 25500
    },
    {
-    "direction": 0,
+    "direction": -1,
     "targetTime": 26900
    },
    {

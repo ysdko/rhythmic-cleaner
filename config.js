@@ -19,19 +19,19 @@ const MUSIC_START_DELAY = 2000;
 const RATING_TABLE = {
   perfect: {
     score: 1000,
-    range: 34, //ms
+    range: 50, //ms
   },
   great: {
     score: 500,
-    range: 64, //ms
+    range: 70, //ms
   },
   good: {
     score: 100,
-    range: 90, //ms
+    range: 100, //ms
   },
   miss: {
     score: 0,
-    range: 134, //ms
+    range: 130, //ms
   },
 };
 
@@ -47,12 +47,10 @@ let aclr = {
   y : 0,
   z : 0
 }
-// 判定時の加速度の値
-let nowDirection = 0;
 // 判定する加速度の閾値
-const THREATHOLD = 0.4;
+const THREATHOLD = 3;
 // タッチかスライドかのフラグ
-let flagTorS = 'Touch'; // Slide
+let flagTorS = 'Touch'; //SlideFrout, SlideBack
 // デバイスの種類
 let DEVICE = 'iPhone';
 

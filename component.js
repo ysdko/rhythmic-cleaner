@@ -46,7 +46,11 @@ phina.define("TargetMarker", {
     this.marker = Sprite("garbage").addChildTo(this.group);
     this.marker.scaleX = 0.6;
     this.marker.scaleY = 0.6;
-    this.arrow = Arrow(direction).group.addChildTo(this.group);
+    this.arrow = null;
+    if (direction === 1)
+      this.arrow = Arrow(0).group.addChildTo(this.group);
+    else if (direction === -1)
+      this.arrow = Arrow(1).group.addChildTo(this.group);
 
     this.group.visible = false;
     this.group.scaleX = this.scaleY = 0;
@@ -57,12 +61,9 @@ phina.define("TargetMarker", {
   },
 });
 
-// jsonfileのdirectionは, 0:上向き矢印 1:下向き矢印
 //矢印オブジェクト
 phina.define("Arrow", {
-  //direction 0:上向き, 1:下向き
-  init: function (direction) {
-    if (direction !== 1 && direction !== 0) direction = 1;
+  init: function (turn) {
     this.group = DisplayElement();
     this.triangle = TriangleShape({
       fill: "red",
@@ -79,8 +80,8 @@ phina.define("Arrow", {
     })
       .addChildTo(this.group)
       .setPosition(0, 30);
-    this.group.setRotation(180 * direction);
-    if (direction) this.group.setPosition(0, 12);
+    this.group.setRotation(180 * turn);
+    if (turn) this.group.setPosition(0, 12);
     else this.group.setPosition(0, -12);
   },
 });

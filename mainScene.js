@@ -115,9 +115,16 @@ phina.define("MainScene", {
       .setPosition(gx.center(), gy.span(2))
       .addChildTo(this);
     beatmap.notes.forEach((note) => {
-      TargetMarker(note.targetTime, note.direction).group.addChildTo(
-        this.markerGroup
-      );
+      if(options.mode === 'normal') {
+        TargetMarker(note.targetTime, 0).group.addChildTo(
+          this.markerGroup
+        );
+      }
+      else {
+        TargetMarker(note.targetTime, note.direction).group.addChildTo(
+          this.markerGroup
+        );
+      }
     });
 
 
@@ -264,47 +271,65 @@ phina.define("MainScene", {
     // 判定可能マーカーを探索
     const markers = this.markerGroup.children;
     markers.some((m) => {
-      if (!m.isAwake) return;
+      if (!m.isAwake) return; 
       // マーカーが有効かつtrackIdが一致、かつ判定範囲内
       // 判定が狭い順に判定し、該当したらループ拔ける
       const delta = Math.abs(m.targetTime - time);
-      if (delta <= RATING_TABLE["perfect"].range 
-        && (flagTorS === 'Touch' 
-          || flagTorS === 'Slide' 
-            && (m.direction === nowDirection))) {
-        unitIcon.fireEffect();
-        SoundManager.play("hit");
-        this.reaction(m, "perfect");
-        this.perfect_times += 1;
-        this.combo_func();
-        return true;
+      if (delta <= RATING_TABLE["perfect"].range) {
+        if (flagTorS === 'Touch' || m.direction === 0 
+          || flagTorS === 'SlideFront' && (m.direction === 1)
+          || flagTorS === 'SlideBack' && (m.direction === -1)) {
+          unitIcon.fireEffect();
+          SoundManager.play("hit");
+          this.reaction(m, "perfect");
+          this.perfect_times += 1;
+          this.combo_func();
+          return true;
+        }
+        else {
+          this.reaction(m, "miss");
+          this.miss_times += 1;
+          this.combo = 0;
+          return true;
+        }
       }
-      if (delta <= RATING_TABLE["great"].range
-        && (flagTorS === 'Touch' 
-          || flagTorS === 'Slide' 
-            && (m.direction === nowDirection))) {
-        unitIcon.fireEffect();
-        SoundManager.play("hit");
-        this.reaction(m, "great");
-        this.great_times += 1;
-        this.combo_func();
-        return true;
+      if (delta <= RATING_TABLE["great"].range) {
+        if (flagTorS === 'Touch' || m.direction === 0 
+          || flagTorS === 'SlideFront' && (m.direction === 1)
+          || flagTorS === 'SlideBack' && (m.direction === -1)) {
+          unitIcon.fireEffect();
+          SoundManager.play("hit");
+          this.reaction(m, "great");
+          this.great_times += 1;
+          this.combo_func();
+          return true;
+        }
+        else {
+          this.reaction(m, "miss");
+          this.miss_times += 1;
+          this.combo = 0;
+          return true;
+        }
       }
-      if (delta <= RATING_TABLE["good"].range
-        && (flagTorS === 'Touch' 
-          || flagTorS === 'Slide' 
-            && (m.direction === nowDirection))) {
-        unitIcon.fireEffect();
-        SoundManager.play("hit");
-        this.reaction(m, "good");
-        this.good_times += 1;
-        this.combo_func();
-        return true;
+      if (delta <= RATING_TABLE["good"].range) {
+        if (flagTorS === 'Touch' || m.direction === 0 
+          || flagTorS === 'SlideFront' && (m.direction === 1)
+          || flagTorS === 'SlideBack' && (m.direction === -1)) {
+          unitIcon.fireEffect();
+          SoundManager.play("hit");
+          this.reaction(m, "good");
+          this.good_times += 1;
+          this.combo_func();
+          return true;
+        }
+        else {
+          this.reaction(m, "miss");
+          this.miss_times += 1;
+          this.combo = 0;
+          return true;
+        }
       }
-      if (delta <= RATING_TABLE["miss"].range
-        && (flagTorS === 'Touch' 
-          || flagTorS === 'Slide' 
-            && (m.direction === nowDirection))) {
+      if (delta <= RATING_TABLE["miss"].range) {
         this.reaction(m, "miss");
         this.miss_times += 1;
         this.combo = 0;

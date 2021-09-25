@@ -3,11 +3,11 @@
   "offset": 0,
   "notes": [
    {
-    "direction": 0,
+    "direction": 1,
     "targetTime": 4300
    },
    {
-    "direction": 0,
+    "direction": -1,
     "targetTime": 5300
    },
    {
@@ -23,7 +23,7 @@
     "targetTime": 8300
    },
    {
-    "direction": 0,
+    "direction": -1,
     "targetTime": 9300
    },
    {
@@ -31,7 +31,7 @@
     "targetTime": 10300
    },
    {
-    "direction": 1,
+    "direction": 0,
     "targetTime": 10800
    },
    {
@@ -39,7 +39,7 @@
     "targetTime": 11300
    },
    {
-    "direction": 0,
+    "direction": 1,
     "targetTime": 12300
    },
    {
@@ -79,7 +79,7 @@
     "targetTime": 20300
    },
    {
-    "direction": 1,
+    "direction": -1,
     "targetTime": 21300
    },
    {
@@ -107,7 +107,7 @@
     "targetTime": 26800
    },
    {
-    "direction": 0,
+    "direction": -1,
     "targetTime": 27300
    },
    {
@@ -123,7 +123,7 @@
     "targetTime": 30300
    },
    {
-    "direction": 0,
+    "direction": 1,
     "targetTime": 31300
    },
    {
@@ -139,11 +139,11 @@
     "targetTime": 34300
    },
    {
-    "direction": 1,
+    "direction": -1,
     "targetTime": 34800
    },
    {
-    "direction": 0,
+    "direction": 1,
     "targetTime": 35300
    }
 
