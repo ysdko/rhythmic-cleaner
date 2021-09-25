@@ -18,8 +18,7 @@ phina.define('SelectMusicScene', {
     function set(nowNum) {
       self.mode = 'normal';
       selectFlag = true;
-      self.circleLeft.visible = true;
-      self.circleRight.stroke = "cyan";
+      circleGroup.visible = true;
       nextLabel.fill = "white";
       SoundManager.stopMusic();
       for(var i=0; i<3; i++){
@@ -76,14 +75,14 @@ phina.define('SelectMusicScene', {
     .setPosition(this.gridX.center(), this.gridY.span(1.2))
     .addChildTo(this);
 
-    const circleGroup = DisplayElement().addChildTo(this);
-    self.circleLeft = Sprite('logo').setVisible(false).setPosition(60, 0)
+    const circleGroup = DisplayElement().setVisible(false).addChildTo(this);
+    self.circleLeft = Sprite('logo').setPosition(60, 0)
     .addChildTo(circleGroup).setScale(0.35, 0.35);
     self.circleRight = RectangleShape({
       width: 80,
       height: 80,
       fill: null,
-      stroke: null,
+      stroke: 'cyan',
       strokeWidth: 5,
     }).addChildTo(circleGroup).setPosition(580, 0).setInteractive(true);
     self.circleRight.on("pointstart", function() {   
