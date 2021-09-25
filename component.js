@@ -41,8 +41,8 @@ phina.define("EffectWave", {
 
 //ノーツ
 phina.define("TargetMarker", {
-  init: function (targetTime, scene, direction) {
-    this.group = DisplayElement().addChildTo(scene);
+  init: function (targetTime, direction) {
+    this.group = DisplayElement();
     this.marker = Sprite("garbage").addChildTo(this.group);
     this.marker.scaleX = 0.6;
     this.marker.scaleY = 0.6;
@@ -53,9 +53,11 @@ phina.define("TargetMarker", {
     this.group.isAwake = true;
     this.group.targetTime = targetTime;
     this.group.vector = phina.geom.Vector2(0, 1);
+    this.group.direction = direction;
   },
 });
 
+// jsonfileのdirectionは, 0:上向き矢印 1:下向き矢印
 //矢印オブジェクト
 phina.define("Arrow", {
   //direction 0:上向き, 1:下向き
