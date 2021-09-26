@@ -184,6 +184,7 @@ phina.define("MainScene", {
       .setPosition(216, 0)
       .addChildTo(this).onpointstart = function () {
       SoundManager.stopMusic();
+      SoundManager.play('back');
       self.exit({
         result_score: self.totalScore,
         perfect_times: self.perfect_times,
