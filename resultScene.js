@@ -9,8 +9,6 @@ phina.define('ResultScene2', {
     // 背景色
     this.backgroundColor = 'black';
     this.rank = '';
-    var bgGroup = DisplayElement().addChildTo(this);
-    var SCALE = 65;
     self = this;  
 
     const rank_score = params.result_score/MAX_SCORE[params.music_title]
@@ -25,7 +23,10 @@ phina.define('ResultScene2', {
       this.rank = "C";
     }
 
-    this.bgGroup = bgGroup;
+
+    const bg = Sprite('bg').addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
+    bg.alpha = ALPHA;
+
 
     //結果表示の曲名変換
     var text1;
@@ -91,6 +92,9 @@ phina.define('ResultScene2', {
     .setPosition(this.gridX.span(5), this.gridY.span(12.5))
     .addChildTo(this)
     .onpointstart=function() {
+      SoundManager.volume = 0.5;
+      SoundManager.play('back');
+      SoundManager.volume = 0.15;
       self.exit(); // 自分を渡す
     };
 
