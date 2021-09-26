@@ -69,6 +69,10 @@ const ASSETS = {
     vacume: "./tools/vacume.png",
     logo: "./tools/logoC.png",
     bg: "./tools/bg2.png",
+    bgM: "./tools/bg_main.png",
+    note4: "./tools/note4.png",
+    note8: "./tools/note8.png",
+    note16_2: "./tools/note16_2.png",
   },
   sound: {
     point: "./tools/point.mp3",
