@@ -35,7 +35,7 @@ phina.define("MainScene", {
 
 
     PathShape({
-      stroke: "white",
+      stroke: "gray",
       strokeWidth: 10,
       paths: [
         Vector2(0, gy.span(2) + this.gridY.span(MARKER_COODINATE_Y)),
