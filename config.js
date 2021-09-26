@@ -75,7 +75,8 @@ const ASSETS = {
     note8: "./tools/note8.png",
     note16_2: "./tools/note16_2.png",
     title: "./tools/title.png",
-    bg_title: "./tools/bg_title.png"
+    bg_title: "./tools/bg_title.png",
+    play_image: "./tools/play_image.png"
   },
   sound: {
     point: "./tools/point.mp3",
