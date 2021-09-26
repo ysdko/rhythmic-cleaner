@@ -81,7 +81,8 @@ const ASSETS = {
     hyakkaryouran: "./tools/hyakkaryouran.mp3",
     hit: "./tools/tamborine.mp3",
     select: "./tools/select.mp3",
-    back: "./tools/back.mp3",
+    back: "./tools/back2.mp3",
+    result: "./tools/result.mp3",
   },
   json: {
     shiningStar: "./tools/shiningStar.json",
