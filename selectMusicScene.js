@@ -17,7 +17,9 @@ phina.define('SelectMusicScene', {
 
     function set(nowNum) {
       self.mode = 'normal';
-      self.circleRightText.text = 'N';
+      self.circleRightText.text = '易';
+      self.circleRight.stroke = 'cyan';
+      self.circleRightText.stroke = "cyan";
       selectFlag = true;
       circleGroup.visible = true;
       nextLabel.fill = "white";
@@ -26,12 +28,12 @@ phina.define('SelectMusicScene', {
         if(i === nowNum) {
           num[i].fill = "white";
           labels[i].fill = "white";
-          lines[i].stroke = "magenta";
+          lines[i].stroke = "cyan";
         }
         else{
-          num[i].fill = "gray";
-          labels[i].fill = "gray";
-          lines[i].stroke = "purple";
+          num[i].fill = "white";
+          labels[i].fill = "white";
+          lines[i].stroke = "darkcyan";
         }
       }
 
@@ -53,13 +55,18 @@ phina.define('SelectMusicScene', {
     }
 
     function setMode() {
+      SoundManager.play('select');
       if (self.mode === 'normal') {
         self.mode = 'hard';
-        self.circleRightText.text = 'H';
+        self.circleRightText.text = '難';
+        self.circleRight.stroke = 'magenta';
+        self.circleRightText.stroke = "magenta";
       }
       else {
         self.mode = 'normal';
-        self.circleRightText.text = 'N';
+        self.circleRightText.text = '易';
+        self.circleRight.stroke = 'cyan';
+        self.circleRightText.stroke = "cyan";
       }
     }
 
@@ -67,13 +74,13 @@ phina.define('SelectMusicScene', {
     bg.alpha = ALPHA;
 
     Label({
-      text: "曲を選択して下さい",
+      text: "曲・難易度を\n選択して下さい",
       fill: "white",
       fontSize: 60,
       stroke: "cyan",
       strokeWidth: 3,
     })
-    .setPosition(this.gridX.center(), this.gridY.span(1.2))
+    .setPosition(this.gridX.center(), this.gridY.span(2))
     .addChildTo(this);
 
     const circleGroup = DisplayElement().setVisible(false).addChildTo(this);
@@ -89,8 +96,15 @@ phina.define('SelectMusicScene', {
     self.circleRight.on("pointstart", function() {   
       setMode();
     });
+    self.modeLabel = Label({
+      text: "難易度",
+      fill: "white",
+      fontSize: 33,
+      stroke: "cyan",
+      strokeWidth: 2,
+    }).addChildTo(circleGroup).setPosition(580, -63);
     self.circleRightText = Label({
-      text: "N",
+      text: "易",
       fill: "white",
       fontSize: 50,
       stroke: "cyan",
@@ -124,17 +138,17 @@ phina.define('SelectMusicScene', {
     num.push(Label({
       text: "1.",
       fontSize: 52,
-      fill: "gray",
+      fill: "white",
       strokeWidth: 3,
     }).addChildTo(songGroup).setPosition(-175, -150));
     labels.push(Label({
       text: "Shining Star",
       fontSize: 52,
-      fill: "gray",
+      fill: "white",
       strokeWidth: 3,
     }).addChildTo(songGroup).setPosition(35, -150));
     lines.push(PathShape({
-      stroke: "purple",
+      stroke: "darkcyan",
       strokeWidth: 5,
       paths: [Vector2(-200, -100), 
         Vector2(200, -100)]
@@ -152,18 +166,18 @@ phina.define('SelectMusicScene', {
     num.push(Label({
       text: "2.",
       fontSize: 52,
-      fill: "gray",
+      fill: "white",
       strokeWidth: 3,
     }).addChildTo(songGroup).setPosition(-175, 0));
     labels.push(Label({
       text: "Cat life",
       fontSize: 52,
-      fill: "gray",
+      fill: "white",
       strokeWidth: 3,
     }).addChildTo(songGroup).setPosition(35, 0));
     labels[1].setInteractive(true);
     lines.push(PathShape({
-      stroke: "purple",
+      stroke: "darkcyan",
       strokeWidth: 5,
       paths: [Vector2(-200, 50), 
         Vector2(200, 50)]
@@ -184,18 +198,18 @@ phina.define('SelectMusicScene', {
     num.push(Label({
       text: "3.",
       fontSize: 52,
-      fill: "gray",
+      fill: "white",
       strokeWidth: 3,
     }).addChildTo(songGroup).setPosition(-175, 150));
     labels.push(Label({
       text: "百花繚乱",
       fontSize: 52,
-      fill: "gray",
+      fill: "white",
       strokeWidth: 3,
     }).addChildTo(songGroup).setPosition(40, 150));
     labels[2].setInteractive(true);
     lines.push(PathShape({
-      stroke: "purple",
+      stroke: "darkcyan",
       strokeWidth: 5,
       paths: [Vector2(-200, 200), 
         Vector2(200, 200)]
@@ -245,7 +259,7 @@ phina.define('SelectMusicScene', {
     prevButton.setInteractive(true);
     prevButton.onpointstart = function() {
       SoundManager.stopMusic();
-      SoundManager.play('point');
+      SoundManager.play('back');
       self.exit({nextLabel: 'title'});
     };
     Label({

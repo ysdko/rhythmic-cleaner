@@ -80,6 +80,8 @@ const ASSETS = {
     catlife: "./tools/catlife.mp3",
     hyakkaryouran: "./tools/hyakkaryouran.mp3",
     hit: "./tools/tamborine.mp3",
+    select: "./tools/select.mp3",
+    back: "./tools/back.mp3",
   },
   json: {
     shiningStar: "./tools/shiningStar.json",

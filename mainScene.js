@@ -30,37 +30,13 @@ phina.define("MainScene", {
     this.rating_ratio = 1;
 
 
-    bg = Sprite('bg').addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
+    bg = Sprite('bgM').addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
     bg.alpha = ALPHA;
 
 
     PathShape({
-      stroke: "magenta",
-      strokeWidth: 1,
-      paths: [
-        Vector2(this.gridX.span(8), this.gridY.span(16)),
-        Vector2(this.gridX.span(8), this.gridY.span(4.5)),
-      ],
-    }).addChildTo(this);
-    PathShape({
-      stroke: "magenta",
-      strokeWidth: 5,
-      paths: [
-        Vector2(this.gridX.span(0), this.gridY.span(16)),
-        Vector2(this.gridX.span(7.5), this.gridY.span(4.5)),
-      ],
-    }).addChildTo(this);
-    PathShape({
-      stroke: "magenta",
-      strokeWidth: 5,
-      paths: [
-        Vector2(this.gridX.span(16), this.gridY.span(16)),
-        Vector2(this.gridX.span(8.5), this.gridY.span(4.5)),
-      ],
-    }).addChildTo(this);
-    PathShape({
-      stroke: "magenta",
-      strokeWidth: 5,
+      stroke: "gray",
+      strokeWidth: 10,
       paths: [
         Vector2(0, gy.span(2) + this.gridY.span(MARKER_COODINATE_Y)),
         Vector2(this.gridX.width, gy.span(2) + this.gridY.span(MARKER_COODINATE_Y)),
