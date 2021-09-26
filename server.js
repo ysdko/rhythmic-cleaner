@@ -38,7 +38,7 @@ function getReq(req, res) {
   fs.readFile(filePath, types.codeType, function(err, data){
     if(err) {
       console.error(err.message);
-      process.exit(1);
+      return 1;
     }
     res.writeHead(200, {'Content-Type': types.contentType});
     if (types.codeType === 'UTF-8')
