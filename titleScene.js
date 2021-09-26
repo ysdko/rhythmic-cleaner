@@ -11,7 +11,7 @@ phina.define('TitleScene', {
     SoundManager.musicVolume = 0.15;
     const self = this;
 
-    const bg = Sprite('bg').addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
+    const bg = Sprite('bg_title').addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
     bg.alpha = ALPHA_TITLE;
 
     const bg_title = Sprite('title')
