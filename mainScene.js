@@ -147,14 +147,14 @@ phina.define("MainScene", {
       .addChildTo(this);
 
 
-    // 加速度表示(デバッグ用)
-    var aclr_label = Label(orgRound(aclr.y, 10).toString()).addChildTo(this);
-    aclr_label.fontSize = 48;
-    aclr_label.fill = "white";
-    aclr_label.setPosition(gx.span(2), gy.span(4));
-    aclr_label.update = function () {
-      this.text = orgRound(aclr.y, 10).toString();
-    };
+    // // 加速度表示(デバッグ用)
+    // var aclr_label = Label(orgRound(aclr.y, 10).toString()).addChildTo(this);
+    // aclr_label.fontSize = 48;
+    // aclr_label.fill = "white";
+    // aclr_label.setPosition(gx.span(2), gy.span(4));
+    // aclr_label.update = function () {
+    //   this.text = orgRound(aclr.y, 10).toString();
+    // };
 
 
     // ポーズボタン
@@ -184,7 +184,9 @@ phina.define("MainScene", {
       .setPosition(216, 0)
       .addChildTo(this).onpointstart = function () {
       SoundManager.stopMusic();
-      SoundManager.play('back');
+      SoundManager.volume = 0.5;
+      SoundManager.play('result');
+      SoundManager.volume = 0.15;
       self.exit({
         result_score: self.totalScore,
         perfect_times: self.perfect_times,
@@ -261,6 +263,7 @@ phina.define("MainScene", {
           this.reaction(m, "perfect");
           this.perfect_times += 1;
           this.combo_func();
+          this.effect_func('perfect');
           return true;
         }
         else {
@@ -279,6 +282,7 @@ phina.define("MainScene", {
           this.reaction(m, "great");
           this.great_times += 1;
           this.combo_func();
+          this.effect_func('great');
           return true;
         }
         else {
@@ -322,6 +326,58 @@ phina.define("MainScene", {
       RateLabel({ text: "BONUS ×1.1", fontSize: 40 })
         .setPosition(this.gridX.center(), this.gridY.span(4))
         .addChildTo(this);
+    }
+  },
+
+  effect_func: function (status) {
+    const self = this;
+
+    const noteA = Sprite('note4')
+    .setPosition(self.gridX.center(3), self.gridY.span(1) + self.gridY.span(MARKER_COODINATE_Y))
+    .setVisible(false)
+    .addChildTo(self);
+    noteA.tweener.set({ scaleX: 0.3, scaleY: 0.3, alpha: 1, rotation: -10, visible:true })
+    .to({ scaleX: 0, scaleY: 0, alpha: 0, rotation: 10, x:self.gridX.center(5), y:self.gridY.span(1) + self.gridY.span(MARKER_COODINATE_Y - 4)}, 700)
+    .wait(100)
+    .call(function () {
+      noteA.remove();
+    }, this);
+
+    const noteB = Sprite('note16_2')
+    .setPosition(self.gridX.center(-3), self.gridY.span(1) + self.gridY.span(MARKER_COODINATE_Y))
+    .setVisible(false)
+    .addChildTo(self);
+    noteB.tweener.set({ scaleX: 0.3, scaleY: 0.3, alpha: 1, rotation: -10, visible:true })
+    .to({ scaleX: 0, scaleY: 0, alpha: 0, rotation: 10, x:self.gridX.center(-5), y:self.gridY.span(1) + self.gridY.span(MARKER_COODINATE_Y - 4)}, 700)
+    .wait(100)
+    .call(function () {
+      noteB.remove();
+    }, this);
+
+    if(status === 'perfect') {
+      const noteC = Sprite('note16_2')
+      .setPosition(self.gridX.center(4), self.gridY.span(1) + self.gridY.span(MARKER_COODINATE_Y + 1))
+      .setVisible(false)
+      .addChildTo(self);
+      noteC.tweener.set({ scaleX: 0.3, scaleY: 0.3, alpha: 1, rotation: -10, visible:true })
+      .to({ scaleX: 0, scaleY: 0, alpha: 0, rotation: 10, x:self.gridX.center(6), y:self.gridY.span(1) + self.gridY.span(MARKER_COODINATE_Y - 2)}, 700)
+      .wait(100)
+      .call(function () {
+        noteC.remove();
+      }, this);
+    }
+
+    if(status === 'perfect') {
+      const noteD = Sprite('note8')
+      .setPosition(self.gridX.center(-4), self.gridY.span(1) + self.gridY.span(MARKER_COODINATE_Y + 1))
+      .setVisible(false)
+      .addChildTo(self);
+      noteD.tweener.set({ scaleX: 0.3, scaleY: 0.3, alpha: 1, rotation: -10, visible:true })
+      .to({ scaleX: 0, scaleY: 0, alpha: 0, rotation: 10, x:self.gridX.center(-6), y:self.gridY.span(1) + self.gridY.span(MARKER_COODINATE_Y - 2)}, 700)
+      .wait(100)
+      .call(function () {
+        noteD.remove();
+      }, this);
     }
   },
 
