@@ -259,7 +259,9 @@ phina.define('SelectMusicScene', {
     prevButton.setInteractive(true);
     prevButton.onpointstart = function() {
       SoundManager.stopMusic();
+      SoundManager.volume = 0.5;
       SoundManager.play('back');
+      SoundManager.volume = 0.15;
       self.exit({nextLabel: 'title'});
     };
     Label({
