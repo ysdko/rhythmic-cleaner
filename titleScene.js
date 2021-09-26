@@ -12,7 +12,7 @@ phina.define('TitleScene', {
     const self = this;
 
     const bg = Sprite('bg').addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
-    bg.alpha = ALPHA;
+    bg.alpha = ALPHA_TITLE;
 
     const bg_title = Sprite('title')
     .setPosition(this.gridX.center(), this.gridY.center())

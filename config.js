@@ -60,7 +60,8 @@ var icon_global;
 var params_global;
 
 //背景の透明度
-const ALPHA = 1.0;
+const ALPHA = 0.8;
+const ALPHA_TITLE = 1.0;
 
 const ASSETS = {
   image: {

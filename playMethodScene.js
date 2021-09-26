@@ -30,7 +30,7 @@ phina.define("PlayMethodScene", {
     }).addChildTo(playMethodGroup);
 
     const textGroup = DisplayElement()
-      .setPosition(this.gridX.center(), this.gridY.span(11))
+      .setPosition(this.gridX.center(), this.gridY.span(10.8))
       .addChildTo(this);
 
     RectangleShape({
@@ -38,7 +38,7 @@ phina.define("PlayMethodScene", {
       height: 300,
       fill: "black",
       stroke: "cyan",
-      strokeWidth: 16,
+      strokeWidth: 10,
       cornerRadius: 16,
     })
       .addChildTo(textGroup)
@@ -72,7 +72,7 @@ phina.define("PlayMethodScene", {
       .addChildTo(textGroup);
 
     const prevButtonGroup = DisplayElement()
-      .setPosition(this.gridX.center(), this.gridY.span(15))
+      .setPosition(this.gridX.center(), this.gridY.span(14.5))
       .addChildTo(this);
     const prevButton = RectangleShape({
       width: 240,
