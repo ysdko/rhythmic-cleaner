@@ -29,7 +29,7 @@ phina.define("PlayMethodScene", {
       strokeWidth: 3,
     }).addChildTo(playMethodGroup);
 
-    Sprite('play_image').addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(5.5)).setScale(0.3, 0.3);
+    Sprite('play_image').addChildTo(this).setPosition(this.gridX.center(), this.gridY.span(5.5)).setScale(0.55, 0.55);
 
     const textGroup = DisplayElement()
     .setPosition(this.gridX.center(), this.gridY.span(11.3))
@@ -37,14 +37,14 @@ phina.define("PlayMethodScene", {
 
     RectangleShape({
       width: 600,
-      height: 270,
+      height: 260,
       fill: "black",
       stroke: "cyan",
       strokeWidth: 10,
       cornerRadius: 16,
     })
       .addChildTo(textGroup)
-      .setPosition(0, 0);
+      .setPosition(0, 10);
 
     Label({
       text: "1. スマホを掃除機に取り付けよう",
@@ -52,25 +52,25 @@ phina.define("PlayMethodScene", {
       fontSize: 25,
       align: "left",
     })
-      .setPosition(-280, -100)
+      .setPosition(-285, -75)
       .addChildTo(textGroup);
 
     Label({
-      text: "2. ノーツに合わせて掃除機をスライド\n    させよう",
+      text: "2. ノーツに合わせて(矢印付きのものはその方向に)\n    掃除機をスライドさせよう",
       fill: "white",
       fontSize: 25,
       align: "left",
     })
-      .setPosition(-280, 0)
+      .setPosition(-285, 0)
       .addChildTo(textGroup);
 
     Label({
-      text: "3. 掃除機の音がうるさい場合はイヤホン\n    をつけよう",
+      text: "3. 掃除機の音がうるさい場合は\n    イヤホンをつけよう",
       fill: "white",
       fontSize: 25,
       align: "left",
     })
-      .setPosition(-280, 100)
+      .setPosition(-285, 85)
       .addChildTo(textGroup);
 
     const prevButtonGroup = DisplayElement()
