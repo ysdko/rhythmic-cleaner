@@ -110,6 +110,7 @@ phina.define("RateLabel", {
   },
 });
 
+
 //スコア詳細
 phina.define("ScoreView", {
   init: function (title, score) {
