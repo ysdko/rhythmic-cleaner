@@ -60,7 +60,7 @@ var icon_global;
 var params_global;
 
 //背景の透明度
-const ALPHA = 0.8;
+const ALPHA = 1.0;
 
 const ASSETS = {
   image: {
@@ -73,6 +73,7 @@ const ASSETS = {
     note4: "./tools/note4.png",
     note8: "./tools/note8.png",
     note16_2: "./tools/note16_2.png",
+    title: "./tools/title.png",
   },
   sound: {
     point: "./tools/point.mp3",

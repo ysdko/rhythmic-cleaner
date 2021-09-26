@@ -14,6 +14,11 @@ phina.define('TitleScene', {
     const bg = Sprite('bg').addChildTo(this).setPosition(this.gridX.center(), this.gridY.center());
     bg.alpha = ALPHA;
 
+    const bg_title = Sprite('title')
+    .setPosition(this.gridX.center(), this.gridY.center())
+    .setScale(0.6, 0.6)
+    .addChildTo(this);
+
     Sprite('logo').addChildTo(this).setPosition(90, 80).setScale(0.4, 0.4);
 
     // PathShape({
@@ -36,11 +41,11 @@ phina.define('TitleScene', {
     // }).addChildTo(this);
 
 
-    const intervalId = setInterval(() =>{
-      var x = Math.randint(95, this.gridX.width-95);
-      var y = 300;
-      TitleNotes(x,y, this).group.addChildTo(this);
-    }, 700);
+    // const intervalId = setInterval(() =>{
+    //   var x = Math.randint(95, this.gridX.width-95);
+    //   var y = 300;
+    //   TitleNotes(x,y, this).group.addChildTo(this);
+    // }, 700);
 
 
     Label({

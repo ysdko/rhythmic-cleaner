@@ -151,15 +151,15 @@ phina.define("TitleNotes", {
   init: function (x, y, scene) {
     this.group = DisplayElement().addChildTo(scene);
     this.marker = Sprite("garbage").addChildTo(this.group);
-    this.group.scaleX = 0.4;
-    this.group.scaleY = 0.4;
+    this.group.scaleX = 0.2;
+    this.group.scaleY = 0.2;
     this.group.x = x;
     this.group.y = y;
 
     this.vy = 5.0;
     this.group.vy = 1.0;
     this.group.update = function () {
-      this.vy += 0.5;
+      this.vy += 0.2;
       this.y += this.vy;
       if (this.bottom > 750) {
         EffectWave().addChildTo(scene).setPosition(this.x, 750);
