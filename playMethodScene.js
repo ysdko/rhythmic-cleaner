@@ -16,7 +16,7 @@ phina.define("PlayMethodScene", {
       height: 80,
       fill: "black",
       stroke: "cyan",
-      strokeWidth: 10,
+      strokeWidth: 7,
       cornerRadius: 16,
     })
       .addChildTo(playMethodGroup)

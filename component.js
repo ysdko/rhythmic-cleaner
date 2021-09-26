@@ -142,11 +142,6 @@ phina.define("ScoreView", {
   },
 });
 
-// 定数
-var CIRCLE_RADIUS = 32;
-var GRAVITY = 0.98;
-var FLOOR_HEIGHT = 960;
-
 phina.define("TitleNotes", {
   init: function (x, y, scene) {
     this.group = DisplayElement().addChildTo(scene);
