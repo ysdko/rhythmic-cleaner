@@ -23,6 +23,7 @@ const codeTypes = {
 }
 
 function getType(_url) {
+  console.log("test2")
   for (let key in contentTypes)
     if (_url.endsWith(key))
       return {contentType: contentTypes[key], codeType: codeTypes[key]};
@@ -30,6 +31,7 @@ function getType(_url) {
 }
 
 function getReq(req, res) {
+  console.log("test1")
   let url = req.url;
   if (url === '/') url = '/index.html';
   const types = getType(url);

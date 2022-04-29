@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/hiyo1234/rhythmic-cleaner/issues"
   },
-  "homepage": "https://github.com/hiyo1234/rhythmic-cleaner#readme"
+  "homepage": "https://github.com/hiyo1234/rhythmic-cleaner#readme",
+  "dependencies": {
+    "express": "^4.18.0"
+  }
 }
