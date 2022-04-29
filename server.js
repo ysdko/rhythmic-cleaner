@@ -50,5 +50,5 @@ function getReq(req, res) {
 }
 
 server.on('request', getReq);
-server.listen(process.env.PORT || 5000);
+server.listen(80);
 console.log('Server running …');
